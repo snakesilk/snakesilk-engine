@@ -1,32 +1,18 @@
-# megamanjs
-[![Build Status](https://travis-ci.org/pomle/megamanjs.svg?branch=master)][1]
-[![codecov.io](https://codecov.io/github/pomle/megamanjs/coverage.svg?branch=master)](https://codecov.io/github/pomle/megamanjs?branch=master)
-[![code-climate](https://codeclimate.com/github/pomle/megamanjs/badges/gpa.svg)](https://codeclimate.com/github/pomle/megamanjs)
+# SnakeSilk Engine
+[![Build Status](https://travis-ci.org/snakesilk/snakesilk-engine.svg?branch=master)][1]
+[![codecov.io](https://codecov.io/github/snakesilk/snakesilk-engine/coverage.svg?branch=master)](https://codecov.io/github/pomle/megamanjs?branch=master)
 
-Project that aims at creating a game engine in JavaScript using Megaman 2 on NES as MVP guide. WebGL is used as renderer and despite Megaman 2 being a 2D game it is run in 3D space using [THREE.js](https://github.com/mrdoob/three.js/) as 3D lib.
+Game Engine build from my Megaman 2 remake in JavaScript that uses WebGL as renderer and runs in 3D space using [THREE.js](https://github.com/mrdoob/three.js/) as 3D lib.
 
 Follow the project blog at https://medium.com/recreating-megaman-2-using-js-webgl
 
-## Running
+
+## Developing
 
 * Clone repo.
 
-        git clone https://github.com/pomle/megamanjs.git
+        git clone https://github.com/snakesilk/snakesilk-engine.git
 
-* Start webserver of your choice in project dir.
-
-        cd megamanjs
-        php -S localhost:8000 -t ./
-        
-   or
-
-        cd megamanjs
-        python -m SimpleHTTPServer 8000
-  
-* Open `http://localhost:8000/src/dev.html` in Chrome and it should run.
-
-
-## Developing
 
 ### Prerequisites
 
@@ -36,34 +22,18 @@ Follow the project blog at https://medium.com/recreating-megaman-2-using-js-webg
 
 * Install dev dependencies.
 
-        cd megamanjs
+        cd snakesilk-engine
         npm install
 
 * Run test suite.
 
         npm test
 
-    The test suite begins with running a Mocha unit test in Node. After that a Chrome window should open running an integration test followed by a system test. Lastly test coverage output is stored in `./test/coverage`.
-
-* When adding scripts to project, add them to [`script-manifest.json`](https://github.com/pomle/megamanjs/blob/master/src/script-manifest.json) and regenerate.
-
-        npm run generate
+* When adding scripts to project, add them to [`script-manifest.json`](https://github.com/snakesilk/snakesilk-engine/blob/master/script-manifest.json).
 
 
-####Running locally in Chrome without web server (discouraged).
-
-To run project locally without a web server, Chrome needs to be started with `--allow-file-access-from-files` flag.
-
-* Windows
-
-        "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --allow-file-access-from-files
-
-* OSX
-
-        open -a "Google Chrome" --args --allow-file-access-from-files
-    
 ## Contributing
 
 Contributions are welcome.
 
-[1]: https://travis-ci.org/pomle/megamanjs
+[1]: https://travis-ci.org/snakesilk/snakesilk-engine

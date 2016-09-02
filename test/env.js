@@ -10,7 +10,7 @@ const path = require('path');
 
 const BASE_PATH = path.resolve(path.join(__dirname, '..', 'src'));
 
-const files = require('../src/script-manifest.json');
+const files = require('../script-manifest.json');
 
 global.THREE = require('three');
 
