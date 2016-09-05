@@ -11,14 +11,9 @@ class Attach extends Engine.Trait
 
         this._offset = new THREE.Vector3;
         this._position = null;
-        this._attached = false;
     }
     __collides(withObject, ourZone, theirZone)
     {
-        if (this._attached === true) {
-            return false;
-        }
-
         if (withObject.solid) {
             const host = this._host;
             const solid = withObject.solid;
@@ -41,7 +36,6 @@ class Attach extends Engine.Trait
                 host.velocity.multiplyScalar(0);
                 this._position = withObject.position;
                 this._offset.copy(host.position).sub(this._position);
-                this._attached = true;
 
                 /* Prefer attach timer to lifetime timer. */
                 host.collidable = false;
@@ -58,7 +52,6 @@ class Attach extends Engine.Trait
     }
     reset()
     {
-        this._attached = false;
         this._position = null;
         this._host.collidable = true;
     }
