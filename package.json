@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "description": "Simple, extensible game engine allowing creation of games using composition of components thru XML.",
   "scripts": {
-    "test": "mocha test/unit"
+    "test": "mocha test/unit",
+    "test+coverage": "istanbul cover $(npm bin)/_mocha test/unit",
+    "upload-coverage": "codecov -f test/coverage/lcov.info --disable=gcov"
   },
   "repository": {
     "type": "git",
@@ -16,7 +18,9 @@
   },
   "homepage": "https://github.com/snakesilk/snakesalt-engine#readme",
   "devDependencies": {
+    "codecov": "^1.0.1",
     "expect.js": "^0.3.1",
+    "istanbul": "^0.4.5",
     "mocha": "^3.0.2",
     "sinon": "^1.17.5",
     "three.js": "^0.77.1",
