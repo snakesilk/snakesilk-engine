@@ -1,6 +1,6 @@
 # SnakeSilk Engine
 [![Build Status](https://travis-ci.org/snakesilk/snakesilk-engine.svg?branch=master)][1]
-[![codecov.io](https://codecov.io/github/snakesilk/snakesilk-engine/coverage.svg?branch=master)](https://codecov.io/github/pomle/megamanjs?branch=master)
+[![codecov.io](https://codecov.io/github/snakesilk/snakesilk-engine/coverage.svg?branch=master)](https://codecov.io/github/snakesilk/snakesilk-engine?branch=master)
 
 Game Engine build from my Megaman 2 remake in JavaScript that uses WebGL as renderer and runs in 3D space using [THREE.js](https://github.com/mrdoob/three.js/) as 3D lib.
 
