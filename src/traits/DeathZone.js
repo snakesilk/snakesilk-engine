@@ -6,7 +6,7 @@ class DeathZone extends Engine.Trait
         super();
         this.NAME = 'deathZone';
     }
-    __collides(withObject, ourZone, theirZone)
+    __collides(withObject)
     {
         if (withObject.health && withObject.health.energy.depleted === false) {
             withObject.health.kill();
