@@ -5,16 +5,17 @@ class Attach extends Engine.Trait
     {
         super();
 
-        this.EVENT_DETACH = 'detach';
+        this.NAME = 'attach';
+
         this.EVENT_ATTACH = 'attach';
 
         this._offset = new THREE.Vector3;
         this._position = null;
-        this._time = -1;
+        this._attached = false;
     }
     __collides(withObject, ourZone, theirZone)
     {
-        if (this._time !== -1) {
+        if (this._attached === true) {
             return false;
         }
 
@@ -23,12 +24,11 @@ class Attach extends Engine.Trait
             const solid = withObject.solid;
             const dir = solid.attackDirection(ourZone, theirZone);
 
-            /* If we are pushing Crash Bomb from the top or below, just nudge. */
+            /* If we are pushing from the top or below, just nudge. */
             if (dir === solid.TOP) {
-                our.top = their.bottom;
-            }
-            else if (dir === solid.BOTTOM) {
-                our.bottom = their.top;
+                ourZone.top = theirZone.bottom;
+            } else if (dir === solid.BOTTOM) {
+                ourZone.bottom = theirZone.top;
             }
             /* If we hit something from left or right, we attach. */
             else {
@@ -41,7 +41,7 @@ class Attach extends Engine.Trait
                 host.velocity.multiplyScalar(0);
                 this._position = withObject.position;
                 this._offset.copy(host.position).sub(this._position);
-                this._time = 0;
+                this._attached = true;
 
                 /* Prefer attach timer to lifetime timer. */
                 host.collidable = false;
@@ -58,9 +58,8 @@ class Attach extends Engine.Trait
     }
     reset()
     {
-        this._time = -1;
+        this._attached = false;
         this._position = null;
         this._host.collidable = true;
-        this._trigger(this.EVENT_DETACH);
     }
 }
