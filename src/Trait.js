@@ -11,10 +11,10 @@ class Trait
         this._requires = [];
 
         this.MAGIC_METHODS = {
-            '__collides':   Engine.Object.prototype.EVENT_COLLIDE,
-            '__obstruct':   Engine.Object.prototype.EVENT_OBSTRUCT,
-            '__uncollides': Engine.Object.prototype.EVENT_UNCOLLIDE,
-            '__timeshift':  Engine.Object.prototype.EVENT_TIMESHIFT,
+            '__collides':   Engine.Entity.prototype.EVENT_COLLIDE,
+            '__obstruct':   Engine.Entity.prototype.EVENT_OBSTRUCT,
+            '__uncollides': Engine.Entity.prototype.EVENT_UNCOLLIDE,
+            '__timeshift':  Engine.Entity.prototype.EVENT_TIMESHIFT,
         }
 
         this.EVENT_ATTACHED = 'attached';
@@ -33,7 +33,7 @@ class Trait
     }
     __attach(host)
     {
-        if (host instanceof Engine.Object === false) {
+        if (host instanceof Engine.Entity === false) {
             throw new TypeError('Invalid host');
         }
         if (this._host !== null) {

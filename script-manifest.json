@@ -19,7 +19,7 @@
     "Collision.js",
     "Camera.js",
     "World.js",
-    "Object.js",
+    "Entity.js",
     "SequenceManager.js",
     "Timeline.js",
     "UVCoords.js",

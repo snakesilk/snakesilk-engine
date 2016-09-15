@@ -1,6 +1,6 @@
 Engine.objects.characters.Megaman = function()
 {
-    Engine.Object.call(this);
+    Engine.Entity.call(this);
 
     this.events.bind(this.EVENT_TRAIT_ATTACHED, trait => {
       if (trait.NAME === 'weapon') {
@@ -10,7 +10,7 @@ Engine.objects.characters.Megaman = function()
 }
 
 Engine.Util.extend(Engine.objects.characters.Megaman,
-                   Engine.Object);
+                   Engine.Entity);
 
 Engine.objects.characters.Megaman.prototype.changeDress = function(weapon)
 {

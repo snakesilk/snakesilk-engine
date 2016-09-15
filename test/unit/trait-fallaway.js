@@ -4,7 +4,7 @@ const expect = require('expect.js');
 const sinon = require('sinon');
 
 const env = require('../env');
-const Object = env.Engine.Object;
+const Object = env.Engine.Entity;
 const Fallaway = env.Engine.traits.Fallaway;
 const Physics = env.Engine.traits.Physics;
 

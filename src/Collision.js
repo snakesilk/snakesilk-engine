@@ -15,7 +15,7 @@ class Collision
     }
     addObject(object)
     {
-        if (object instanceof Engine.Object !== true) {
+        if (object instanceof Engine.Entity !== true) {
             throw new TypeError('Collidable wrong type');
         }
         this.objects.push(object);

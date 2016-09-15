@@ -1,10 +1,10 @@
 Engine.objects.characters.Metalman = function()
 {
-    Engine.Object.call(this);
+    Engine.Entity.call(this);
 }
 
 Engine.Util.extend(Engine.objects.characters.Metalman,
-                   Engine.Object);
+                   Engine.Entity);
 
 Engine.objects.characters.Metalman.prototype.routeAnimation = function()
 {

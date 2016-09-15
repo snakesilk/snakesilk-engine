@@ -28,7 +28,7 @@ Engine.objects.Weapon = class Weapon
     }
     addProjectile(object)
     {
-        if (!(object instanceof Engine.Object) || !object.projectile) {
+        if (!(object instanceof Engine.Entity) || !object.projectile) {
             throw new TypeError('Invalid projectile');
         }
         this.projectiles.push(object);
@@ -37,7 +37,7 @@ Engine.objects.Weapon = class Weapon
     }
     emit(object)
     {
-        if (!(object instanceof Engine.Object) || !object.projectile) {
+        if (!(object instanceof Engine.Entity) || !object.projectile) {
             throw new TypeError('Invalid projectile');
         }
 
@@ -119,7 +119,7 @@ Engine.objects.Weapon = class Weapon
     }
     setUser(user)
     {
-        if (user instanceof Engine.Object !== true) {
+        if (user instanceof Engine.Entity !== true) {
             throw new TypeError('User not object');
         }
         if (user.weapon instanceof Engine.traits.Weapon !== true) {

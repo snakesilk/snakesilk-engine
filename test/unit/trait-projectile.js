@@ -4,21 +4,21 @@ const expect = require('expect.js');
 const sinon = require('sinon');
 
 const env = require('../env');
-const Object = env.Engine.Object;
+const Entity = env.Engine.Entity;
 const Health = env.Engine.traits.Health;
 const Projectile = env.Engine.traits.Projectile;
 
 describe('Projectile Trait', function() {
   function createCharacter()
   {
-    const host = new Object;
+    const host = new Entity;
     host.applyTrait(new Health);
     return host;
   }
 
   function createProjectile()
   {
-    const host = new Object;
+    const host = new Entity;
     host.applyTrait(new Projectile);
     return host;
   }
@@ -46,16 +46,16 @@ describe('Projectile Trait', function() {
     expect(proj.collidable).to.be(true);
   });
 
-  context('when colliding with object without health', function() {
+  context('when colliding with entity without health', function() {
     it('should be inert', function() {
-      const char = new Object;
+      const char = new Entity;
       const proj = createProjectile();
       proj.projectile.setDamage(13);
       proj.collides(char);
     });
   });
 
-  context('when colliding with object with health', function() {
+  context('when colliding with entity with health', function() {
     it('should inflict correct amount of damage', function() {
       const char = createCharacter();
       const proj = createProjectile();
