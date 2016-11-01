@@ -3,7 +3,7 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const env = require('../env.js');
+const env = require('../env');
 const THREE = env.THREE;
 const Obj = env.Engine.Object;
 const World = env.Engine.World;
