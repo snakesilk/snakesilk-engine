@@ -3,7 +3,7 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const env = require('../env.js');
+const env = require('../env');
 const AudioContextMock = require('../mocks/audiocontext-mock');
 const AudioPlayer = env.Engine.AudioPlayer;
 

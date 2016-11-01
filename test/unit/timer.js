@@ -4,7 +4,7 @@ const expect = require('expect.js');
 const sinon = require('sinon');
 
 const RequestAnimationFrameMock = require('../mocks/requestanimationframe-mock');
-const env = require('../env.js');
+const env = require('../env');
 const Timer = env.Engine.Timer;
 
 describe('Timer', function() {

@@ -5,7 +5,7 @@ const sinon = require('sinon');
 const fs = require('fs');
 
 const xmlReader = require('../xmlreader');
-const env = require('../env.js');
+const env = require('../env');
 const Engine = env.Engine;
 const World = env.Engine.World;
 const THREE = env.THREE;
