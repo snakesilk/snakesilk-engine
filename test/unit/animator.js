@@ -4,8 +4,8 @@ const expect = require('expect.js');
 const sinon = require('sinon');
 
 const env = require('../env');
-const Animator = Engine.Animator;
-const Animation = Engine.Animator.Animation;
+const Animator = env.Engine.Animator;
+const Animation = env.Engine.Animator.Animation;
 
 describe('Animator', () => {
   function createAnimator() {
