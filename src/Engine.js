@@ -1,5 +1,3 @@
-'use strict';
-
-let Engine = {
+Engine = {
     logic: {},
 };

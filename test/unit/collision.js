@@ -44,7 +44,7 @@ describe('Collision', function() {
       });
       it('should create a collision index array at same position', function() {
         expect(collision.collisionIndex).to.have.length(1);
-        expect(collision.collisionIndex[0]).to.be.an(Array);
+        expect(collision.collisionIndex[0]).to.be.an('array');
       });
       it('should create a placeholder in position cache', function() {
         expect(collision.positionCache).to.have.length(1);

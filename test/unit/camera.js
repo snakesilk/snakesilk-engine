@@ -27,7 +27,7 @@ describe('Camera', function() {
       expect(camera.pathIndex).to.equal(-1);
     });
     it('should have no paths', function() {
-      expect(camera.paths).to.be.an(Array);
+      expect(camera.paths).to.be.an('array');
       expect(camera.paths).to.have.length(0);
     });
   });
