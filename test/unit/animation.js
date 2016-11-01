@@ -4,7 +4,8 @@ const expect = require('expect.js');
 const sinon = require('sinon');
 
 const env = require('../env');
-const Animation = Engine.Animator.Animation;
+const Animation = env.Engine.Animator.Animation;
+const Timeline = env.Engine.Timeline;
 
 describe('Animation', () => {
   describe('on instantiation', () => {
@@ -63,7 +64,7 @@ describe('Animation', () => {
           });
 
           it('instantiates a timeline', () => {
-            expect(animation.timeline).to.be.a(Engine.Timeline);
+            expect(animation.timeline).to.be.a(Timeline);
           });
 
           describe('#getIndex()', () => {

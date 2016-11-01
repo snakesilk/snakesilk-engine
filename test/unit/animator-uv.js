@@ -4,10 +4,10 @@ const expect = require('expect.js');
 const sinon = require('sinon');
 
 const env = require('../env');
-const UVAnimator = Engine.Animator.UV;
-const Animation = Engine.Animator.Animation;
-const UVCoords = Engine.UVCoords;
-const PlaneGeometry = THREE.PlaneGeometry;
+const UVAnimator = env.Engine.Animator.UV;
+const Animation = env.Engine.Animator.Animation;
+const UVCoords = env.Engine.UVCoords;
+const PlaneGeometry = env.THREE.PlaneGeometry;
 
 describe('UV Animator', () => {
   let animator;
