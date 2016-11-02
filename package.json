@@ -6,6 +6,7 @@
     "build": "./tools/build.sh",
     "test": "mocha test/unit",
     "test+coverage": "istanbul cover $(npm bin)/_mocha test/unit",
+    "test:build": "mocha test/build",
     "upload-coverage": "codecov -f test/coverage/lcov.info --disable=gcov"
   },
   "repository": {
