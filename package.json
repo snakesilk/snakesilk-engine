@@ -1,6 +1,6 @@
 {
   "name": "snakesilk",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Simple, extensible game engine allowing creation of games using composition of components thru XML.",
   "scripts": {
     "test": "mocha test/unit",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/snakesilk/snakesalt-engine.git"
+    "url": "git+https://github.com/snakesilk/snakesilk-engine.git"
   },
   "author": "Pontus Persson",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/snakesilk/snakesalt-engine/issues"
+    "url": "https://github.com/snakesilk/snakesilk-engine/issues"
   },
-  "homepage": "https://github.com/snakesilk/snakesalt-engine#readme",
+  "homepage": "https://github.com/snakesilk/snakesilk-engine#readme",
   "devDependencies": {
     "codecov": "^1.0.1",
     "expect.js": "^0.3.1",
