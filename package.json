@@ -2,6 +2,7 @@
   "name": "snakesilk",
   "version": "0.1.1",
   "description": "Simple, extensible game engine allowing creation of games using composition of components thru XML.",
+  "main": "./build/snakesilk.js",
   "scripts": {
     "build": "./tools/build.sh",
     "test": "mocha test/unit",
