@@ -112,7 +112,7 @@ extends Engine.Loader.XML.Parser
                 .then(objects => {
                     Object.keys(objects).forEach(id => {
                         const object = objects[id];
-                        resource.addAuto(id, object.constructor);
+                        resource.addEntity(id, object.constructor);
                     });
                 });
             tasks.push(task);

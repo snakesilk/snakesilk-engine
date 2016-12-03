@@ -32,9 +32,9 @@ class ResourceManager
     {
         return this._addResource('font', id, object);
     }
-    addObject(id, object)
+    addEntity(id, object)
     {
-        return this._addResource('object', id, object);
+        return this._addResource('entity', id, object);
     }
     addTexture(id, object)
     {
