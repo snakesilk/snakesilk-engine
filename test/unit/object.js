@@ -6,7 +6,7 @@ const sinon = require('sinon');
 const env = require('../env');
 
 const extend = env.Engine.Util.extend;
-const Host = env.Engine.Object;
+const Host = env.Engine.Entity;
 const Trait = env.Engine.Trait;
 
 describe('Object', function() {

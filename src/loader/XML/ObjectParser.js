@@ -107,7 +107,7 @@ extends Engine.Loader.XML.Parser
         if (type === 'character' && Engine.objects.characters[source]) {
             return Engine.objects.characters[source];
         } else {
-            return Engine.Object;
+            return Engine.Entity;
         }
     }
     _getTexture(id)

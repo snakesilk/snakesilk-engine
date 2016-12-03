@@ -6,8 +6,8 @@ const sinon = require('sinon');
 const env = require('../env');
 
 const World = env.Engine.World;
-const Host = env.Engine.Object;
-const Spawnable = env.Engine.Object;
+const Host = env.Engine.Entity;
+const Spawnable = env.Engine.Entity;
 const Spawn = env.Engine.traits.Spawn;
 
 describe('Trait', function() {

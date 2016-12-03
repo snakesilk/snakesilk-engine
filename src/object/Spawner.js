@@ -1,5 +1,5 @@
 Engine.objects.Spawner =
-class Spawner extends Engine.Object
+class Spawner extends Engine.Entity
 {
     constructor()
     {

@@ -1,6 +1,6 @@
 Engine.objects.characters.SniperJoe = function(target)
 {
-    Engine.Object.call(this);
+    Engine.Entity.call(this);
     this.ai = new Engine.AI(this);
 
     this.coolDown = .8;
@@ -11,7 +11,7 @@ Engine.objects.characters.SniperJoe = function(target)
 }
 
 Engine.Util.extend(Engine.objects.characters.SniperJoe,
-                   Engine.Object);
+                   Engine.Entity);
 
 Engine.objects.characters.SniperJoe.prototype.impactProjectile = function(projectile)
 {
@@ -77,5 +77,5 @@ Engine.objects.characters.SniperJoe.prototype.timeShift = function(dt)
         }
     }
 
-    Engine.Object.prototype.timeShift.call(this, dt);
+    Engine.Entity.prototype.timeShift.call(this, dt);
 }

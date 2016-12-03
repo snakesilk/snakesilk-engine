@@ -23,18 +23,18 @@ extends Engine.Loader.XML.Parser
     }
     _createClimbable()
     {
-        const object = new Engine.Object();
+        const object = new Engine.Entity();
         object.applyTrait(new Engine.traits.Climbable);
         return object;
     }
     _createDeathZone()
     {
-        const object = new Engine.Object();
+        const object = new Engine.Entity();
         object.applyTrait(new Engine.traits.DeathZone);
         return object;
     }
     _createSolid() {
-        const object = new Engine.Object();
+        const object = new Engine.Entity();
         const solid = new Engine.traits.Solid;
         solid.fixed = true;
         solid.obstructs = true;

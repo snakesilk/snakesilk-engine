@@ -1,6 +1,6 @@
 Engine.objects.characters.ChangkeyMaker = function()
 {
-    Engine.Object.call(this);
+    Engine.Entity.call(this);
     this.ai = new Engine.AI(this);
 
     this.fire = false;
@@ -21,7 +21,7 @@ Engine.objects.characters.ChangkeyMaker = function()
 }
 
 Engine.Util.extend(Engine.objects.characters.ChangkeyMaker,
-                   Engine.Object);
+                   Engine.Entity);
 
 Engine.objects.characters.ChangkeyMaker.prototype.routeAnimation = function()
 {
@@ -59,7 +59,7 @@ Engine.objects.characters.ChangkeyMaker.prototype.timeShift = function(dt)
         this.fireWait = Infinity;
     }
 
-    Engine.Object.prototype.timeShift.call(this, dt);
+    Engine.Entity.prototype.timeShift.call(this, dt);
 
     this.flickerLoop += dt;
     if (this.flickerLoop > this.flickerDelay) {

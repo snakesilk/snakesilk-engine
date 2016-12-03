@@ -1,6 +1,6 @@
 Engine.objects.characters.Shotman = function(target)
 {
-    Engine.Object.call(this);
+    Engine.Entity.call(this);
     this.ai = new Engine.AI(this);
 
     this.coolDown = .8;
@@ -21,7 +21,7 @@ Engine.objects.characters.Shotman = function(target)
 }
 
 Engine.Util.extend(Engine.objects.characters.Shotman,
-                   Engine.Object);
+                   Engine.Entity);
 
 Engine.objects.characters.Shotman.prototype.fire = function()
 {
@@ -101,5 +101,5 @@ Engine.objects.characters.Shotman.prototype.timeShift = function(dt)
 
     this.animators[0].enabled = Math.abs(this.shootingAngle - this.aimingAngle) > 2;
 
-    Engine.Object.prototype.timeShift.call(this, dt);
+    Engine.Entity.prototype.timeShift.call(this, dt);
 }

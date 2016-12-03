@@ -12,12 +12,12 @@ describe('Climber / Climbable', function() {
   beforeEach(function() {
     world = new env.Engine.World();
 
-    climber = new env.Engine.Object();
+    climber = new env.Engine.Entity();
     climber.applyTrait(new env.Engine.traits.Solid());
     climber.applyTrait(new env.Engine.traits.Climber());
     climber.addCollisionRect(10, 10);
 
-    climbable = new env.Engine.Object();
+    climbable = new env.Engine.Entity();
     climbable.applyTrait(new env.Engine.traits.Climbable());
     climbable.addCollisionRect(10, 10);
 

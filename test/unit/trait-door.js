@@ -13,7 +13,7 @@ const THREE = env.THREE;
 describe('Door Trait', function() {
   function createDoor()
   {
-    const door = new env.Engine.Object;
+    const door = new env.Engine.Entity;
     const model = new THREE.Mesh(new THREE.PlaneGeometry(8, 2, 4, 2), new THREE.MeshBasicMaterial());
     door.setModel(model);
     door.addCollisionRect(10, 10);
@@ -23,7 +23,7 @@ describe('Door Trait', function() {
 
   function createPlayer()
   {
-    const player = new env.Engine.Object;
+    const player = new env.Engine.Entity;
     player.applyTrait(new Physics);
     player.applyTrait(new Solid);
     player.addCollisionRect(10, 10);

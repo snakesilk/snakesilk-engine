@@ -5,7 +5,7 @@ const sinon = require('sinon');
 
 const env = require('../env');
 
-const Host = env.Engine.Object;
+const Host = env.Engine.Entity;
 const Trait = env.Engine.Trait;
 
 describe('Trait', function() {

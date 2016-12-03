@@ -1,6 +1,6 @@
 Engine.objects.characters.SniperArmor = function()
 {
-    Engine.Object.call(this);
+    Engine.Entity.call(this);
     this.ai = new Engine.AI(this);
 
     this.airTime = 0;
@@ -11,7 +11,7 @@ Engine.objects.characters.SniperArmor = function()
 }
 
 Engine.Util.extend(Engine.objects.characters.SniperArmor,
-                   Engine.Object);
+                   Engine.Entity);
 
 Engine.objects.characters.SniperArmor.prototype.routeAnimation = function()
 {
@@ -80,5 +80,5 @@ Engine.objects.characters.SniperArmor.prototype.timeShift = function(dt)
         this.groundTime = 0;
     }
 
-    Engine.Object.prototype.timeShift.call(this, dt);
+    Engine.Entity.prototype.timeShift.call(this, dt);
 }

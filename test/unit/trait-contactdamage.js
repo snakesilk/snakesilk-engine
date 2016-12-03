@@ -4,7 +4,7 @@ const expect = require('expect.js');
 const sinon = require('sinon');
 
 const env = require('../env');
-const Object = env.Engine.Object;
+const Object = env.Engine.Entity;
 const ContactDamage = env.Engine.traits.ContactDamage;
 const Invincibility = env.Engine.traits.Invincibility;
 const Health = env.Engine.traits.Health;

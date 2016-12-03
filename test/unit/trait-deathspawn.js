@@ -5,7 +5,7 @@ const sinon = require('sinon');
 
 const env = require('../env');
 const World = env.Engine.World;
-const Object = env.Engine.Object;
+const Object = env.Engine.Entity;
 const Health = env.Engine.traits.Health;
 const DeathSpawn = env.Engine.traits.DeathSpawn;
 

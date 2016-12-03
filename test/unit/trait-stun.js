@@ -5,7 +5,7 @@ const sinon = require('sinon');
 
 const env = require('../env');
 const World = env.Engine.World;
-const Object = env.Engine.Object;
+const Object = env.Engine.Entity;
 const ContactDamage = env.Engine.traits.ContactDamage;
 const Physics = env.Engine.traits.Physics;
 const Solid = env.Engine.traits.Solid;

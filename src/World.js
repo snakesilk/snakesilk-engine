@@ -39,7 +39,7 @@ class World
     }
     addObject(object)
     {
-        if (object instanceof Engine.Object === false) {
+        if (object instanceof Engine.Entity === false) {
             throw new TypeError('Invalid object');
         }
         if (this.hasObject(object)) {
@@ -79,7 +79,7 @@ class World
     }
     removeObject(object)
     {
-        if (object instanceof Engine.Object === false) {
+        if (object instanceof Engine.Entity === false) {
             throw new TypeError('Invalid object');
         }
         const index = this.objects.indexOf(object);

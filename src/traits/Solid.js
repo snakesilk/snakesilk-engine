@@ -106,8 +106,8 @@ class Solid extends Engine.Trait
 }
 
 Engine.traits.Solid.SIDES = {
-    TOP: Engine.Object.prototype.SURFACE_TOP,
-    BOTTOM: Engine.Object.prototype.SURFACE_BOTTOM,
-    LEFT: Engine.Object.prototype.SURFACE_LEFT,
-    RIGHT: Engine.Object.prototype.SURFACE_RIGHT,
+    TOP: Engine.Entity.prototype.SURFACE_TOP,
+    BOTTOM: Engine.Entity.prototype.SURFACE_BOTTOM,
+    LEFT: Engine.Entity.prototype.SURFACE_LEFT,
+    RIGHT: Engine.Entity.prototype.SURFACE_RIGHT,
 };

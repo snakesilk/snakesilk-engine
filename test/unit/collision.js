@@ -6,7 +6,7 @@ const sinon = require('sinon');
 const env = require('../env');
 
 const Collision = env.Engine.Collision;
-const Obj = env.Engine.Object;
+const Obj = env.Engine.Entity;
 
 describe('Collision', function() {
   it('should not re-test positionally static objects', function() {

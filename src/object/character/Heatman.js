@@ -1,13 +1,13 @@
 Engine.objects.characters.Heatman = function()
 {
-    Engine.Object.call(this);
+    Engine.Entity.call(this);
 
     this.flameTransformDuration = .09;
     this.flameTransformTime = 0;
 }
 
 Engine.Util.extend(Engine.objects.characters.Heatman,
-                   Engine.Object);
+                   Engine.Entity);
 
 Engine.objects.characters.Heatman.prototype.routeAnimation = function()
 {
@@ -49,5 +49,5 @@ Engine.objects.characters.Heatman.prototype.timeShift = function(dt)
         this.health.immune = true;
     }
 
-    Engine.Object.prototype.timeShift.call(this, dt);
+    Engine.Entity.prototype.timeShift.call(this, dt);
 }
