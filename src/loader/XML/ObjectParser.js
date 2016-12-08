@@ -7,6 +7,7 @@ extends Engine.Loader.XML.Parser
     constructor(loader, node)
     {
         if (!node || node.tagName !== 'objects') {
+            console.error(node);
             throw new TypeError('Node not <objects>');
         }
 
@@ -20,7 +21,10 @@ extends Engine.Loader.XML.Parser
     getObjects()
     {
         if (!this._promise) {
-            this._promise =  this._parse();
+            this._promise =  this._parse()
+                .catch(err => {
+                    console.error(err, this._node);
+                });
         }
         return this._promise;
     }

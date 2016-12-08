@@ -5,14 +5,11 @@ class ResourceManager
 {
     constructor()
     {
-        /* These must be defined in order of specificity. */
-        this.TYPE_MAP = {
-            'weapon': Engine.objects.Weapon,
-            'object': Engine.Entity,
-            'texture': THREE.Texture,
-        }
+        this.EVENT_ADDED = 'event-added';
 
-        this._items = {};
+        this._events = new Engine.Events();
+
+        this._items = Object.create(null);
     }
     _addResource(type, id, object)
     {
@@ -30,17 +27,12 @@ class ResourceManager
         }
 
         this._items[type][id] = object;
-    }
-    addAuto(id, object)
-    {
-        for (let type in this.TYPE_MAP) {
-            const proto = this.TYPE_MAP[type].prototype;
-            if (proto.isPrototypeOf(object.prototype)) {
-                this._addResource(type, id, object);
-                return true;
-            }
-        }
-        throw new Error('Could not determine type from ' + object);
+
+        this._events.trigger(this.EVENT_ADDED, {
+            type,
+            id,
+            object,
+        });
     }
     addAudio(id, object)
     {
@@ -58,9 +50,29 @@ class ResourceManager
     {
         return this._addResource('texture', id, object);
     }
-    addWeapon(id, object)
-    {
-        return this._addResource('weapon', id, object);
+    createImporter(type) {
+        return (objects) => {
+            Object.keys(objects).forEach(id => {
+                this._addResource(type, id, objects[id]);
+            });
+        };
+    }
+    getAsync(type, id) {
+        return new Promise((resolve, reject) => {
+            const timeout = 10000;
+            const timer = setTimeout(() => {
+                resolve(this.get(type, id));
+            }, timeout);
+
+            const listener = (event) => {
+                if (event.type === type && event.id === id) {
+                    resolve(event.object);
+                }
+                this._events.unbind(this.EVENT_ADDED, listener);
+            };
+
+            this._events.bind(this.EVENT_ADDED, listener);
+        });
     }
     get(type, id)
     {

@@ -41,8 +41,8 @@ extends Engine.Loader.XML.Parser
             ]);
         }).then(() => {
             return this._parsePlayer();
-        }).then(() => {
-            return this._parseWeapons();
+        /*}).then(() => {
+            return this._parseWeapons();*/
         }).then(() => {
             return this.loader.entrypoint;
         });
@@ -112,7 +112,7 @@ extends Engine.Loader.XML.Parser
                 .then(objects => {
                     Object.keys(objects).forEach(id => {
                         const object = objects[id];
-                        resource.addAuto(id, object.constructor);
+                        resource.addObject(id, object.constructor);
                     });
                 });
             tasks.push(task);
