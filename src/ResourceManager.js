@@ -7,7 +7,7 @@ class ResourceManager
     {
         this.EVENT_ADDED = 'event-added';
 
-        this._events = new Engine.Events();
+        this.events = new Engine.Events();
 
         this._items = Object.create(null);
     }
@@ -28,11 +28,11 @@ class ResourceManager
 
         this._items[type][id] = object;
 
-        this._events.trigger(this.EVENT_ADDED, {
+        this.events.trigger(this.EVENT_ADDED, [
             type,
             id,
             object,
-        });
+        ]);
     }
     addAudio(id, object)
     {
@@ -58,20 +58,18 @@ class ResourceManager
         };
     }
     getAsync(type, id) {
-        return new Promise((resolve, reject) => {
-            const timeout = 10000;
-            const timer = setTimeout(() => {
-                resolve(this.get(type, id));
-            }, timeout);
+        if (this.has(type, id)) {
+            return Promise.resolve(this.get(type, id));
+        }
 
-            const listener = (event) => {
-                if (event.type === type && event.id === id) {
-                    resolve(event.object);
+        return new Promise(resolve => {
+            const listener = (_type, _id, item) => {
+                if (_type === type && _id === id) {
+                    this.events.unbind(this.EVENT_ADDED, listener);
+                    resolve(item);
                 }
-                this._events.unbind(this.EVENT_ADDED, listener);
             };
-
-            this._events.bind(this.EVENT_ADDED, listener);
+            this.events.bind(this.EVENT_ADDED, listener);
         });
     }
     get(type, id)

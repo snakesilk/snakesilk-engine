@@ -6,7 +6,7 @@ class Events
     constructor(host)
     {
         this._host = host;
-        this._events = {};
+        this._events = Object.create(null);
     }
     _gc(name)
     {
