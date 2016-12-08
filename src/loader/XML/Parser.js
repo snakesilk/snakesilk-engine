@@ -36,25 +36,6 @@ class Parser
             return val;
         }
     }
-    getAudio(audioNode)
-    {
-        const url = this.resolveURL(audioNode, 'src');
-        if (!url) {
-            const id = this.getAttr(audioNode, 'id');
-            const audio = this.loader.resourceManager.get('audio', id);
-            return Promise.resolve(audio);
-        }
-
-        return this.loader.resourceLoader.loadAudio(url)
-            .then(audio => {
-                const loopNode = audioNode.getElementsByTagName('loop')[0];
-                if (loopNode) {
-                    audio.setLoop(this.getFloat(loopNode, 'start') || 0,
-                                  this.getFloat(loopNode, 'end') || audio.getBuffer().duration);
-                }
-                return audio;
-            });
-    }
     getBool(node, attr)
     {
         return node.getAttribute(attr) === 'true';

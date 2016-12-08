@@ -11,78 +11,36 @@ class ResourceParser
     }
 
     parseAudioNodes(audioNodes) {
-        return Promise.all(audioNodes.map(node => {
-            return this.parseAudioNode(node);
-        }));
-    }
+        const audioParser = new Engine.Loader.XML
+            .AudioParser(this.loader);
 
-    parseAudioNode(audioNode) {
-        console.log(audioNode);
-        const url = audioNode.attr('src').toURL();
-        const id = audioNode.attr('id').value;
-
-        return this.resourceLoader.loadAudio(url)
+        return Promise.all(audioNodes.map(audioNode => {
+            const id = audioNode.attr('id').value;
+            return audioParser.getAudio(audioNode)
+                .then(audio => {
+                    return {
+                        id,
+                        audio,
+                    };
+                });
+        }))
         .then(audio => {
-            return audioNode.find('loop')
-            .then(([loopNode]) => {
-                if (loopNode) {
-                    const start = loopNode.attr('start');
-                    const end = loopNode.attr('end');
-                    audio.setLoop(
-                        start ? start.toFloat() : 0,
-                        end ? end.toFloat() : audio.getBuffer().duration);
-                }
-                return audio;
+            audio.forEach(audio => {
+                this.resourceManager.addAudio(audio.id, audio.audio);
             });
-        })
-        .then(audio => {
-            this.resourceManager.addAudio(id, audio);
         });
     }
 
     parseResourcesNode(resourcesNode) {
-        let groupsNodes;
-
-        const pursueGroup = () => {
-            chain = chain.then(() => {
-                console.log(groupsNodes);
-                if (groupsNodes.length) {
-                    return this.parseResourcesGroupNode(groupsNodes.pop())
-                    .then(pursueGroup);
-                }
-            });
-        };
-
-        let chain = resourcesNode.find('group')
-        .then(nodes => {
-            if (nodes.length) {
-                nodes.sort((aNode, bNode) => {
-                    const a = aNode.attr('order').toInt();
-                    const b = bNode.attr('order').toInt();
-                    return a < b;
-                });
-                groupsNodes = nodes;
-            }
-        })
-        .then(pursueGroup);
-        /*
-        .then(objectNodes => this.parseObjectNodes(objectNodes))
-        .then(() => resourceNode.find(`group[order='2'] > objects`))
-        .then(objectNodes => this.parseObjectNodes(objectNodes))
-        .then(() => resourceNode.find(`group[order='3'] > objects`))
-        .then(objectNodes => this.parseObjectNodes(objectNodes));*/
-    }
-
-    parseResourcesGroupNode(groupNode) {
-        const audioTask = groupNode.find('audio > *')
+        const audioTask = resourcesNode.find('audio > *')
             .then(nodes => this.parseAudioNodes(nodes));
 
-        const objectTask = groupNode.find('objects')
+        const objectTask = resourcesNode.find('objects')
             .then(nodes => this.parseObjectsNodes(nodes));
 
         return Promise.all([
-            objectTask,
             audioTask,
+            objectTask,
         ]);
     }
 

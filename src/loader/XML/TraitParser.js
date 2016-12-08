@@ -171,23 +171,31 @@ extends Engine.Loader.XML.Parser
             };
         } else if (name === 'spawn') {
             const itemNodes = node.getElementsByTagName('item');
-            const items = [];
+            const tasks = [];
             for (let itemNode, i = 0; itemNode = itemNodes[i]; ++i) {
                 const offsetNode = itemNode.getElementsByTagName('offset')[0];
                 let offset;
                 if (offsetNode) {
                     offset = this.getVector3(offsetNode) || undefined;
                 }
-                const event = this.getAttr(itemNode, 'event') || 'death';
-                const object = this.getAttr(itemNode, 'object');
-                const constr = this.loader.resourceManager.get('object', object);
-                items.push([event, constr, offset]);
+
+                const objectId = this.getAttr(itemNode, 'object');
+                const task = Promise.all([
+                    this.getAttr(itemNode, 'event') || 'death',
+                    objectId,
+                    this.loader.resourceManager.getAsync('object', objectId),
+                ]);
+
+                tasks.push(task);
             }
-            return function setup(trait) {
-                items.forEach(function(arg) {
-                    trait.addItem(arg[0], arg[1], arg[2]);
+            return Promise.all(tasks)
+                .then(items => {
+                    return function setup(trait) {
+                        items.forEach(function(arg) {
+                            trait.addItem(arg[0], arg[1], arg[2]);
+                        });
+                    }
                 });
-            };
         } else if (name === 'translate') {
             const velocity = this.getVector2(node);
             return function setup(trait) {
@@ -248,11 +256,20 @@ extends Engine.Loader.XML.Parser
     parseTrait(node)
     {
         const name = this.getAttr(node, 'name');
-        const blueprint = {
-            name,
-            constr: this.getConstructor(name),
-            setup: this.getSetup(node),
-        };
-        return this.createConstructor(blueprint);
+
+        return Promise.all([
+            this.getConstructor(name),
+            this.getSetup(node)
+        ])
+        .then(([constr, setup]) => {
+            return {
+                name,
+                constr,
+                setup,
+            };
+        })
+        .then(blueprint => {
+            return this.createConstructor(blueprint);
+        });
     }
 }

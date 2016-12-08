@@ -13,6 +13,10 @@ extends Engine.Loader.XML.Parser
 
         super(loader);
 
+        this.resourceManager = loader.resourceManager;
+        this.resourceParser = new Engine.Loader.XML.ResourceParser(loader);
+
+
         this._node = node;
 
         this._animations = null;
@@ -21,7 +25,7 @@ extends Engine.Loader.XML.Parser
     getObjects()
     {
         if (!this._promise) {
-            this._promise =  this._parse()
+            this._promise = this._parse()
                 .catch(err => {
                     console.error(err, this._node);
                 });
@@ -316,7 +320,7 @@ extends Engine.Loader.XML.Parser
             const node = textNodes[0];
             const font = node.getAttribute('font');
             const string = node.textContent;
-            const text = this.loader.resourceManager.get('font', font)(string);
+            const text = this.loader.resourceManager.getAsync('font', font)(string);
             blueprint.geometries.push(text.getGeometry());
             blueprint.textures = {__default: {texture: text.getTexture()}};
         }
@@ -344,6 +348,10 @@ extends Engine.Loader.XML.Parser
             }),
         ]).then(() => {
             return blueprint;
+        }).catch(err => {
+            console.error(err, objectNode,
+                          objectNode.ownerDocument.baseURL);
+            throw err;
         });
     }
     _parseObjectAnimationRouter(objectNode)
@@ -352,7 +360,7 @@ extends Engine.Loader.XML.Parser
         if (node) {
             let animationRouter;
             eval(node.textContent);
-            if (typeof animationRouter === "function") {
+            if (typeof animationRouter === 'function') {
                 return Promise.resolve(animationRouter);
             }
         }
@@ -360,20 +368,20 @@ extends Engine.Loader.XML.Parser
     }
     _parseObjectAudio(objectNode)
     {
-        const tasks = [];
-        const audioDef = {};
+        const audioParser = new Engine.Loader.XML
+            .AudioParser(this.loader);
+
         const audioNodes = objectNode.querySelectorAll('audio > *');
-        for (let audioNode, i = 0; audioNode = audioNodes[i++];) {
-            const task = this.getAudio(audioNode)
-                .then(audio => {
-                    const id = this.getAttr(audioNode, 'id');
-                    audioDef[id] = audio;
-                });
-            tasks.push(task);
-        }
-        return Promise.all(tasks).then(() => {
-            return audioDef;
+        const map = Object.create(null);
+        const tasks = [...audioNodes].map(rawNode => {
+            const node = new Engine.XMLNode(rawNode);
+            const id = node.attr('id').value;
+            return audioParser.getAudio(node)
+                .then(audio => map[id] = audio);
         });
+
+        return Promise.all(tasks)
+            .then(() => map);
     }
     _parseObjectCollision(objectNode)
     {
@@ -411,16 +419,16 @@ extends Engine.Loader.XML.Parser
     }
     _parseObjectTraits(objectNode)
     {
-        const traits = [];
+        const tasks = [];
         const traitParser = new Engine.Loader.XML.TraitParser(this.loader);
         const traitsNode = objectNode.getElementsByTagName('traits')[0];
         if (traitsNode) {
             const traitNodes = traitsNode.getElementsByTagName('trait');
             for (let traitNode, i = 0; traitNode = traitNodes[i++];) {
-                traits.push(traitParser.parseTrait(traitNode));
+                tasks.push(traitParser.parseTrait(traitNode));
             }
         }
-        return Promise.resolve(traits);
+        return Promise.all(tasks);
     }
     _parseObjectSequences(objectNode)
     {

@@ -10,10 +10,10 @@ Engine.CanvasUtil = {
         return clone;
     },
     colorReplace: function(canvas, rgbIn, rgbOut) {
-        const context = canvas.getContext("2d");
+        const context = canvas.getContext('2d');
         const pixels = context.getImageData(0, 0, canvas.width, canvas.height);
         const data = pixels.data;
-        for (let i = 0, l = data.length; i < l; i += 4) {
+        for (let i = 0, l = data.length; i < l; i = i + 4) {
             if (data[i]   === rgbIn.x &&
                 data[i+1] === rgbIn.y &&
                 data[i+2] === rgbIn.z) {
@@ -31,7 +31,7 @@ Engine.CanvasUtil = {
         const scaled = document.createElement('canvas');
         scaled.width = w;
         scaled.height = h;
-        const context = scaled.getContext("2d");
+        const context = scaled.getContext('2d');
         context.imageSmoothingEnabled = scale < 1;
         context.drawImage(canvas, 0, 0, w, h);
         return scaled;

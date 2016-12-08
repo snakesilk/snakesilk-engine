@@ -86,7 +86,9 @@ extends Engine.Loader.XML.Parser
         if (this._objects[id]) {
             return this._objects[id];
         } else if (resource.has('object', id)) {
-            return {constructor: resource.get('object', id)};
+            return {
+                constructor: resource.get('object', id),
+            };
         }
         throw new Error(`Object "${id}" not defined.`);
     }
@@ -98,18 +100,18 @@ extends Engine.Loader.XML.Parser
 
         this._scene = new Engine.Scene();
 
-        this._parseAudio();
-        this._parseCamera();
-        this._parseEvents();
-        this._parseBehaviors();
-        this._parseCamera();
-        this._parseGravity();
-        this._parseSequences();
-
-        return this._parseObjects().then(() => {
+        return Promise.all([
+            this._parseAudio(),
+            this._parseCamera(),
+            this._parseEvents(),
+            this._parseBehaviors(),
+            this._parseCamera(),
+            this._parseGravity(),
+            this._parseSequences(),
+            this._parseObjects(),
+        ])
+        .then(() => {
             return this._parseLayout();
-        }).then(() => {
-            return this.loader.resourceLoader.complete();
         }).then(() => {
             return this._scene;
         });
@@ -117,15 +119,20 @@ extends Engine.Loader.XML.Parser
     _parseAudio()
     {
         const scene = this._scene;
-        const nodes = this._node.querySelectorAll(':scope > audio > *');
-        const tasks = [];
-        for (let node, i = 0; node = nodes[i++];) {
-            const id = this.getAttr(node, 'id');
-            const task = this.getAudio(node).then(audio => {
-                scene.audio.add(id, audio);
-            });
-            tasks.push(task);
-        }
+        const audioNodes = this._node.querySelectorAll(':scope > audio > *');
+
+        const audioParser = new Engine.Loader.XML
+            .AudioParser(this.loader);
+
+        const tasks = [...audioNodes].map(rawNode => {
+            const node = new Engine.XMLNode(rawNode);
+            const id = node.attr('id').value;
+            return audioParser.getAudio(node)
+                .then(audio => {
+                    scene.audio.add(id, audio);
+                });
+        });
+
         return Promise.all(tasks);
     }
     _parseBehaviors()

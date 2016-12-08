@@ -62,10 +62,16 @@ class ResourceManager
             return Promise.resolve(this.get(type, id));
         }
 
-        return new Promise(resolve => {
+        return new Promise((resolve, reject) => {
+            const timeout = setTimeout(() => {
+                this.events.unbind(this.EVENT_ADDED, listener);
+                reject(new Error(`Timeout while waiting for resource "${id}" of type "${type}"`));
+            }, 1000);
+
             const listener = (_type, _id, item) => {
                 if (_type === type && _id === id) {
                     this.events.unbind(this.EVENT_ADDED, listener);
+                    clearTimeout(timeout);
                     resolve(item);
                 }
             };
@@ -77,7 +83,7 @@ class ResourceManager
         if (this._items[type] && this._items[type][id]) {
             return this._items[type][id];
         }
-        throw new Error('No resource "' + id + '" of type ' + type);
+        throw new Error(`No resource "${id}" of type "${type}"`);
     }
     has(type, id)
     {
