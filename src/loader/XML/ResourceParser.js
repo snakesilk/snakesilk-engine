@@ -31,15 +31,39 @@ class ResourceParser
         });
     }
 
+    parseFontNodes(fontNodes) {
+        return Promise.all(fontNodes.map(fontNode => {
+            const url = fontNode.attr('url').toURL();
+            return this.resourceLoader.loadImage(url)
+            .then(canvas => {
+                const fontId = fontNode.attr('id').value;
+                const size = {
+                    x: fontNode.attr('w').toFloat(),
+                    y: fontNode.attr('h').toFloat(),
+                };
+                const map = fontNode.node.getElementsByTagName('map')[0].textContent;
+                const font = new Engine.BitmapFont(map, size, canvas);
+                font.scale = this.loader.textureScale;
+                this.resourceManager.addFont(fontId, text => {
+                    return font.createText(text);
+                });
+            });
+        }));
+    }
+
     parseResourcesNode(resourcesNode) {
         const audioTask = resourcesNode.find('audio > *')
             .then(nodes => this.parseAudioNodes(nodes));
+
+        const fontTask = resourcesNode.find('fonts > font')
+            .then(nodes => this.parseFontNodes(nodes));
 
         const objectTask = resourcesNode.find('objects')
             .then(nodes => this.parseObjectsNodes(nodes));
 
         return Promise.all([
             audioTask,
+            fontTask,
             objectTask,
         ]);
     }
