@@ -61,13 +61,7 @@ class World
     }
     getObject(id)
     {
-        for (let i = 0, l = this.objects.length; i !== l; ++i) {
-            const object = this.objects[i];
-            if (object.id === id) {
-                return object;
-            }
-        }
-        return false;
+        return this.objects.find(o => o.id === id) || null;
     }
     getObjects(name) {
         return this.objects.filter(o => o.name === name);
