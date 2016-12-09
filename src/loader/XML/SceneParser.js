@@ -280,6 +280,9 @@ extends Engine.Loader.XML.Parser
             const parser = new Engine.Loader.XML.ObjectParser(this.loader, node);
             const task = parser.getObjects().then(objects => {
                 Object.assign(this._objects, objects);
+                Object.keys(objects).forEach(id => {
+                    this._scene.resources.addObject(id, objects[id].constructor);
+                });
             });
             tasks.push(task);
         }

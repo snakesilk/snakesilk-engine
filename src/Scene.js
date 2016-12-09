@@ -20,6 +20,7 @@ class Scene
         this.game = null;
         this.events = new Engine.Events(this);
         this.input = new Engine.Keyboard;
+        this.resources = new Engine.ResourceManager();
         this.timer = new Engine.Timer;
         this.world = new Engine.World;
 
