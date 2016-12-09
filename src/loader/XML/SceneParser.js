@@ -17,7 +17,7 @@ extends Engine.Loader.XML.Parser
 
         this._node = node;
         this._scene = null;
-        this._objects = {};
+        this._objects = Object.create(null);
         this._bevahiorObjects = [];
         this._layoutObjects = [];
     }
