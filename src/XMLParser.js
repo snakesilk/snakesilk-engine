@@ -1,5 +1,3 @@
-'use strict';
-
 Engine.XMLNodeList =
 class XMLNodeList extends Array
 {
@@ -23,8 +21,7 @@ class XMLNodeList extends Array
 
     static merge(...nodeLists) {
         return nodeLists.reduce((mergedList, nodeList) => {
-            const exp = [...nodeList];
-            mergedList.push(...exp);
+            mergedList.push(...nodeList);
             return mergedList;
         }, new Engine.XMLNodeList());
     }
