@@ -20,7 +20,7 @@ class ResourceManager
             throw new Error('Empty id');
         }
         if (!this._items[type]) {
-            this._items[type] = {};
+            this._items[type] = Object.create(null);
         }
         if (this._items[type][id]) {
             throw new Error("Object " + id + " already defined");
