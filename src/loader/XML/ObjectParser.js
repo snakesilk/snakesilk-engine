@@ -14,8 +14,6 @@ extends Engine.Loader.XML.Parser
         super(loader);
 
         this.resourceManager = loader.resourceManager;
-        this.resourceParser = new Engine.Loader.XML.ResourceParser(loader);
-
 
         this._node = node;
 
@@ -124,7 +122,7 @@ extends Engine.Loader.XML.Parser
             if (this._textures[id]) {
                 return this._textures[id];
             } else {
-                console.log(this._textures);
+                console.error(this._textures);
                 throw new Error('Texture "' + id + '" not defined');
             }
         } else if (this._textures['__default']) {
@@ -135,13 +133,16 @@ extends Engine.Loader.XML.Parser
     }
     _parse()
     {
-        return this._parseTextures().then(textures => {
-            this._textures = textures;
-            return this._parseAnimations();
-        }).then(animations => {
-            this._animations = animations;
-            return this._parseObjects();
-        });
+        const textureNodes = this._node.querySelectorAll(':scope > textures > texture');
+
+        return this.parseTextures(Engine.XMLNodeList.from(textureNodes))
+            .then(textureMap => {
+                this._textures = textureMap;
+                return this._parseAnimations();
+            }).then(animations => {
+                this._animations = animations;
+                return this._parseObjects();
+            });
     }
     _parseAnimations()
     {
@@ -441,23 +442,39 @@ extends Engine.Loader.XML.Parser
             return Promise.resolve([]);
         }
     }
-    _parseTextures()
+    parseTextures(textureNodes)
     {
-        const nodes = this._node.querySelectorAll(':scope > textures > texture');
-        const textures = {
-            __default: undefined,
-        };
-        for (let node, i = 0; node = nodes[i++];) {
-            const textureId = node.getAttribute('id') || '__default';
-            textures[textureId] = {
-                id: textureId,
-                texture: this.getTexture(node),
-                size: this.getVector2(node, 'w', 'h'),
-            };
-            if (textures['__default'] === undefined) {
-                textures['__default'] = textures[textureId];
+        const textureParser = new Engine.Loader.XML
+            .TextureParser(this.loader);
+
+        const textureMap = Object.create(null);
+
+        const tasks = textureNodes.map((textureNode, index) => {
+            const idAttr = textureNode.attr('id');
+            const id = idAttr ? idAttr.value : '__default';
+            const task = textureParser.getTexture(textureNode)
+                .then(texture => {
+                    return {
+                        id,
+                        texture,
+                        size: this.getVector2(textureNode.node, 'w', 'h'),
+                    };
+                });
+
+            task.then(texture => {
+                textureMap[texture.id] = texture;
+            });
+
+            if (index === 0) {
+                task.then(texture => {
+                    textureMap['__default'] = texture;
+                });
             }
-        }
-        return Promise.resolve(textures);
+
+            return task;
+        });
+
+        return Promise.all(tasks)
+            .then(() => textureMap);
     }
 }

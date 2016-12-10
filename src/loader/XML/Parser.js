@@ -176,59 +176,6 @@ class Parser
         const vec3 = this.getVector3.apply(this, arguments);
         return vec3;
     }
-    getTexture(textureNode)
-    {
-        if (textureNode.tagName !== 'texture') {
-            throw new Error("Node not <texture>");
-        }
-
-        const textureScale = this.getFloat(textureNode, 'scale') || this.loader.textureScale;
-        const textureUrl = this.resolveURL(textureNode, 'url');
-        const textureId = textureNode.getAttribute('id');
-
-        const texture = new THREE.Texture();
-        texture.magFilter = THREE.LinearFilter;
-        texture.minFilter = THREE.LinearMipMapLinearFilter;
-
-        function createReplace(colorIn, colorOut) {
-            return function colorReplace(canvas) {
-                return Engine.CanvasUtil.colorReplace(canvas,
-                    colorIn, colorOut);
-            }
-        }
-
-        this.loader.resourceLoader.loadImage(textureUrl).then(canvas => {
-            texture.name = textureId;
-            const effects = [];
-            const effectsNode = textureNode.getElementsByTagName('effects')[0];
-            if (effectsNode) {
-                const effectNodes = effectsNode.getElementsByTagName('*');
-                for (let effectNode, i = 0; effectNode = effectNodes[i++];) {
-                    if (effectNode.tagName === 'color-replace') {
-                        const colors = [
-                            this.getColorHex(effectNode, 'in'),
-                            this.getColorHex(effectNode, 'out'),
-                        ];
-                        effects.push(createReplace(colors[0], colors[1]));
-                    }
-                }
-            }
-
-            if (textureScale !== 1) {
-                effects.push(function(canvas) {
-                    return Engine.CanvasUtil.scale(canvas, textureScale);
-                });
-            }
-
-            effects.forEach(effect => {
-                canvas = effect(canvas);
-            });
-            texture.image = canvas;
-            texture.needsUpdate = true;
-        });
-
-        return texture;
-    }
     getVector2(node, attrX, attrY)
     {
         const x = this.getAttr(node, attrX || 'x');
