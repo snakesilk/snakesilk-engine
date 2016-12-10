@@ -55,6 +55,7 @@ class XMLNode {
             throw new TypeError('Not a node');
         }
 
+        this.name = node.tagName;
         this.node = node;
     }
 
