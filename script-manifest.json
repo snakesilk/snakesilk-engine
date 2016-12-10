@@ -53,6 +53,7 @@
     "loader/XML/SequenceParser.js",
     "loader/XML/TraitParser.js",
     "loader/XML/SceneParser.js",
+    "loader/XML/TextureParser.js",
     "Player.js",
 
     "Scene.js",
