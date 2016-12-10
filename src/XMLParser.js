@@ -104,8 +104,8 @@ class XMLAttribute {
         return parseFloat(this.value);
     }
 
-    toInt() {
-        return parseFloat(this.value, 10);
+    toInt(base = 10) {
+        return parseFloat(this.value, base);
     }
 
     toURL() {
