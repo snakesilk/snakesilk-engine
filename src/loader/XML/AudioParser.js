@@ -9,10 +9,9 @@ class AudioParser
 
     getAudio(audioNode)
     {
-        const id = audioNode.attr('id').value;
         return audioNode.attr('url')
             ? this.loadAudio(audioNode)
-            : this.resourceManager.getAsync('audio', id);
+            : this.resourceManager.getAsync('audio', audioNode.attr('id').value);
     }
 
     loadAudio(audioNode) {
