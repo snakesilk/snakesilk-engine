@@ -134,26 +134,30 @@ extends Engine.Loader.XML.Parser
     _parse()
     {
         const textureNodes = this._node.querySelectorAll(':scope > textures > texture');
+        const animationNodes = this._node.querySelectorAll(':scope > animations > animation');
 
-        return this.parseTextures(Engine.XMLNodeList.from(textureNodes))
-            .then(textureMap => {
-                this._textures = textureMap;
-                return this._parseAnimations();
-            }).then(animations => {
-                this._animations = animations;
-                return this._parseObjects();
-            });
+        return Promise.all([
+            this.parseAnimations(animationNodes),
+            this.parseTextures(Engine.XMLNodeList.from(textureNodes)),
+
+        ])
+        .then(([
+            animationMap,
+            textureMap,
+        ]) => {
+            this._animations = animationMap;
+            this._textures = textureMap;
+            return this._parseObjects();
+        });
     }
-    _parseAnimations()
+    parseAnimations(animationNodes)
     {
-        const nodes = this._node.querySelectorAll(':scope > animations > animation');
-
         const animations = {
             __default: undefined,
         };
 
-        for (let i = 0, node; node = nodes[i++];) {
-            const animation = this._parseAnimation(node);
+        for (let i = 0, node; node = animationNodes[i++];) {
+            const animation = this.parseAnimation(node);
             animations[animation.id || '__default'] = animation;
             if (animations['__default'] === undefined) {
                 animations['__default'] = animation;
@@ -162,10 +166,11 @@ extends Engine.Loader.XML.Parser
 
         return Promise.resolve(animations);
     }
-    _parseAnimation(animationNode)
+    parseAnimation(animationNode)
     {
         const textureId = animationNode.parentNode.getAttribute('texture');
-        const texture = this._getTexture(textureId);
+        const textureNode = animationNode.parentNode.parentNode.querySelector(`texture[id="${textureId}"], texture`);
+        const textureSize = this.getVector2(textureNode, 'w', 'h');
 
         const id = animationNode.getAttribute('id');
         const group = animationNode.getAttribute('group') || undefined;
@@ -177,7 +182,7 @@ extends Engine.Loader.XML.Parser
             const size = this.getVector2(frameNode, 'w', 'h') ||
                          this.getVector2(frameNode.parentNode, 'w', 'h') ||
                          this.getVector2(frameNode.parentNode.parentNode, 'w', 'h');
-            const uvMap = new Engine.UVCoords(offset, size, texture.size);
+            const uvMap = new Engine.UVCoords(offset, size, textureSize);
             const duration = this.getFloat(frameNode, 'duration') || undefined;
             animation.addFrame(uvMap, duration);
 
