@@ -3,6 +3,7 @@
     "Audio.js",
     "AudioManager.js",
     "AudioPlayer.js",
+    "Conversion.js",
     "Util.js",
     "Easing.js",
     "Events.js",
