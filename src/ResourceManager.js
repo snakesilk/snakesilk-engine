@@ -8,6 +8,7 @@ class ResourceManager
         this.EVENT_ADDED = 'event-added';
 
         this.events = new Engine.Events();
+        this.timeout = 1000;
 
         this._items = Object.create(null);
     }
@@ -66,7 +67,7 @@ class ResourceManager
             const timeout = setTimeout(() => {
                 this.events.unbind(this.EVENT_ADDED, listener);
                 reject(new Error(`Timeout while waiting for resource "${id}" of type "${type}"`));
-            }, 1000);
+            }, this.timeout);
 
             const listener = (_type, _id, item) => {
                 if (_type === type && _id === id) {
