@@ -63,10 +63,12 @@ class ResourceManager
             return Promise.resolve(this.get(type, id));
         }
 
+        const timeoutError = new Error(`Timeout while waiting for resource "${id}" of type "${type}"`);
+
         return new Promise((resolve, reject) => {
             const timeout = setTimeout(() => {
                 this.events.unbind(this.EVENT_ADDED, listener);
-                reject(new Error(`Timeout while waiting for resource "${id}" of type "${type}"`));
+                reject(timeoutError);
             }, this.timeout);
 
             const listener = (_type, _id, item) => {
