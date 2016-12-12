@@ -59,6 +59,10 @@ Engine.Keyboard = class Keyboard
             this.assign(code, map[code]);
         });
     }
+    listenTo(element) {
+        element.addEventListener('keydown', (e) => this.handleEvent(e));
+        element.addEventListener('keyup', (e) => this.handleEvent(e));
+    }
     handleEvent(event)
     {
         const key = event.keyCode;

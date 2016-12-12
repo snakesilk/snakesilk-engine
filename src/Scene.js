@@ -19,21 +19,15 @@ class Scene
         this.camera = new Engine.Camera;
         this.game = null;
         this.events = new Engine.Events(this);
-        this.input = new Engine.Keyboard;
+
         this.resources = new Engine.ResourceManager();
         this.timer = new Engine.Timer;
         this.world = new Engine.World;
 
-        this.doFor = Engine.Loops.doFor(this.world.events, this.world.EVENT_SIMULATE);
-        this.waitFor = Engine.Loops.waitFor(this.world.events, this.world.EVENT_SIMULATE);
-
-        this.input.events.bind(this.input.EVENT_TRIGGER, (key, type) => {
-            this.events.trigger(this.EVENT_INPUT, [key, type]);
-        });
-
-        this._inputRoute = (key, state) => {
-            this.input.trigger(key, state);
-        };
+        this.doFor = Engine.Loops.doFor(
+            this.world.events, this.world.EVENT_SIMULATE);
+        this.waitFor = Engine.Loops.waitFor(
+            this.world.events, this.world.EVENT_SIMULATE);
 
         this._timerBound = false;
         this._timerUpdate = (dt) => {
@@ -82,9 +76,6 @@ class Scene
     {
         this.game = game;
         this.audio.setPlayer(game.audioPlayer);
-
-        const input = this.game.input;
-        input.events.bind(input.EVENT_TRIGGER, this._inputRoute);
     }
     __start()
     {
@@ -108,10 +99,6 @@ class Scene
         this.stopSimulation();
         this.audio.stopAll();
         this.audio.unsetPlayer();
-
-        const input = this.game.input;
-        input.events.unbind(input.EVENT_TRIGGER, this._inputRoute);
-
         this.game = null;
     }
     pauseSimulation()
@@ -139,5 +126,3 @@ class Scene
         }
     }
 }
-
-Engine.scenes = {};
