@@ -6,6 +6,11 @@ extends Engine.Loader.XML.Parser
 {
     constructor(loader, node)
     {
+        if (node.tagName !== 'scene') {
+            console.error(node.node);
+            throw new TypeError('Node not <scene>');
+        }
+
         super(loader);
 
         this.DEFAULT_POS = new THREE.Vector3(0, 0, 0);
