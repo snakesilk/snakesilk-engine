@@ -13,7 +13,7 @@
     "Sequencer.js",
     "SyncPromise.js",
     "Tween.js",
-    "Keyboard.js",
+    "input/Keyboard.js",
     "Mouse.js",
     "Math.js",
     "Verlet.js",
