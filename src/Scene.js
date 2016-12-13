@@ -19,7 +19,6 @@ class Scene
         this.camera = new Engine.Camera;
         this.game = null;
         this.events = new Engine.Events(this);
-
         this.resources = new Engine.ResourceManager();
         this.timer = new Engine.Timer;
         this.world = new Engine.World;
@@ -87,7 +86,6 @@ class Scene
     }
     __pause()
     {
-        this.input.release();
         this.timer.pause();
     }
     __end()
@@ -99,6 +97,7 @@ class Scene
         this.stopSimulation();
         this.audio.stopAll();
         this.audio.unsetPlayer();
+
         this.game = null;
     }
     pauseSimulation()
