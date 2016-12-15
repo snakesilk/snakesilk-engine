@@ -58,11 +58,7 @@ class XMLNode {
 
     attr(name) {
         const value = this.node.getAttribute(name);
-        if (value != null) {
-            return new Engine.XMLAttr(name, value, this.node);
-        } else {
-            return null;
-        }
+        return value && new Engine.XMLAttr(name, value, this.node) || null;
     }
 
     find(selector) {
