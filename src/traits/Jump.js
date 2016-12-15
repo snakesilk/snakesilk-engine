@@ -73,6 +73,7 @@ class Jump extends Engine.Trait
         if (!this._ready) {
             return false;
         }
+        this._ready = false;
 
         this._bump.copy(this.force);
         this._bump.x *= host.direction.x;
