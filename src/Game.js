@@ -19,8 +19,12 @@ Engine.Game = class Game
 
         this.element = null;
         this.scene = null;
+        this.timer = new Engine.Timer();
 
         this.pause();
+
+        this.updateScene = this.updateScene.bind(this);
+        this.renderScene = this.renderScene.bind(this);
     }
 
     destroy()
@@ -54,9 +58,7 @@ Engine.Game = class Game
         }
         this._paused = true;
         this.audioPlayer.pause();
-        if (this.scene) {
-            this.scene.events.trigger(this.scene.EVENT_PAUSE);
-        }
+        this.timer.pause();
     }
     resume()
     {
@@ -65,10 +67,7 @@ Engine.Game = class Game
         }
         this._paused = false;
         this.audioPlayer.resume();
-
-        if (this.scene) {
-            this.scene.events.trigger(this.scene.EVENT_RESUME);
-        }
+        this.timer.run();
     }
     render()
     {
@@ -81,16 +80,21 @@ Engine.Game = class Game
     }
     _updatePlaybackSpeed()
     {
-        if (this.scene) {
-            this.scene.timer.setTimeStretch(this._playbackSpeed);
-        }
+        this.timer.setTimeStretch(this._playbackSpeed);
         this.audioPlayer.setPlaybackRate(this._playbackSpeed);
     }
+
     setResolution(w, h)
     {
         this.renderer.setSize(w, h);
         this.renderer.domElement.removeAttribute('style');
     }
+
+    renderScene()
+    {
+        this.scene.render(this.renderer);
+    }
+
     setScene(scene)
     {
         if (scene instanceof Engine.Scene === false) {
@@ -98,6 +102,10 @@ Engine.Game = class Game
         }
 
         this.unsetScene();
+
+        const timer = this.timer;
+        timer.events.bind(timer.EVENT_UPDATE, this.updateScene);
+        timer.events.bind(timer.EVENT_RENDER, this.renderScene);
 
         this.scene = scene;
         this.scene.events.trigger(this.scene.EVENT_CREATE, [this]);
@@ -108,21 +116,27 @@ Engine.Game = class Game
            we make sure the aspect ratio is correct before
            we roll. */
         this.adjustAspectRatio();
-        this._updatePlaybackSpeed();
 
         this.scene.events.trigger(this.scene.EVENT_START);
-
-        if (!this._paused) {
-            this.scene.events.trigger(this.scene.EVENT_RESUME);
-        }
     }
+
     unsetScene()
     {
         if (this.scene) {
-            this.events.trigger(this.EVENT_SCENE_UNSET, [this.scene]);
+            this.scene.events.trigger(this.scene.EVENT_END);
+
+            const timer = this.timer;
+            timer.events.unbind(timer.EVENT_UPDATE, this.updateScene);
+            timer.events.unbind(timer.EVENT_RENDER, this.renderScene);
+
             this.events.trigger(this.EVENT_SCENE_DESTROY, [this.scene]);
-            this.scene.events.trigger(this.scene.EVENT_DESTROY);
+            this.scene.events.trigger(this.scene.EVENT_DESTROY, [this]);
             this.scene = null;
         }
+    }
+
+    updateScene(dt)
+    {
+        this.scene.updateTime(dt);
     }
 }

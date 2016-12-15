@@ -1,5 +1,3 @@
-'use strict';
-
 Engine.AudioManager =
 class AudioManager
 {
