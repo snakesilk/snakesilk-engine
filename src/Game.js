@@ -65,6 +65,7 @@ Engine.Game = class Game
         }
         this._paused = false;
         this.audioPlayer.resume();
+
         if (this.scene) {
             this.scene.events.trigger(this.scene.EVENT_RESUME);
         }
