@@ -5,14 +5,7 @@ class ResourceManager
 {
     constructor()
     {
-        /* These must be defined in order of specificity. */
-        this.TYPE_MAP = {
-            'weapon': Engine.objects.Weapon,
-            'object': Engine.Object,
-            'texture': THREE.Texture,
-        }
-
-        this._items = {};
+        this._items = Object.create(null);
     }
     _addResource(type, id, object)
     {
@@ -30,17 +23,6 @@ class ResourceManager
         }
 
         this._items[type][id] = object;
-    }
-    addAuto(id, object)
-    {
-        for (let type in this.TYPE_MAP) {
-            const proto = this.TYPE_MAP[type].prototype;
-            if (proto.isPrototypeOf(object.prototype)) {
-                this._addResource(type, id, object);
-                return true;
-            }
-        }
-        throw new Error('Could not determine type from ' + object);
     }
     addAudio(id, object)
     {
