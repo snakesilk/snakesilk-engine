@@ -2,7 +2,6 @@ verbose: false
 instrumentation:
     root: .
     default-excludes: true
-    excludes: ['lib/*']
     compact: true
     preserve-comments: false
     complete-copy: false
