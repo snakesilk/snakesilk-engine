@@ -1,5 +1,5 @@
-import ResourceLoader from './ResourceLoader';
-import ResourceManager from './ResourceManager';
+const ResourceLoader = require('./ResourceLoader');
+const ResourceManager = require('./ResourceManager');
 
 class Loader
 {
@@ -13,4 +13,4 @@ class Loader
     }
 }
 
-export default Loader;
+module.exports = Loader;
