@@ -1,10 +1,13 @@
-Engine.traits.DeathSpawn =
-class DeathSpawn extends Engine.Trait
+const Trait = require('../Trait');
+const Health = require('./Health');
+
+class DeathSpawn extends Trait
 {
     constructor()
     {
         super();
         this.NAME = 'deathSpawn';
+        this._requires = [Health];
 
         this.chance = 1;
         this.pool = [];
@@ -47,3 +50,5 @@ class DeathSpawn extends Engine.Trait
         }
     }
 }
+
+module.exports = DeathSpawn;

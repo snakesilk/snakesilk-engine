@@ -1,5 +1,7 @@
-Engine.traits.Headlight =
-class Headlight extends Engine.traits.Light
+const THREE = require('three');
+const Light = require('./Light');
+
+class Headlight extends Light
 {
     constructor()
     {
@@ -34,8 +36,8 @@ class Headlight extends Engine.traits.Light
         this.headbob = 2;
 
         this.lamps = [
-            new Engine.traits.Light.Lamp(this.beam),
-            new Engine.traits.Light.Lamp(this.point),
+            new Light.Lamp(this.beam),
+            new Light.Lamp(this.point),
         ];
     }
     __attach(host)
@@ -60,8 +62,9 @@ class Headlight extends Engine.traits.Light
     }
     __timeshift(deltaTime)
     {
-        const host = this._host,
-              animator = host.animators[0];
+        const
+            host = this._host,
+            animator = host.animators[0];
 
         this.flare.material.opacity = this.point.intensity / this.lamps[1].intensity;
 
@@ -75,3 +78,5 @@ class Headlight extends Engine.traits.Light
         super.__timeshift.apply(this, arguments);
     }
 }
+
+module.exports = Headlight;
