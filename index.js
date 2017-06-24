@@ -1,11 +1,11 @@
-const Game = require('./Game');
-const InputPlayer = require('./InputPlayer');
-const InputRecorder = require('./InputRecorder');
-const Scene = require('./Scene');
+const Game = require('./engine/Game');
+const InputPlayer = require('./engine/InputPlayer');
+const InputRecorder = require('./engine/InputRecorder');
+const Scene = require('./engine/Scene');
 
-const XMLLoader = require('./loader/XML');
-const Mouse = require('./Mouse');
-const Hud = require('./Hud');
+const XMLLoader = require('./engine/loader/XML');
+const Mouse = require('./engine/Mouse');
+const Hud = require('./engine/Hud');
 
 module.exports = {
     Game,
