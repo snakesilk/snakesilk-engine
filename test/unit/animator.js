@@ -1,11 +1,8 @@
-'use strict';
-
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const env = require('../env');
-const Animator = env.Engine.Animator;
-const Animation = env.Engine.Animator.Animation;
+const Animator = require('../../engine/Animator');
+const Animation = require('../../engine/Animation');
 
 describe('Animator', () => {
   function createAnimator() {

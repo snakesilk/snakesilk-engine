@@ -1,12 +1,8 @@
-'use strict';
-
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const env = require('../env');
-
-const Host = env.Engine.Entity;
-const Trait = env.Engine.Trait;
+const Host = require('../../engine/Object');
+const Trait = require('../../engine/Trait');
 
 describe('Trait', function() {
   let MockTrait;
@@ -89,7 +85,6 @@ describe('Trait', function() {
     });
 
     it('should except if host not Object', function() {
-      const host = new Host();
       const trait = new MockTrait();
       expect(function() {
         trait.__attach('a');

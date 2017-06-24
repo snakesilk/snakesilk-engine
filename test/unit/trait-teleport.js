@@ -1,12 +1,9 @@
-'use strict';
-
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const env = require('../env');
-const Object = env.Engine.Entity;
-const Teleport = env.Engine.traits.Teleport;
-const Physics = env.Engine.traits.Physics;
+const Object = require('../../engine/Object');
+const Physics = require('../../engine/traits/Physics');
+const Teleport = require('../../engine/traits/Teleport');
 
 describe('Teleport Trait', function() {
   describe('on instantiation', function() {

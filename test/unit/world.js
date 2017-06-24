@@ -1,12 +1,9 @@
-'use strict';
-
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const env = require('../env');
-const THREE = env.THREE;
-const Obj = env.Engine.Entity;
-const World = env.Engine.World;
+const THREE = require('three');
+const Obj = require('../../engine/Object');
+const World = require('../../engine/World');
 
 describe('World', function() {
   let world;

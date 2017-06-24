@@ -1,7 +1,8 @@
 {
-  "name": "snakesilk",
+  "name": "snakesilk-engine",
   "version": "0.1.1",
   "description": "Simple, extensible game engine allowing creation of games using composition of components thru XML.",
+  "main": "index.js",
   "scripts": {
     "test": "mocha test/unit",
     "test+coverage": "istanbul cover $(npm bin)/_mocha test/unit",
@@ -17,13 +18,15 @@
     "url": "https://github.com/snakesilk/snakesilk-engine/issues"
   },
   "homepage": "https://github.com/snakesilk/snakesilk-engine#readme",
+  "dependencies": {
+    "three": "0.70"
+  },
   "devDependencies": {
     "codecov": "^1.0.1",
     "expect.js": "^0.3.1",
     "istanbul": "^0.4.5",
     "mocha": "^3.0.2",
     "sinon": "^1.17.5",
-    "three.js": "^0.77.1",
-    "xmldom": "^0.1.22"
+    "xmldom": "^0.1.27"
   }
 }

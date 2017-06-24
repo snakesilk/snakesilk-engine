@@ -1,14 +1,11 @@
-'use strict';
-
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const env = require('../env');
-const World = env.Engine.World;
-const Object = env.Engine.Entity;
-const Conveyor = env.Engine.traits.Conveyor;
-const Physics = env.Engine.traits.Physics;
-const Solid = env.Engine.traits.Solid;
+const Object = require('../../engine/Object');
+const World = require('../../engine/World');
+const Conveyor = require('../../engine/traits/Conveyor');
+const Physics = require('../../engine/traits/Physics');
+const Solid = require('../../engine/traits/Solid');
 
 describe('Conveyor Trait', function() {
   function createCharacter()

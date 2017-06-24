@@ -1,16 +1,11 @@
-'use strict';
-
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const env = require('../env');
-
-const Obj = env.Engine.Entity;
-const World = env.Engine.World;
-const Character = env.Engine.objects.Character;
-const Physics = env.Engine.traits.Physics;
-const Jump = env.Engine.traits.Jump;
-const Solid = env.Engine.traits.Solid;
+const Entity = require('../../engine/Object');
+const World = require('../../engine/World');
+const Physics = require('../../engine/traits/Physics');
+const Jump = require('../../engine/traits/Jump');
+const Solid = require('../../engine/traits/Solid');
 
 describe('Jump', function() {
   it.skip('should maintain jump height despite variations in time', function() {
@@ -18,7 +13,7 @@ describe('Jump', function() {
 
     const world = new World();
 
-    const ground = new Obj();
+    const ground = new Entity();
     ground.applyTrait(new Solid());
     ground.addCollisionRect(1000, 10);
     ground.position.set(0, 0);
@@ -35,7 +30,7 @@ describe('Jump', function() {
     world.addObject(jumper);
     world.addObject(ground);
 
-    const maxLoops = 40;
+    let maxLoops = 40;
     expect(jumper.jump._ready).to.be(false);
     while (jumper.jump._ready === false && maxLoops--) {
       world.updateTime(step);

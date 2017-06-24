@@ -1,10 +1,7 @@
-'use strict';
-
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const env = require('../env');
-const AudioManager = env.Engine.AudioManager;
+const AudioManager = require('../../engine/AudioManager');
 
 describe('AudioManager', function() {
   function MockAudio() {

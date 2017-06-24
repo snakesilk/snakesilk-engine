@@ -25,11 +25,10 @@ Follow the project blog at https://medium.com/recreating-megaman-2-using-js-webg
         cd snakesilk-engine
         npm install
 
+
 * Run test suite.
 
         npm test
-
-* When adding scripts to project, add them to [`script-manifest.json`](https://github.com/snakesilk/snakesilk-engine/blob/master/script-manifest.json).
 
 
 ## Contributing

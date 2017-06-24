@@ -3,10 +3,9 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const env = require('../env');
-
-const Collision = env.Engine.Collision;
-const Obj = env.Engine.Entity;
+const THREE = require('three');
+const Collision = require('../../engine/Collision');
+const Obj = require('../../engine/Object');
 
 describe('Collision', function() {
   it('should not re-test positionally static objects', function() {
@@ -44,11 +43,11 @@ describe('Collision', function() {
       });
       it('should create a collision index array at same position', function() {
         expect(collision.collisionIndex).to.have.length(1);
-        expect(collision.collisionIndex[0]).to.be.an('array');
+        expect(collision.collisionIndex[0]).to.be.an(Array);
       });
       it('should create a placeholder in position cache', function() {
         expect(collision.positionCache).to.have.length(1);
-        expect(collision.positionCache[0]).to.be.a(env.THREE.Vector2);
+        expect(collision.positionCache[0]).to.be.a(THREE.Vector2);
         expect(collision.positionCache[0].x).to.be(undefined);
         expect(collision.positionCache[0].y).to.be(undefined);
       });

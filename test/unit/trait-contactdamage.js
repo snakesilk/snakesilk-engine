@@ -1,14 +1,11 @@
-'use strict';
-
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const env = require('../env');
-const Object = env.Engine.Entity;
-const ContactDamage = env.Engine.traits.ContactDamage;
-const Invincibility = env.Engine.traits.Invincibility;
-const Health = env.Engine.traits.Health;
-const World = env.Engine.World;
+const Object = require('../../engine/Object');
+const ContactDamage = require('../../engine/traits/ContactDamage');
+const Invincibility = require('../../engine/traits/Invincibility');
+const Health = require('../../engine/traits/Health');
+const World = require('../../engine/World');
 
 describe('ContactDamage Trait', function() {
   it('should expose itself as "contactDamage" on host', function() {

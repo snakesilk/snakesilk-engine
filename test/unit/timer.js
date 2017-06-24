@@ -1,11 +1,8 @@
-'use strict';
-
 const expect = require('expect.js');
 const sinon = require('sinon');
 
 const RequestAnimationFrameMock = require('../mocks/requestanimationframe-mock');
-const env = require('../env');
-const Timer = env.Engine.Timer;
+const Timer = require('../../engine/Timer');
 
 describe('Timer', function() {
   function setup() {

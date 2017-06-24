@@ -1,10 +1,7 @@
-'use strict';
-
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const env = require('../env');
-const Events = env.Engine.Events;
+const Events = require('../../engine/Events');
 
 describe('Events', function() {
   it('should apply this value to thisable functions', function() {

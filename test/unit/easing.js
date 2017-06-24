@@ -1,11 +1,7 @@
-'use strict';
-
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const env = require('../env');
-
-const Easing = env.Engine.Easing;
+const Easing = require('../../engine/Easing');
 
 describe('Easing', function() {
   const autoBlacklist = new Set([

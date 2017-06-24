@@ -1,19 +1,17 @@
-'use strict';
-
 const expect = require('expect.js');
 const sinon = require('sinon');
 const fs = require('fs');
 
+const THREE = require('three');
 const xmlReader = require('../xmlreader');
-const env = require('../env');
-const Engine = env.Engine;
-const World = env.Engine.World;
-const THREE = env.THREE;
-const Obj = env.Engine.Entity;
-const Parser = env.Engine.Loader.XML.Parser;
-const ObjectParser = env.Engine.Loader.XML.ObjectParser;
-const LevelParser = env.Engine.Loader.XML.LevelParser;
-const TraitParser = env.Engine.Loader.XML.TraitParser;
+
+const World = require('../../engine/World');
+const ResourceManager = require('../../engine/ResourceManager');
+const Obj = require('../../engine/Object');
+const Parser = require('../../engine/loader/XML/Parser');
+const ObjectParser = require('../../engine/loader/XML/ObjectParser');
+const LevelParser = require('../../engine/loader/XML/LevelParser');
+const TraitParser = require('../../engine/loader/XML/TraitParser');
 
 function createNode(x) {
   return xmlReader.createNode(x).childNodes[0];
@@ -28,7 +26,7 @@ describe('Parser', function() {
 
   beforeEach(function() {
     loaderMock = {
-      resource: new Engine.ResourceManager(),
+      resource: new ResourceManager(),
     };
 
     global.Image = sinon.spy(function() {
