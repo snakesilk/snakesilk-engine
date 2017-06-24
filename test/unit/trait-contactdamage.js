@@ -1,11 +1,11 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const Object = require('../../src/engine/Object');
-const ContactDamage = require('../../src/engine/traits/ContactDamage');
-const Invincibility = require('../../src/engine/traits/Invincibility');
-const Health = require('../../src/engine/traits/Health');
-const World = require('../../src/engine/World');
+const Object = require('../../src/Object');
+const ContactDamage = require('../../src/traits/ContactDamage');
+const Invincibility = require('../../src/traits/Invincibility');
+const Health = require('../../src/traits/Health');
+const World = require('../../src/World');
 
 describe('ContactDamage Trait', function() {
   it('should expose itself as "contactDamage" on host', function() {

@@ -1,9 +1,9 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const World = require('../../src/engine/World');
-const Input = require('../../src/engine/Keyboard');
-const Recorder = require('../../src/engine/InputRecorder');
+const World = require('../../src/World');
+const Input = require('../../src/Keyboard');
+const Recorder = require('../../src/InputRecorder');
 
 describe('InputRecorder', function() {
   context('when recording input on world', function() {

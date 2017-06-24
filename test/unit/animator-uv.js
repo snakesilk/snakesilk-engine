@@ -1,12 +1,10 @@
-'use strict';
-
 const expect = require('expect.js');
 const sinon = require('sinon');
 
 const {PlaneGeometry} = require('three');
-const UVAnimator = require('../../src/engine/animator/UV');
-const Animation = require('../../src/engine/Animation');
-const UVCoords = require('../../src/engine/UVCoords');
+const UVAnimator = require('../../src/animator/UV');
+const Animation = require('../../src/Animation');
+const UVCoords = require('../../src/UVCoords');
 
 describe('UV Animator', () => {
   let animator;

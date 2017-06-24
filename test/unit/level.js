@@ -1,16 +1,15 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const env = require('../env');
 const AudioContextMock = require('../mocks/audiocontext-mock');
 const WebGLRendererMock = require('../mocks/webglrenderer-mock');
 const RequestAnimationFrameMock = require('../mocks/requestanimationframe-mock');
 
-const Game = require('../../src/engine/Game');
-const Entity = require('../../src/engine/Object');
-const Level = require('../../src/engine/scene/Level');
-const Health = require('../../src/engine/traits/Health');
-const Teleport = require('../../src/engine/traits/Teleport');
+const Game = require('../../src/Game');
+const Entity = require('../../src/Object');
+const Level = require('../../src/scene/Level');
+const Health = require('../../src/traits/Health');
+const Teleport = require('../../src/traits/Teleport');
 
 describe('Level', function() {
   beforeEach(() => {

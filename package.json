@@ -1,5 +1,5 @@
 {
-  "name": "snakesilk",
+  "name": "snakesilk-engine",
   "version": "0.1.1",
   "description": "Simple, extensible game engine allowing creation of games using composition of components thru XML.",
   "scripts": {

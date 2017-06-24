@@ -2,10 +2,10 @@ const expect = require('expect.js');
 const sinon = require('sinon');
 
 const THREE = require('three');
-const World = require('../../src/engine/World');
-const Host = require('../../src/engine/Object');
+const World = require('../../src/World');
+const Host = require('../../src/Object');
 const Spawnable = Host;
-const Spawn = require('../../src/engine/traits/Spawn');
+const Spawn = require('../../src/traits/Spawn');
 
 describe('Trait', function() {
   describe('Spawn', function() {

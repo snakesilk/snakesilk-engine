@@ -1,9 +1,9 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const Object = require('../../src/engine/Object');
-const Health = require('../../src/engine/traits/Health');
-const Projectile = require('../../src/engine/traits/Projectile');
+const Object = require('../../src/Object');
+const Health = require('../../src/traits/Health');
+const Projectile = require('../../src/traits/Projectile');
 
 describe('Projectile Trait', function() {
   function createCharacter()

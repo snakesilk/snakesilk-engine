@@ -5,13 +5,13 @@ const fs = require('fs');
 const THREE = require('three');
 const xmlReader = require('../xmlreader');
 
-const World = require('../../src/engine/World');
-const ResourceManager = require('../../src/engine/ResourceManager');
-const Obj = require('../../src/engine/Object');
-const Parser = require('../../src/engine/loader/XML/Parser');
-const ObjectParser = require('../../src/engine/loader/XML/ObjectParser');
-const LevelParser = require('../../src/engine/loader/XML/LevelParser');
-const TraitParser = require('../../src/engine/loader/XML/TraitParser');
+const World = require('../../src/World');
+const ResourceManager = require('../../src/ResourceManager');
+const Obj = require('../../src/Object');
+const Parser = require('../../src/loader/XML/Parser');
+const ObjectParser = require('../../src/loader/XML/ObjectParser');
+const LevelParser = require('../../src/loader/XML/LevelParser');
+const TraitParser = require('../../src/loader/XML/TraitParser');
 
 function createNode(x) {
   return xmlReader.createNode(x).childNodes[0];

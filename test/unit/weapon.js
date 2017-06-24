@@ -1,10 +1,10 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const Entity = require('../../src/engine/Object');
-const Weapon = require('../../src/engine/object/Weapon');
-const Projectile = require('../../src/engine/traits/Projectile');
-const WeaponTrait = require('../../src/engine/traits/Weapon');
+const Entity = require('../../src/Object');
+const Weapon = require('../../src/object/Weapon');
+const Projectile = require('../../src/traits/Projectile');
+const WeaponTrait = require('../../src/traits/Weapon');
 
 describe('Weapon', function() {
   let weapon;

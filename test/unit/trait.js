@@ -1,8 +1,8 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const Host = require('../../src/engine/Object');
-const Trait = require('../../src/engine/Trait');
+const Host = require('../../src/Object');
+const Trait = require('../../src/Trait');
 
 describe('Trait', function() {
   let MockTrait;

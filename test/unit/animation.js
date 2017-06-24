@@ -1,8 +1,8 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const Animation = require('../../src/engine/Animation');
-const Timeline = require('../../src/engine/Timeline');
+const Animation = require('../../src/Animation');
+const Timeline = require('../../src/Timeline');
 
 describe('Animation', () => {
   describe('on instantiation', () => {

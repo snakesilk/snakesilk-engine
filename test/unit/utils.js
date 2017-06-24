@@ -1,7 +1,7 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const Util = require('../../src/engine/Util');
+const Util = require('../../src/Util');
 
 describe('Util', function() {
   describe('#renameFunction', () => {

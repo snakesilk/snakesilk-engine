@@ -1,7 +1,7 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const Mouse = require('../../src/engine/Mouse');
+const Mouse = require('../../src/Mouse');
 
 describe('Mouse', function() {
   describe('#sluggish()', function() {

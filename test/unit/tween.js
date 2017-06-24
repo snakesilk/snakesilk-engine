@@ -1,7 +1,7 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const Tween = require('../../src/engine/Tween');
+const Tween = require('../../src/Tween');
 
 describe('Tween', function() {
   it('should ignore keys in to that are undefined', function() {

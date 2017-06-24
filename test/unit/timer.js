@@ -2,7 +2,7 @@ const expect = require('expect.js');
 const sinon = require('sinon');
 
 const RequestAnimationFrameMock = require('../mocks/requestanimationframe-mock');
-const Timer = require('../../src/engine/Timer');
+const Timer = require('../../src/Timer');
 
 describe('Timer', function() {
   function setup() {

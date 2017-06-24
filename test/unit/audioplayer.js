@@ -2,8 +2,8 @@ const expect = require('expect.js');
 const sinon = require('sinon');
 
 const AudioContextMock = require('../mocks/audiocontext-mock');
-const Audio = require('../../src/engine/Audio');
-const AudioPlayer = require('../../src/engine/AudioPlayer');
+const Audio = require('../../src/Audio');
+const AudioPlayer = require('../../src/AudioPlayer');
 
 describe('AudioPlayer', function() {
 

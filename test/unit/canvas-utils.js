@@ -1,12 +1,8 @@
-'use strict';
-
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const env = require('../env');
-
 const CanvasMock = require('../mocks/canvas-mock');
-const CanvasUtil = require('../../src/engine/CanvasUtil');
+const CanvasUtil = require('../../src/CanvasUtil');
 
 describe('CanvasUtil', function() {
   beforeEach(function() {

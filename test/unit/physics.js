@@ -1,10 +1,10 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const Host = require('../../src/engine/Object');
-const World = require('../../src/engine/World');
-const Physics = require('../../src/engine/traits/Physics');
-const Solid = require('../../src/engine/traits/Solid');
+const Host = require('../../src/Object');
+const World = require('../../src/World');
+const Physics = require('../../src/traits/Physics');
+const Solid = require('../../src/traits/Solid');
 
 describe('Physics', function() {
   it('should bind to timeshift event of host', function() {

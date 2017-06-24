@@ -3,7 +3,7 @@ const sinon = require('sinon');
 
 const THREE = require('three');
 const CanvasMock = require('../mocks/canvas-mock');
-const BitmapFont = require('../../src/engine/BitmapFont');
+const BitmapFont = require('../../src/BitmapFont');
 
 describe('Bitmap Font', () => {
   beforeEach(() => {
