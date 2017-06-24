@@ -2,6 +2,9 @@
   "name": "snakesilk-engine",
   "version": "0.1.1",
   "description": "Simple, extensible game engine allowing creation of games using composition of components thru XML.",
+  "main": {
+    "./index.js"
+  },
   "scripts": {
     "test": "mocha test/unit",
     "test+coverage": "istanbul cover $(npm bin)/_mocha test/unit",
