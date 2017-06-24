@@ -1,9 +1,9 @@
-import THREE from 'three';
-import Easing from '../Easing';
-import Entity from '../Object';
-import Scene from '../Scene';
+const THREE = require('three');
+const Easing = require('../Easing');
+const Entity = require('../Object');
+const Scene = require('../Scene');
 
-import Solid from '../traits/Solid';
+const Solid = require('../traits/Solid');
 
 class StageSelect extends Scene
 {
@@ -382,4 +382,4 @@ class StageSelect extends Scene
     }
 }
 
-export default StageSelect;
+module.exports = StageSelect;
