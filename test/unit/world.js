@@ -2,8 +2,8 @@ const expect = require('expect.js');
 const sinon = require('sinon');
 
 const THREE = require('three');
-const Obj = require('../../src/Object');
-const World = require('../../src/World');
+const Obj = require('../../engine/Object');
+const World = require('../../engine/World');
 
 describe('World', function() {
   let world;

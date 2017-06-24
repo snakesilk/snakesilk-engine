@@ -1,7 +1,7 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const Easing = require('../../src/Easing');
+const Easing = require('../../engine/Easing');
 
 describe('Easing', function() {
   const autoBlacklist = new Set([

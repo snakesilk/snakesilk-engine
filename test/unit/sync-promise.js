@@ -1,7 +1,7 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const SyncPromise = require('../../src/SyncPromise');
+const SyncPromise = require('../../engine/SyncPromise');
 
 describe('SyncPromise', function() {
   it('should call thenable callback when resolved', function() {

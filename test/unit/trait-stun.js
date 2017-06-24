@@ -1,15 +1,15 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const Object = require('../../src/Object');
-const World = require('../../src/World');
-const ContactDamage = require('../../src/traits/ContactDamage');
-const Physics = require('../../src/traits/Physics');
-const Solid = require('../../src/traits/Solid');
-const Move = require('../../src/traits/Move');
-const Jump = require('../../src/traits/Jump');
-const Health = require('../../src/traits/Health');
-const Stun = require('../../src/traits/Stun');
+const Object = require('../../engine/Object');
+const World = require('../../engine/World');
+const ContactDamage = require('../../engine/traits/ContactDamage');
+const Physics = require('../../engine/traits/Physics');
+const Solid = require('../../engine/traits/Solid');
+const Move = require('../../engine/traits/Move');
+const Jump = require('../../engine/traits/Jump');
+const Health = require('../../engine/traits/Health');
+const Stun = require('../../engine/traits/Stun');
 
 describe('Stun Trait', function() {
   function createGround()

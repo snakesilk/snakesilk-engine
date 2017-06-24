@@ -2,11 +2,11 @@ const expect = require('expect.js');
 const sinon = require('sinon');
 
 const THREE = require('three');
-const Entity = require('../../src/Object');
-const World = require('../../src/World');
-const Door = require('../../src/traits/Door');
-const Physics = require('../../src/traits/Physics');
-const Solid = require('../../src/traits/Solid');
+const Entity = require('../../engine/Object');
+const World = require('../../engine/World');
+const Door = require('../../engine/traits/Door');
+const Physics = require('../../engine/traits/Physics');
+const Solid = require('../../engine/traits/Solid');
 
 describe('Door Trait', function() {
   function createDoor()

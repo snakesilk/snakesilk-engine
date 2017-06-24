@@ -4,8 +4,8 @@ const expect = require('expect.js');
 const sinon = require('sinon');
 
 const THREE = require('three');
-const Collision = require('../../src/Collision');
-const Obj = require('../../src/Object');
+const Collision = require('../../engine/Collision');
+const Obj = require('../../engine/Object');
 
 describe('Collision', function() {
   it('should not re-test positionally static objects', function() {

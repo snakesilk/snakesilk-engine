@@ -2,7 +2,7 @@ const expect = require('expect.js');
 const sinon = require('sinon');
 
 const RequestAnimationFrameMock = require('../mocks/requestanimationframe-mock');
-const Scene = require('../../src/Scene');
+const Scene = require('../../engine/Scene');
 
 describe('Scene', function() {
   function createScene() {

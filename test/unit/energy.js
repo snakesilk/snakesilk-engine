@@ -1,7 +1,7 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const Energy = require('../../src/logic/Energy');
+const Energy = require('../../engine/logic/Energy');
 
 describe('Energy', function() {
   describe('when instantiating with no args', () => {

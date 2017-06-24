@@ -1,10 +1,10 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const World = require('../../src/World');
-const Entity = require('../../src/Object');
-const Health = require('../../src/traits/Health');
-const Spawner = require('../../src/object/Spawner');
+const World = require('../../engine/World');
+const Entity = require('../../engine/Object');
+const Health = require('../../engine/traits/Health');
+const Spawner = require('../../engine/object/Spawner');
 
 describe('Spawner', function() {
   class Spawnable extends Entity {

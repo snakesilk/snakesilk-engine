@@ -1,8 +1,8 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const Animator = require('../../src/Animator');
-const Animation = require('../../src/Animation');
+const Animator = require('../../engine/Animator');
+const Animation = require('../../engine/Animation');
 
 describe('Animator', () => {
   function createAnimator() {

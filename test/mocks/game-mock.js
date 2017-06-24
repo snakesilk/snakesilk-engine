@@ -1,7 +1,7 @@
 const AudioContextMock = require('./audiocontext-mock');
 const WebGLRendererMock = require('./webglrenderer-mock');
 
-const Game = require('../../src/Game');
+const Game = require('../../engine/Game');
 
 function createGameMock()
 {

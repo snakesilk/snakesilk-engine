@@ -1,7 +1,7 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const Timeline = require('../../src/Timeline');
+const Timeline = require('../../engine/Timeline');
 
 describe('Timeline', function() {
   it('should hold frame forever if not duration given', function() {

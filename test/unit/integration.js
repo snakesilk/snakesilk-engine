@@ -2,7 +2,7 @@ const expect = require('expect.js');
 const sinon = require('sinon');
 
 const THREE = require('three');
-const Integrator = require('../../src/Verlet');
+const Integrator = require('../../engine/Verlet');
 
 describe('Integration', function() {
   context('when instantiating with vector', function() {

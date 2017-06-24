@@ -1,8 +1,8 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const Object = require('../../src/Object');
-const Translate = require('../../src/traits/Translate');
+const Object = require('../../engine/Object');
+const Translate = require('../../engine/traits/Translate');
 
 describe('Translate Trait', function() {
   function createTranslate()

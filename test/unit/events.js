@@ -1,7 +1,7 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const Events = require('../../src/Events');
+const Events = require('../../engine/Events');
 
 describe('Events', function() {
   it('should apply this value to thisable functions', function() {

@@ -1,9 +1,9 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const Object = require('../../src/Object');
-const World = require('../../src/World');
-const Move = require('../../src/traits/Move');
+const Object = require('../../engine/Object');
+const World = require('../../engine/World');
+const Move = require('../../engine/traits/Move');
 
 describe('Move Trait', function() {
   function createPlayer()

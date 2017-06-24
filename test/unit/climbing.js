@@ -1,11 +1,11 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const Object = require('../../src/Object');
-const World = require('../../src/World');
-const Climbable = require('../../src/traits/Climbable');
-const Climber = require('../../src/traits/Climber');
-const Solid = require('../../src/traits/Solid');
+const Object = require('../../engine/Object');
+const World = require('../../engine/World');
+const Climbable = require('../../engine/traits/Climbable');
+const Climber = require('../../engine/traits/Climber');
+const Solid = require('../../engine/traits/Solid');
 
 describe('Climber / Climbable', function() {
   let climber;

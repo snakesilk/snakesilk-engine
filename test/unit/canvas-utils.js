@@ -2,7 +2,7 @@ const expect = require('expect.js');
 const sinon = require('sinon');
 
 const CanvasMock = require('../mocks/canvas-mock');
-const CanvasUtil = require('../../src/CanvasUtil');
+const CanvasUtil = require('../../engine/CanvasUtil');
 
 describe('CanvasUtil', function() {
   beforeEach(function() {

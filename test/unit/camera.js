@@ -2,8 +2,8 @@ const expect = require('expect.js');
 const sinon = require('sinon');
 
 const THREE = require('three');
-const Camera = require('../../src/Camera');
-const CameraPath = require('../../src/CameraPath');
+const Camera = require('../../engine/Camera');
+const CameraPath = require('../../engine/CameraPath');
 
 describe('Camera', function() {
   let camera;

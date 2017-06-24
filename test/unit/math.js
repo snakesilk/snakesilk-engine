@@ -4,7 +4,7 @@ const sinon = require('sinon');
 const RandomMock = require('../mocks/math-random-mock');
 
 const THREE = require('three');
-const Math = require('../../src/Math');
+const Math = require('../../engine/Math');
 
 describe('Math', function() {
   describe('#applyRatio()', function() {

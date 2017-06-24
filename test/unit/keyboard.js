@@ -1,7 +1,7 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const Keyboard = require('../../src/Keyboard');
+const Keyboard = require('../../engine/Keyboard');
 
 describe('Keyboard', function() {
   describe('#assign()', function() {

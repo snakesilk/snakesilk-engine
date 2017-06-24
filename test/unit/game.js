@@ -5,8 +5,8 @@ const NodeMock = require('../mocks/node-mock');
 const AudioContextMock = require('../mocks/audiocontext-mock');
 const WebGLRendererMock = require('../mocks/webglrenderer-mock');
 const RequestAnimationFrameMock = require('../mocks/requestanimationframe-mock');
-const Game = require('../../src/Game');
-const Scene = require('../../src/Scene');
+const Game = require('../../engine/Game');
+const Scene = require('../../engine/Scene');
 
 describe('Game', function() {
   beforeEach(function() {

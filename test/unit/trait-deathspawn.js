@@ -1,10 +1,10 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const Object = require('../../src/Object');
-const World = require('../../src/World');
-const Health = require('../../src/traits/Health');
-const DeathSpawn = require('../../src/traits/DeathSpawn');
+const Object = require('../../engine/Object');
+const World = require('../../engine/World');
+const Health = require('../../engine/traits/Health');
+const DeathSpawn = require('../../engine/traits/DeathSpawn');
 
 describe('DeathSpawn Trait', function() {
   function createDeathSpawner()

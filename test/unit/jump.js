@@ -1,11 +1,11 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const Entity = require('../../src/Object');
-const World = require('../../src/World');
-const Physics = require('../../src/traits/Physics');
-const Jump = require('../../src/traits/Jump');
-const Solid = require('../../src/traits/Solid');
+const Entity = require('../../engine/Object');
+const World = require('../../engine/World');
+const Physics = require('../../engine/traits/Physics');
+const Jump = require('../../engine/traits/Jump');
+const Solid = require('../../engine/traits/Solid');
 
 describe('Jump', function() {
   it.skip('should maintain jump height despite variations in time', function() {
