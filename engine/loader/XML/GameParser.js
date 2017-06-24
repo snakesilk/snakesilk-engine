@@ -1,7 +1,7 @@
-import Parser from './Parser';
-import ObjectParser from './ObjectParser';
-import WeaponParser from './WeaponParser';
-import BitmapFont from '../../BitmapFont';
+const Parser = require('./Parser');
+const ObjectParser = require('./ObjectParser');
+const WeaponParser = require('./WeaponParser');
+const BitmapFont = require('../../BitmapFont');
 
 class GameParser extends Parser
 {
@@ -169,4 +169,4 @@ class GameParser extends Parser
     }
 }
 
-export default GameParser;
+module.exports = GameParser;

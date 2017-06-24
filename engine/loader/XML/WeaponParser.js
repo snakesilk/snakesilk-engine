@@ -1,5 +1,5 @@
-import {Vector2} from 'three';
-import Parser from './Parser';
+const {Vector2} = require('three');
+const Parser = require('./Parser');
 
 function loadWeapon(source) {
     const constr = require('../../object/weapon/' + source);
@@ -102,4 +102,4 @@ class WeaponParser extends Parser
     }
 }
 
-export default WeaponParser;
+module.exports = WeaponParser;

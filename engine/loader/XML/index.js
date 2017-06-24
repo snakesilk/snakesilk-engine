@@ -1,9 +1,9 @@
-import Loader from '../../Loader';
-import GameParser from './GameParser';
+const Loader = require('../../Loader');
+const GameParser = require('./GameParser');
 
-import SceneParser from './SceneParser';
-import LevelParser from './LevelParser';
-import StageSelectParser from './StageSelectParser';
+const SceneParser = require('./SceneParser');
+const LevelParser = require('./LevelParser');
+const StageSelectParser = require('./StageSelectParser');
 
 class XMLLoader extends Loader
 {
@@ -92,4 +92,4 @@ class XMLLoader extends Loader
     }
 }
 
-export default XMLLoader;
+module.exports = XMLLoader;

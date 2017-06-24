@@ -1,6 +1,6 @@
-import SceneParser from './SceneParser';
-import StageSelect from '../../scene/StageSelect';
-import Util from '../../Util';
+const SceneParser = require('./SceneParser');
+const StageSelect = require('../../scene/StageSelect');
+const Util = require('../../Util');
 
 class StageSelectParser extends SceneParser
 {
@@ -119,4 +119,4 @@ class StageSelectParser extends SceneParser
     }
 }
 
-export default StageSelectParser;
+module.exports = StageSelectParser;
