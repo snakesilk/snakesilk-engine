@@ -1,4 +1,4 @@
-const THREE = require('three');
+const {Vector2} = require('three');
 const Trait = require('../Trait');
 const Health = require('./Health');
 const Physics = require('./Physics');
@@ -13,7 +13,7 @@ class Stun extends Trait
         this.EVENT_STUN_ENGAGE = 'stun-engaged';
         this.EVENT_STUN_DISENGAGE = 'stun-disengage';
 
-        this._bumpForce = new THREE.Vector2();
+        this._bumpForce = new Vector2();
         this._elapsed = 0;
         this._engaged = false;
 

@@ -1,4 +1,4 @@
-const THREE = require('three');
+const {Vector2} = require('three');
 const Trait = require('../Trait');
 
 class Weapon extends Trait
@@ -17,7 +17,7 @@ class Weapon extends Trait
         this._timeout = .25;
         this._duration = Infinity;
         this._weapon = undefined;
-        this.projectileEmitOffset = new THREE.Vector2();
+        this.projectileEmitOffset = new Vector2();
         this.projectileEmitRadius = 0;
     }
     __collides(withObject)
