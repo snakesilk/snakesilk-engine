@@ -151,6 +151,6 @@ module.exports = World;
 
 const THREE = require('three');
 const Collision = require('./Collision');
-const Entity = require('./Object');
+const Entity = require('./Entity');
 const Events = require('./Events');
 const Loops = require('./Loops');

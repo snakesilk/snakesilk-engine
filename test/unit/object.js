@@ -2,7 +2,7 @@ const expect = require('expect.js');
 const sinon = require('sinon');
 
 const { extend } = require('../../engine/Util');
-const Host = require('../../engine/Object');
+const Host = require('../../engine/Entity');
 const Trait = require('../../engine/Trait');
 
 describe('Object', function() {

@@ -1,4 +1,4 @@
-const Entity = require('./Object');
+const Entity = require('./Entity');
 const Events = require('./Events');
 
 const MAGIC_METHODS = {

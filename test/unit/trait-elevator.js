@@ -2,7 +2,7 @@ const expect = require('expect.js');
 const sinon = require('sinon');
 
 const { Vector2: Vec2 } = require('three');
-const Object = require('../../engine/Object');
+const Object = require('../../engine/Entity');
 const World = require('../../engine/World');
 const Elevator = require('../../engine/traits/Elevator');
 const Physics = require('../../engine/traits/Physics');

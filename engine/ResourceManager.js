@@ -1,5 +1,5 @@
 const THREE = require('three');
-const Entity = require('./Object');
+const Entity = require('./Entity');
 const Weapon = require('./object/Weapon');
 
 class ResourceManager
