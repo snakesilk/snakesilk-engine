@@ -1,6 +1,15 @@
-const THREE = require('three');
-const { Vector2 } = THREE;
-const { nextPowerOf } = require('./Math');
+const {
+    FrontSide,
+    Mesh,
+    MeshBasicMaterial,
+    LinearFilter,
+    LinearMipMapLinearFilter,
+    PlaneGeometry,
+    Texture,
+    Vector2
+} = require('three');
+
+const {nextPowerOf} = require('./Math');
 const UVCoords = require('./UVCoords');
 
 class BitmapFont
@@ -56,9 +65,9 @@ class BitmapFont
                                   co.dx, co.dy, co.dw, co.dh);
             }
         });
-        const texture = new THREE.Texture(canvas);
-        texture.magFilter = THREE.LinearFilter;
-        texture.minFilter = THREE.LinearMipMapLinearFilter;
+        const texture = new Texture(canvas);
+        texture.magFilter = LinearFilter;
+        texture.minFilter = LinearMipMapLinearFilter;
         texture.needsUpdate = true;
         return new Text(texture, textSize, textureSize);
     }
@@ -74,14 +83,14 @@ class Text
     }
     getGeometry()
     {
-        const geometry = new THREE.PlaneGeometry(this._size.x, this._size.y);
+        const geometry = new PlaneGeometry(this._size.x, this._size.y);
         geometry.faceVertexUvs[0] = this._uvMap;
         return geometry;
     }
     getMaterial()
     {
-        const material = new THREE.MeshBasicMaterial({
-            side: THREE.FrontSide,
+        const material = new MeshBasicMaterial({
+            side: FrontSide,
             map: this.getTexture(),
             transparent: true,
         });
@@ -95,7 +104,7 @@ class Text
     {
         const geometry = this.getGeometry();
         const material = this.getMaterial();
-        return new THREE.Mesh(geometry, material);
+        return new Mesh(geometry, material);
     }
 }
 
