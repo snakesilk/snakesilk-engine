@@ -1,4 +1,4 @@
-const THREE = require('three');
+const {Vector2} = require('three');
 const Trait = require('../Trait');
 
 class Projectile extends Trait
@@ -13,7 +13,7 @@ class Projectile extends Trait
         this.EVENT_RECYCLED = 'recycled';
 
         this._damage = 0;
-        this._origin = new THREE.Vector2();
+        this._origin = new Vector2();
         this._range = Infinity;
         this._speed = 0;
 

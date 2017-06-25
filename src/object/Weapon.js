@@ -1,4 +1,4 @@
-const THREE = require('three');
+const {Vector2} = require('three');
 const Events = require('../Events');
 const Entity = require('../Entity');
 const Energy = require('../logic/Energy');
@@ -18,8 +18,8 @@ class Weapon
         this.coolDown = 0;
         this.cost = 1;
         this.directions = [
-            new THREE.Vector2(-1, 0),
-            new THREE.Vector2(1, 0),
+            new Vector2(-1, 0),
+            new Vector2(1, 0),
         ];
         this.events = new Events(this);
         this.projectiles = [];
