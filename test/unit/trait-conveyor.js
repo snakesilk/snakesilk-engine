@@ -1,11 +1,11 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const Object = require('../../engine/Entity');
-const World = require('../../engine/World');
-const Conveyor = require('../../engine/traits/Conveyor');
-const Physics = require('../../engine/traits/Physics');
-const Solid = require('../../engine/traits/Solid');
+const Object = require('../../src/Entity');
+const World = require('../../src/World');
+const Conveyor = require('../../src/traits/Conveyor');
+const Physics = require('../../src/traits/Physics');
+const Solid = require('../../src/traits/Solid');
 
 describe('Conveyor Trait', function() {
   function createCharacter()

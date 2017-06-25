@@ -5,9 +5,9 @@ const RequestAnimationFrameMock = require('../mocks/requestanimationframe-mock')
 const NodeMock = require('../mocks/node-mock');
 const GameMock = require('../mocks/game-mock');
 
-const Hud = require('../../engine/Hud');
-const Timer = require('../../engine/Timer');
-const Level = require('../../engine/scene/Level');
+const Hud = require('../../src/Hud');
+const Timer = require('../../src/Timer');
+const Level = require('../../src/scene/Level');
 
 describe('Hud', function() {
   describe('attach()', function() {

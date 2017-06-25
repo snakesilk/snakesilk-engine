@@ -5,11 +5,11 @@ const AudioContextMock = require('../mocks/audiocontext-mock');
 const WebGLRendererMock = require('../mocks/webglrenderer-mock');
 const RequestAnimationFrameMock = require('../mocks/requestanimationframe-mock');
 
-const Game = require('../../engine/Game');
-const Entity = require('../../engine/Entity');
-const Level = require('../../engine/scene/Level');
-const Health = require('../../engine/traits/Health');
-const Teleport = require('../../engine/traits/Teleport');
+const Game = require('../../src/Game');
+const Entity = require('../../src/Entity');
+const Level = require('../../src/scene/Level');
+const Health = require('../../src/traits/Health');
+const Teleport = require('../../src/traits/Teleport');
 
 describe('Level', function() {
   beforeEach(() => {

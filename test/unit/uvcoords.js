@@ -1,7 +1,7 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const UVCoords = require('../../engine/UVCoords');
+const UVCoords = require('../../src/UVCoords');
 
 describe('UVCoords', function() {
   it('should correctly create UV coords from offsets', function() {

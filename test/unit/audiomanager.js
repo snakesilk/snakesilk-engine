@@ -1,7 +1,7 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const AudioManager = require('../../engine/AudioManager');
+const AudioManager = require('../../src/AudioManager');
 
 describe('AudioManager', function() {
   function MockAudio() {

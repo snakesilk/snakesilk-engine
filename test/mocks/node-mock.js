@@ -1,5 +1,5 @@
 const sinon = require('sinon');
-const Events = require('../../engine/Events');
+const Events = require('../../src/Events');
 
 function NodeMock()
 {

@@ -2,11 +2,11 @@ const expect = require('expect.js');
 const sinon = require('sinon');
 
 const { Vector2: Vec2 } = require('three');
-const Object = require('../../engine/Entity');
-const World = require('../../engine/World');
-const Elevator = require('../../engine/traits/Elevator');
-const Physics = require('../../engine/traits/Physics');
-const Solid = require('../../engine/traits/Solid');
+const Object = require('../../src/Entity');
+const World = require('../../src/World');
+const Elevator = require('../../src/traits/Elevator');
+const Physics = require('../../src/traits/Physics');
+const Solid = require('../../src/traits/Solid');
 
 describe('Elevator Trait', function() {
   function createCharacter()
