@@ -1,5 +1,5 @@
 const AI = require('../AI');
-const Entity = require('../Object');
+const Entity = require('../Entity');
 
 class Spawner extends Entity
 {

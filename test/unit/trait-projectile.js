@@ -1,7 +1,7 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const Object = require('../../engine/Object');
+const Object = require('../../engine/Entity');
 const Health = require('../../engine/traits/Health');
 const Projectile = require('../../engine/traits/Projectile');
 

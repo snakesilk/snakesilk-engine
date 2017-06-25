@@ -1,6 +1,6 @@
 const THREE = require('three');
 const Easing = require('../Easing');
-const Entity = require('../Object');
+const Entity = require('../Entity');
 const Scene = require('../Scene');
 
 const Solid = require('../traits/Solid');
