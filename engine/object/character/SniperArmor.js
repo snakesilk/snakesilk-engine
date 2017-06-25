@@ -1,4 +1,4 @@
-import Entity from '../../Object';
+const Entity = require('../../Object');
 
 class SniperArmor extends Entity
 {
@@ -84,4 +84,4 @@ class SniperArmor extends Entity
     }
 }
 
-export default SniperArmor;
+module.exports = SniperArmor;

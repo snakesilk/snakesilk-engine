@@ -1,4 +1,4 @@
-import Entity from '../../Object';
+const Entity = require('../../Object');
 
 class Crashman extends Entity
 {
@@ -19,4 +19,4 @@ class Crashman extends Entity
     }
 }
 
-export default Crashman;
+module.exports = Crashman;

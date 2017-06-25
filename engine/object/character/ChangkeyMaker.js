@@ -1,4 +1,4 @@
-import Entity from '../../Object';
+const Entity = require('../../Object');
 
 class ChangkeyMaker extends Entity
 {
@@ -72,4 +72,4 @@ class ChangkeyMaker extends Entity
     }
 }
 
-export default ChangkeyMaker;
+module.exports = ChangkeyMaker;

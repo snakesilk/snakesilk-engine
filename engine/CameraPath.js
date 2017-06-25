@@ -1,7 +1,4 @@
-const {
-    Vector2,
-    Vector3,
-} = require('three');
+const {Vector2, Vector3} = require('three');
 
 class CameraPath
 {
