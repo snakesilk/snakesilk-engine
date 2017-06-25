@@ -1,3 +1,10 @@
+const THREE = require('three');
+const BoundingBox = require('./BoundingBox');
+const Events = require('./Events');
+const Loops = require('./Loops');
+const SequenceManager = require('./SequenceManager');
+const Verlet = require('./Verlet');
+
 function Entity()
 {
     this.uuid = THREE.Math.generateUUID();
@@ -179,9 +186,6 @@ Entity.prototype.setModel = function(model)
 
 Entity.prototype.setWorld = function(world)
 {
-    if (world instanceof World === false) {
-        throw new Error('Invalid world');
-    }
     this.world = world;
     this.events.trigger(this.EVENT_WORLD_ADD);
 }
@@ -234,12 +238,3 @@ Entity.prototype.unsetWorld = function() {
 }
 
 module.exports = Entity;
-
-const THREE = require('three');
-const BoundingBox = require('./BoundingBox');
-const Events = require('./Events');
-const Loops = require('./Loops');
-const SequenceManager = require('./SequenceManager');
-const Trait = require('./Trait');
-const Verlet = require('./Verlet');
-const World = require('./World');

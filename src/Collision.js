@@ -1,4 +1,4 @@
-const { Vector2 } = require('three');
+const {Vector2} = require('three');
 const BoundingBox = require('./BoundingBox');
 const Entity = require('./Entity');
 const Math = require('./Math');

@@ -1,10 +1,10 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const Entity = require('../../src/Entity');
-const Weapon = require('../../src/object/Weapon');
-const Projectile = require('../../src/traits/Projectile');
-const WeaponTrait = require('../../src/traits/Weapon');
+const Entity = require('../../Entity');
+const Projectile = require('../../traits/Projectile');
+const WeaponTrait = require('../../traits/Weapon');
+const Weapon = require('../Weapon');
 
 describe('Weapon', function() {
   let weapon;
@@ -199,21 +199,12 @@ describe('Weapon', function() {
   });
 
   describe('#setUser', function() {
-    it('should except if user not object', function() {
-      expect(function() {
-        weapon.setUser('');
-      }).to.throwError(function(error) {
-        expect(error).to.be.a(TypeError);
-        expect(error.message).to.equal('User not object');
-      });
-    });
-
     it('should except if user weapon trait not applied', function() {
       expect(function() {
         weapon.setUser(new Entity());
       }).to.throwError(function(error) {
         expect(error).to.be.a(TypeError);
-        expect(error.message).to.equal('User missing weapon trait');
+        expect(error.message).to.equal('User not weaponized');
       });
     });
   });

@@ -4,9 +4,9 @@
   "description": "Simple, extensible game engine allowing creation of games using composition of components thru XML.",
   "main": "./src/index.js",
   "scripts": {
-    "test": "find ./src -name '*-test.js' | xargs mocha",
-    "test+coverage": "istanbul cover $(npm bin)/_mocha test/unit",
-    "upload-coverage": "codecov -f test/coverage/lcov.info --disable=gcov"
+    "test": "mocha 'src/**/*-test.js'",
+    "test+coverage": "istanbul cover $(npm bin)/_mocha 'src/**/*-test.js'",
+    "upload-coverage": "codecov -f coverage/lcov.info --disable=gcov"
   },
   "repository": {
     "type": "git",

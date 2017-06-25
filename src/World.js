@@ -1,3 +1,9 @@
+const THREE = require('three');
+const Collision = require('./Collision');
+const Entity = require('./Entity');
+const Events = require('./Events');
+const Loops = require('./Loops');
+
 class World
 {
     constructor()
@@ -148,9 +154,3 @@ class World
 }
 
 module.exports = World;
-
-const THREE = require('three');
-const Collision = require('./Collision');
-const Entity = require('./Entity');
-const Events = require('./Events');
-const Loops = require('./Loops');
