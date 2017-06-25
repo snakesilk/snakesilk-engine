@@ -9,13 +9,25 @@ describe('Main Export', function() {
   });
 
   [
+    ['Animation', '../Animation'],
+
     ['Game', '../Game'],
     ['Entity', '../Entity'],
+    ['Loader', '../Loader'],
+    ['Scene', '../Scene'],
+    ['Tween', '../Tween'],
+
+    ['UVAnimator', '../animator/UV'],
+    ['UVCoords', '../UVCoords'],
+
+    ['BitmapFont', '../BitmapFont'],
     ['InputPlayer', '../InputPlayer'],
     ['InputRecorder', '../InputRecorder'],
+    ['SyncPromise', '../SyncPromise'],
+
     ['Mouse', '../Mouse'],
     ['Hud', '../Hud'],
-    ['Scene', '../Scene'],
+
   ].forEach(([module, target]) => {
     it(`exposes ${module}`, () => {
       expect(Main[module]).to.be(require(target));
