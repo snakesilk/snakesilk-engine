@@ -1,5 +1,6 @@
-Engine.objects.weapons.EnemyPlasma =
-class EnemyPlasma extends Engine.objects.Weapon
+const Weapon = require('../Weapon');
+
+class EnemyPlasma extends Weapon
 {
     fire()
     {
@@ -11,3 +12,5 @@ class EnemyPlasma extends Engine.objects.Weapon
         return true;
     }
 }
+
+module.exports = EnemyPlasma;

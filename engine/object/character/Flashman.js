@@ -1,4 +1,4 @@
-import Entity from '../../Object';
+const Entity = require('../../Object');
 
 class Flashman extends Entity
 {
@@ -29,4 +29,4 @@ class Flashman extends Entity
     }
 }
 
-export default Flashman;
+module.exports = Flashman;

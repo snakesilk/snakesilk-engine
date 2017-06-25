@@ -1,5 +1,5 @@
-import Entity from '../../Object';
-import AI from '../../AI';
+const Entity = require('../../Object');
+const AI = require('../../AI');
 
 class Telly extends Entity
 {
@@ -40,4 +40,4 @@ class Telly extends Entity
     }
 }
 
-export default Telly;
+module.exports = Telly;

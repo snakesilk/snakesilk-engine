@@ -9,7 +9,6 @@ const Spawn = require('../../engine/traits/Spawn');
 
 describe('Trait', function() {
   describe('Spawn', function() {
-    console.log(Host);
     const spawn = new Spawn();
     const world = new World();
     const host = new Host();
