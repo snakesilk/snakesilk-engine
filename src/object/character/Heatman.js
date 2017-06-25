@@ -1,4 +1,4 @@
-const Entity = require('../../Object');
+const Entity = require('../../Entity');
 
 class Heatman extends Entity
 {
