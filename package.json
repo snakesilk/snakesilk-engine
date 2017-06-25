@@ -1,5 +1,5 @@
 {
-  "name": "snakesilk-engine",
+  "name": "@snakesilk/engine",
   "version": "0.1.2",
   "description": "Simple, extensible game engine allowing creation of games using composition of components thru XML.",
   "main": "./src/index.js",
@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/snakesilk/snakesilk-engine.git"
   },
-  "author": "Pontus Persson",
+  "author": "Pontus Persson <pontus.alexander@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/snakesilk/snakesilk-engine/issues"
