@@ -1,0 +1,5 @@
+coverage/
+node_modules/
+.istanbul.yml
+.travis.yml
+yarn.lock
