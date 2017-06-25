@@ -1,3 +1,9 @@
+const THREE = require('three');
+const Events = require('../Events');
+const Entity = require('../Entity');
+const Energy = require('../logic/Energy');
+const WeaponTrait = require('../traits/Weapon');
+
 class Weapon
 {
     constructor()
@@ -28,7 +34,7 @@ class Weapon
     }
     addProjectile(object)
     {
-        if (!(object instanceof Entity) || !object.projectile) {
+        if (!object.projectile) {
             throw new TypeError('Invalid projectile');
         }
         this.projectiles.push(object);
@@ -37,7 +43,7 @@ class Weapon
     }
     emit(object)
     {
-        if (!(object instanceof Entity) || !object.projectile) {
+        if (!object.projectile) {
             throw new TypeError('Invalid projectile');
         }
 
@@ -119,11 +125,8 @@ class Weapon
     }
     setUser(user)
     {
-        if (user instanceof Entity !== true) {
-            throw new TypeError('User not object');
-        }
-        if (user.weapon instanceof WeaponTrait !== true) {
-            throw new TypeError('User missing weapon trait');
+        if (!user.weapon) {
+            throw new TypeError('User not weaponized');
         }
         this.user = user;
     }
@@ -141,9 +144,3 @@ class Weapon
 }
 
 module.exports = Weapon;
-
-const THREE = require('three');
-const Events = require('../Events');
-const Entity = require('../Entity');
-const Energy = require('../logic/Energy');
-const WeaponTrait = require('../traits/Weapon');
