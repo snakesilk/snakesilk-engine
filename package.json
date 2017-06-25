@@ -1,6 +1,6 @@
 {
   "name": "snakesilk-engine",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Simple, extensible game engine allowing creation of games using composition of components thru XML.",
   "main": "./src/index.js",
   "scripts": {
