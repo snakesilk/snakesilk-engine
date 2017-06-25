@@ -1,4 +1,4 @@
-const Entity = require('../Object');
+const Entity = require('../Entity');
 const Trait = require('../Trait');
 
 const SIDES = {

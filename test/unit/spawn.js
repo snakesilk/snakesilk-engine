@@ -3,7 +3,7 @@ const sinon = require('sinon');
 
 const THREE = require('three');
 const World = require('../../engine/World');
-const Host = require('../../engine/Object');
+const Host = require('../../engine/Entity');
 const Spawnable = Host;
 const Spawn = require('../../engine/traits/Spawn');
 

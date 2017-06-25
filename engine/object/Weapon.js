@@ -144,6 +144,6 @@ module.exports = Weapon;
 
 const THREE = require('three');
 const Events = require('../Events');
-const Entity = require('../Object');
+const Entity = require('../Entity');
 const Energy = require('../logic/Energy');
 const WeaponTrait = require('../traits/Weapon');

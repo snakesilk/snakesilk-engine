@@ -5,7 +5,7 @@ const sinon = require('sinon');
 
 const THREE = require('three');
 const Collision = require('../../engine/Collision');
-const Obj = require('../../engine/Object');
+const Obj = require('../../engine/Entity');
 
 describe('Collision', function() {
   it('should not re-test positionally static objects', function() {

@@ -2,7 +2,7 @@ const expect = require('expect.js');
 const sinon = require('sinon');
 
 const World = require('../../engine/World');
-const Entity = require('../../engine/Object');
+const Entity = require('../../engine/Entity');
 const Health = require('../../engine/traits/Health');
 const Spawner = require('../../engine/object/Spawner');
 
