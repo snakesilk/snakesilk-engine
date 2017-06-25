@@ -1,9 +1,9 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const Object = require('../../engine/Entity');
-const Fallaway = require('../../engine/traits/Fallaway');
-const Physics = require('../../engine/traits/Physics');
+const Object = require('../../src/Entity');
+const Fallaway = require('../../src/traits/Fallaway');
+const Physics = require('../../src/traits/Physics');
 
 describe('Fallaway Trait', function() {
   describe('on instantiation', function() {

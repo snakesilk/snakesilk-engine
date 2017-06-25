@@ -1,9 +1,9 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const Entity = require('../../engine/Entity');
-const World = require('../../engine/World');
-const Solid = require('../../engine/traits/Solid');
+const Entity = require('../../src/Entity');
+const World = require('../../src/World');
+const Solid = require('../../src/traits/Solid');
 
 describe('Solid Trait', function() {
   const step = 1/120;
