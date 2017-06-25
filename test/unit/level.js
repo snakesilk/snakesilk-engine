@@ -30,7 +30,6 @@ describe('Level', function() {
       const character = new Entity;
       character.applyTrait(new Health);
       character.applyTrait(new Teleport);
-      console.log(character);
       game.player.setCharacter(character);
       level.events.trigger(level.EVENT_CREATE, [game]);;
       return level;
