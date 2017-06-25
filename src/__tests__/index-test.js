@@ -10,6 +10,7 @@ describe('Main Export', function() {
 
   [
     ['Game', '../Game'],
+    ['Entity', '../Entity'],
     ['InputPlayer', '../InputPlayer'],
     ['InputRecorder', '../InputRecorder'],
     ['Mouse', '../Mouse'],
