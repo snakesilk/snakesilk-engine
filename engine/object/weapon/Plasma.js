@@ -1,4 +1,4 @@
-import Weapon from '../Weapon';
+const Weapon = require('../Weapon');
 
 class Plasma extends Weapon
 {
@@ -13,4 +13,4 @@ class Plasma extends Weapon
     }
 }
 
-export default Plasma;
+module.exports = Plasma;

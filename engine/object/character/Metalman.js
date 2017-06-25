@@ -1,4 +1,4 @@
-import Entity from '../../Object';
+const Entity = require('../../Object');
 
 class Metalman extends Entity {
     routeAnimation() {
@@ -24,4 +24,4 @@ class Metalman extends Entity {
     }
 }
 
-export default Metalman;
+module.exports = Metalman;

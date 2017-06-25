@@ -1,4 +1,4 @@
-import Entity from '../../Object';
+const Entity = require('../../Object');
 
 class Heatman extends Entity
 {
@@ -51,4 +51,4 @@ class Heatman extends Entity
     }
 }
 
-export default Heatman;
+module.exports = Heatman;
