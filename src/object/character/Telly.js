@@ -1,4 +1,4 @@
-const Entity = require('../../Object');
+const Entity = require('../../Entity');
 const AI = require('../../AI');
 
 class Telly extends Entity
