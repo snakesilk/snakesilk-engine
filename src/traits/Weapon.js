@@ -1,6 +1,5 @@
 const THREE = require('three');
 const Trait = require('../Trait');
-const WeaponEntity = require('../object/Weapon');
 
 class Weapon extends Trait
 {
@@ -47,9 +46,6 @@ class Weapon extends Trait
     }
     equip(weapon)
     {
-        if (weapon instanceof WeaponEntity === false) {
-            throw new Error('Invalid weapon');
-        }
         this._weapon = weapon;
         this._weapon.setUser(this._host);
         this._trigger(this.EVENT_EQUIP, [weapon]);
