@@ -7,6 +7,7 @@
     "build": "./scripts/build-dist.sh",
     "test": "mocha 'src/**/*-test.js'",
     "test+coverage": "istanbul cover $(npm bin)/_mocha 'src/**/*-test.js'",
+    "package": "npm run build && npm pack",
     "publish+npm": "npm run build && npm publish",
     "upload-coverage": "codecov -f coverage/lcov.info --disable=gcov"
   },
