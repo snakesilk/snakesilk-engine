@@ -76,4 +76,30 @@ describe('Main Export', function() {
       expect(new (Main.Traits[traitName])()).to.be.a(Trait);
     });
   });
+
+  [
+    'Airman',
+    'Crashman',
+    'Flashman',
+    'Heatman',
+    'Megaman',
+    'Metalman',
+
+    'ChangkeyMaker',
+    'Shotman',
+    'SniperArmor',
+    'SniperJoe',
+    'Telly',
+
+    'AirShooter',
+    'CrashBomber',
+    'EnemyPlasma',
+    'MetalBlade',
+    'Plasma',
+    'TimeStopper',
+  ].forEach((objectName) => {
+    it(`exposes object ${objectName}`, () => {
+      expect(new (Main.Objects[objectName])()).to.be.ok();
+    });
+  });
 });

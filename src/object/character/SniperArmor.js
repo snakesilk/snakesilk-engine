@@ -1,10 +1,11 @@
 const Entity = require('../../Entity');
+const AI = require('../../AI');
 
 class SniperArmor extends Entity
 {
     constructor() {
         super();
-        this.ai = new Engine.AI(this);
+        this.ai = new AI(this);
 
         this.airTime = 0;
         this.groundTime = 0;
