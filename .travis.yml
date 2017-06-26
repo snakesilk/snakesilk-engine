@@ -1,17 +1,10 @@
 language: node_js
 node_js:
 - '6'
+branches:
+  only:
+  - master
 script:
 - npm run test+coverage
 after_success:
 - npm run upload-coverage
-
-before_deploy:
-- npm run build
-deploy:
-  provider: npm
-  email: pontus.alexander@gmail.com
-  api_key:
-    secure: tWhsMgb3tNIRH3X42j2HTD6N32hhSLOD8W1TTsRkZ/h0/Wvn+OgHVTaeHoCOZ0pDp39Fu1Sf45QT3/Jop66ncbLKpoR1NOGVx4R9K3ZLaTAHHtpc8k6Jd2dWcve3bVM5YdfZPImygdUzYwXGMGG4HBV3WiuvZ5d//l/xhKKWTOt3S1SDYwvQuDxxUx6dKwXsgQA9Q2PZ+4rUUEF6pEBgfnEw3ssm6gQGsEa/Ufi1xpr/8f8PZNXq7eSWHxSO4z45fPOEkUtpWOhNzTzkFlvnPO5/Rt4t3PRNVC5SQk0Xh55MvlWmHOvHCw5fh6t6DFH80+9Vgj+LHN5MuQuu6VuFkfjxJoOh5jOOEC7pkSzKmhoVBTWgYluRsmr/Sx21tyuK07+sOkW6ESvVQinQh22w5qi3X5AuY59Cay42Q8UfaVJLMWfj4u38A5efMhtW6erNYU8wJM4hOZ/EZHJiLbd+gaJpcjwzzQQCDR97hmVV3FCsfYhEsKmC8q/SZw9zmG5zoqie5Jr/eCGjA4ankGKcCthBI1qKXjK0SHBRw88Rl4oLwiFQN1rmr+StKRgJ1k+hz0V4ZxQyISsSZjWRn86BzYKtpPGqP+j429AaxO0p5oW/+sOmNML6z2cYwsvYgfXT9ODfztGj6NbJhevXr83wZpqhXH/HHXeE27kYq9nKwLc=
-  on:
-    tags: true
