@@ -7,7 +7,7 @@ const Trait = require('../Trait');
 
 describe('Main Export', function() {
   it('is defined in package.json', () => {
-    expect(packageJSON.main).to.be('./src/index.js');
+    expect(packageJSON.main).to.be('./dist/index.js');
   });
 
   [
