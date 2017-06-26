@@ -2,10 +2,11 @@
   "name": "@snakesilk/engine",
   "version": "0.1.3",
   "description": "Simple, extensible game engine allowing creation of games using composition of components thru XML.",
-  "main": "./src/index.js",
+  "main": "./dist/index.js",
   "scripts": {
     "test": "mocha 'src/**/*-test.js'",
     "test+coverage": "istanbul cover $(npm bin)/_mocha 'src/**/*-test.js'",
+    "prepublish": "./scripts/prepublish.sh",
     "upload-coverage": "codecov -f coverage/lcov.info --disable=gcov"
   },
   "repository": {
@@ -22,6 +23,8 @@
     "three": "0.70"
   },
   "devDependencies": {
+    "babel-cli": "6",
+    "babel-preset-es2015": "6",
     "codecov": "^1.0.1",
     "expect.js": "^0.3.1",
     "istanbul": "^0.4.5",
