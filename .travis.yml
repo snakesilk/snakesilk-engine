@@ -5,6 +5,9 @@ script:
 - npm run test+coverage
 after_success:
 - npm run upload-coverage
+
+before_deploy:
+- npm run build
 deploy:
   provider: npm
   email: pontus.alexander@gmail.com
