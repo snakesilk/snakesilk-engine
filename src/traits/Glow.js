@@ -1,5 +1,6 @@
-Engine.traits.Glow =
-class Glow extends Engine.traits.Light
+const Light = require('./Light');
+
+class Glow extends Light
 {
     constructor()
     {
@@ -23,3 +24,5 @@ class Glow extends Engine.traits.Light
         super.__detach();
     }
 }
+
+module.exports = Glow;
