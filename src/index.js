@@ -4,6 +4,7 @@ const Easing = require('./Easing');
 const Entity = require('./Entity');
 const Loader = require('./Loader');
 const Scene = require('./Scene');
+const Traits = require('./traits');
 const Tween = require('./Tween');
 const UVAnimator = require('./animator/UV');
 const UVCoords = require('./UVCoords');
@@ -23,6 +24,7 @@ module.exports = {
     Entity,
     Loader,
     Scene,
+    Traits,
     Tween,
     UVAnimator,
     UVCoords,
