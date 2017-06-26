@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha 'src/**/*-test.js'",
     "test+coverage": "istanbul cover $(npm bin)/_mocha 'src/**/*-test.js'",
-    "prepublish": "./scripts/prepublish.sh",
+    "prepack": "./scripts/prepack.sh",
     "upload-coverage": "codecov -f coverage/lcov.info --disable=gcov"
   },
   "repository": {
