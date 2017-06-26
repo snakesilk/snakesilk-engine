@@ -1,10 +1,11 @@
 const Entity = require('../../Entity');
+const AI = require('../../AI');
 
 class SniperJoe extends Entity
 {
     constructor() {
         super();
-        this.ai = new Engine.AI(this);
+        this.ai = new AI(this);
 
         this.coolDown = .8;
         this.isShielding = true;
@@ -25,7 +26,7 @@ class SniperJoe extends Entity
             }
         }
 
-        return Engine.objects.Character.prototype.impactProjectile.call(this, projectile);
+        return super.impactProjectile(projectile);
     }
 
     routeAnimation(dt)

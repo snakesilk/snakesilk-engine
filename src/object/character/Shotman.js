@@ -1,14 +1,16 @@
 const Entity = require('../../Entity');
+const AI = require('../../AI');
+const {applyRatio, findRatio, clamp} = require('../../Math');
 
 class Shotman extends Entity
 {
     constructor() {
         super();
-        this.ai = new Engine.AI(this);
+        this.ai = new AI(this);
 
         this.coolDown = .8;
         this.waitForShot = 0;
-        this.target = target;
+        this.target = null;
 
         this.timeAIUpdated = null;
 
@@ -25,7 +27,8 @@ class Shotman extends Entity
 
     fire()
     {
-        if (this.waitForShot > 0) {
+        return false;
+        /*if (this.waitForShot > 0) {
             return;
         }
 
@@ -52,6 +55,7 @@ class Shotman extends Entity
         this.world.addObject(projectile);
         this.waitForShot = this.coolDown;
         return true;
+        */
     }
 
     updateAI()
@@ -59,12 +63,12 @@ class Shotman extends Entity
         if (Math.abs(this.time - this.timeAIUpdated) > 2) {
             var target = this.ai.findPlayer();
             if (target) {
-                var distanceRatio = Engine.Math.findRatio(target.position.x,
+                var distanceRatio = findRatio(target.position.x,
                     target.position.x - this.far,
                     target.position.x - this.near);
 
-                distanceRatio = Engine.Math.clamp(distanceRatio, 0, 1);
-                this.aimingAngle = Engine.Math.applyRatio(distanceRatio, this.aimFar, this.aimNear);
+                distanceRatio = clamp(distanceRatio, 0, 1);
+                this.aimingAngle = applyRatio(distanceRatio, this.aimFar, this.aimNear);
                 this.timeAIUpdated = this.time;
             }
         }
@@ -94,14 +98,14 @@ class Shotman extends Entity
 
         this.updateAI(dt);
         var aimingDiff = this.aimingAngle - this.shootingAngle;
-        this.shootingAngle += Engine.Math.clamp(aimingDiff, -this.aimingSpeed, this.aimingSpeed) * dt;
+        this.shootingAngle += clamp(aimingDiff, -this.aimingSpeed, this.aimingSpeed) * dt;
         var kX = Math.cos(this.RAD * this.shootingAngle);
         var kY = Math.sin(this.RAD * this.shootingAngle);
         this.aim.set(kX, kY);
 
         this.animators[0].enabled = Math.abs(this.shootingAngle - this.aimingAngle) > 2;
 
-        Engine.Object.prototype.timeShift.call(this, dt);
+        super.timeShift(dt);
     }
 }
 

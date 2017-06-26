@@ -1,10 +1,13 @@
+const {PointLight} = require('three');
 const Entity = require('../../Entity');
+const AI = require('../../AI');
+const Glow = require('../../traits/Glow');
 
 class ChangkeyMaker extends Entity
 {
     constructor() {
         super();
-        this.ai = new Engine.AI(this);
+        this.ai = new AI(this);
 
         this.fire = false;
         this.fireCoolDown = 2;
@@ -14,13 +17,15 @@ class ChangkeyMaker extends Entity
         this.flickerIntensity = .25;
         this.flickerDelay = .05;
 
-        var light = new THREE.PointLight(0xff5400, 2, 256);
+        var light = new PointLight(0xff5400, 2, 256);
         light.position.z = 20;
 
-        var glow = new Engine.traits.Glow();
+        var glow = new Glow();
         glow.addLamp(light);
 
+        /* Disable applyTrait since it is not compatible with XML apply of glow.
         this.applyTrait(glow);
+        */
     }
     routeAnimation()
     {
@@ -58,7 +63,7 @@ class ChangkeyMaker extends Entity
             this.fireWait = Infinity;
         }
 
-        Engine.Object.prototype.timeShift.call(this, dt);
+        super.timeShift.call(this, dt);
 
         this.flickerLoop += dt;
         if (this.flickerLoop > this.flickerDelay) {

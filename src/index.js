@@ -3,6 +3,7 @@ const Game = require('./Game');
 const Easing = require('./Easing');
 const Entity = require('./Entity');
 const Loader = require('./Loader');
+const Objects = require('./object/index.js');
 const Scene = require('./Scene');
 const Traits = require('./traits');
 const Tween = require('./Tween');
@@ -23,6 +24,7 @@ module.exports = {
     Easing,
     Entity,
     Loader,
+    Objects,
     Scene,
     Traits,
     Tween,
