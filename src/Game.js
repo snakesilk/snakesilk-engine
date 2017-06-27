@@ -5,6 +5,7 @@ const Keyboard = require('./Keyboard');
 const Events = require('./Events');
 const Player = require('./Player');
 const Scene = require('./Scene');
+const Timer = require('./Timer');
 
 class Game
 {
@@ -15,12 +16,20 @@ class Game
         this.EVENT_SCENE_DESTROY = 'scene_destroy';
         this.EVENT_SCENE_UNSET = 'scene_unset';
 
+        this.render = this.render.bind(this);
+        this.updateTime = this.updateTime.bind(this);
+
         this._paused = null;
         this._playbackSpeed = 1;
 
         this.input = new Keyboard;
         this.events = new Events(this);
         this.audioPlayer = new AudioPlayer();
+
+        this.timer = new Timer();
+        this.timer.events.bind(this.timer.EVENT_RENDER, this.render);
+        this.timer.events.bind(this.timer.EVENT_UPDATE, this.updateTime);
+
         this.renderer = new THREE.WebGLRenderer({
             'antialias': false,
         });
@@ -74,6 +83,7 @@ class Game
         this._paused = true;
         this.audioPlayer.pause();
         this.input.disable();
+        this.timer.pause();
         if (this.scene) {
             this.scene.events.trigger(this.scene.EVENT_PAUSE);
         }
@@ -86,13 +96,16 @@ class Game
         this._paused = false;
         this.audioPlayer.resume();
         this.input.enable();
+        this.timer.run();
         if (this.scene) {
             this.scene.events.trigger(this.scene.EVENT_RESUME);
         }
     }
     render()
     {
-        this.scene.render();
+        if (this.scene) {
+            this.scene.render(this.renderer);
+        }
     }
     setPlaybackSpeed(rate)
     {
@@ -101,9 +114,7 @@ class Game
     }
     _updatePlaybackSpeed()
     {
-        if (this.scene) {
-            this.scene.timer.setTimeStretch(this._playbackSpeed);
-        }
+        this.timer.setTimeStretch(this._playbackSpeed);
         this.audioPlayer.setPlaybackRate(this._playbackSpeed);
     }
     setResolution(w, h)
@@ -129,12 +140,16 @@ class Game
            we make sure the aspect ratio is correct before
            we roll. */
         this.adjustAspectRatio();
-        this._updatePlaybackSpeed();
 
         this.scene.events.trigger(this.scene.EVENT_START);
 
         if (!this._paused) {
             this.scene.events.trigger(this.scene.EVENT_RESUME);
+        }
+    }
+    updateTime(dt) {
+        if (this.scene) {
+            this.scene.updateTime(dt);
         }
     }
     unsetScene()
