@@ -1,4 +1,4 @@
-const THREE = require('three');
+const {AmbientLight, Scene, Vector2} = require('three');
 const Collision = require('./Collision');
 const Entity = require('./Entity');
 const Events = require('./Events');
@@ -14,7 +14,7 @@ class World
         this.EVENT_ADD = 'world-add';
         this.EVENT_REMOVE = 'world-remove';
 
-        this.ambientLight = new THREE.AmbientLight(0xffffff);
+        this.ambientLight = new AmbientLight(0xffffff);
 
         this.collision = new Collision();
 
@@ -24,13 +24,13 @@ class World
 
         this.atmosphericDensity = .1;
         this.atmosphericViscosity = .1;
-        this.gravityForce = new THREE.Vector2(0, 9.81);
-        this.windForce = new THREE.Vector2(0, 0);
+        this.gravityForce = new Vector2(0, 9.81);
+        this.windForce = new Vector2(0, 0);
 
         this.objects = [];
         this.objectsDead = [];
 
-        this.scene = new THREE.Scene();
+        this.scene = new Scene();
         this.scene.add(this.ambientLight);
 
         this._accumulator = 0;
