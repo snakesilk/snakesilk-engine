@@ -1,4 +1,4 @@
-const THREE = require('three');
+const {Mesh, Vector2, Vector3, Math: {generateUUID}} = require('three');
 const BoundingBox = require('./BoundingBox');
 const Events = require('./Events');
 const Loops = require('./Loops');
@@ -8,35 +8,35 @@ const Verlet = require('./Verlet');
 class Entity
 {
     constructor() {
-        this.uuid = THREE.Math.generateUUID();
+        this.uuid = generateUUID();
         this.name = undefined;
 
-        this.aim = new THREE.Vector2();
+        this.aim = new Vector2();
         this.anim = undefined;
         this.animators = [];
         this.audioQueue = [];
         this.collidable = true;
         this.collision = [];
         this.deltaTime = undefined;
-        this.direction = new THREE.Vector2(this.DIRECTION_RIGHT, 0);
+        this.direction = new Vector2(this.DIRECTION_RIGHT, 0);
         this.emitter = undefined;
         this.events = new Events(this);
         this.id = undefined;
-        this.integrator = new Verlet(new THREE.Vector2);
-        this.origo = new THREE.Vector2();
-        this.position = new THREE.Vector3();
+        this.integrator = new Verlet(new Vector2);
+        this.origo = new Vector2();
+        this.position = new Vector3();
         this.sequencer = new SequenceManager(this);
         this.time = 0;
         this.timeStretch = 1;
         this.traits = [];
-        this.velocity = new THREE.Vector2;
+        this.velocity = new Vector2;
         this.world = undefined;
 
         this.doFor = Loops.doFor(this.events, this.EVENT_TIMESHIFT);
         this.waitFor = Loops.waitFor(this.events, this.EVENT_TIMESHIFT);
 
         if (this.geometry && this.material) {
-            this.setModel(new THREE.Mesh(this.geometry, this.material));
+            this.setModel(new Mesh(this.geometry, this.material));
         }
     }
 
