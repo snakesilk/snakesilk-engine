@@ -196,7 +196,7 @@ class Level extends Scene
         world.events.unbind(world.EVENT_SIMULATE, this.simulateListener);
 
         this.input = this.inputs.menu;
-        this.pauseSimulation();
+        this.pause();
     }
     resumeGamePlay()
     {
@@ -204,7 +204,7 @@ class Level extends Scene
         world.events.bind(world.EVENT_SIMULATE, this.simulateListener);
 
         this.input = this.inputs.character;
-        this.resumeSimulation();
+        this.resume();
     }
     resetCheckpoint()
     {

@@ -62,6 +62,13 @@ class Scene
 
         this.receiveInput = this.receiveInput.bind(this);
     }
+
+    /**
+     * Hand input to active input handler.
+     *
+     * @param {string} [key]
+     * @param {string} [state]
+     */
     receiveInput(key, state) {
         /* Send input to active input handler. */
         this.input.trigger(key, state);
@@ -69,15 +76,39 @@ class Scene
         /* Notify listeners. */
         this.events.trigger(this.EVENT_INPUT, [key, state]);
     }
+
+    /**
+     * Render scene.
+     *
+     * @param {THREE.WebGLRenderer} [renderer] - Render engine.
+     */
     render(renderer) {
         renderer.render(this.world.scene, this.camera.camera);
     }
-    pauseSimulation() {
+
+    /**
+     * Pause scene.
+     *
+     * Stop sending time updates to World and Camera.
+     */
+    pause() {
         this._paused = true;
     }
-    resumeSimulation() {
+
+    /**
+     * Resume scene.
+     *
+     * Resume sending time updates to World and Camera.
+     */
+    resume() {
         this._paused = false;
     }
+
+    /**
+     * Move time forward.
+     *
+     * @param {number} [dt] - Time to move forward in seconds.
+     */
     updateTime(dt) {
         if (this._paused) {
             return;
