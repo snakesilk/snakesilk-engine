@@ -46,7 +46,7 @@ class Scene
         };
 
         const audioListener = (audio) => {
-            this.game.audioPlayer.play(audio);
+            this.audio.playAudio(audio);
         };
 
         this.events.bind(this.EVENT_CREATE, (game) => {
@@ -74,7 +74,6 @@ class Scene
     __create(game)
     {
         this.game = game;
-        this.audio.setPlayer(this.game.audioPlayer);
 
         const input = this.game.input;
         input.events.bind(input.EVENT_TRIGGER, this._inputRoute);
@@ -96,7 +95,6 @@ class Scene
     __destroy()
     {
         this.audio.stopAll();
-        this.audio.unsetPlayer();
 
         const input = this.game.input;
         input.events.unbind(input.EVENT_TRIGGER, this._inputRoute);

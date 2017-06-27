@@ -2,6 +2,9 @@ class AudioPlayer
 {
     constructor()
     {
+        this.play = this.play.bind(this);
+        this.stop = this.stop.bind(this);
+
         this._context = new AudioContext();
         this._playing = new Map();
         this._playbackRate = 1;
