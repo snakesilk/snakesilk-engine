@@ -62,11 +62,11 @@ class Scene
         });
 
         this.events.bind(this.EVENT_PAUSE, () => {
-            this.__pause();
+            this.input.release();
         });
 
         this.events.bind(this.EVENT_END, () => {
-            this.__end();
+            this.input.release();
         });
 
         this.events.bind(this.EVENT_DESTROY, () => {
@@ -78,14 +78,6 @@ class Scene
 
             this.world.events.unbind(this.world.EVENT_EMIT_AUDIO, audioListener);
         });
-    }
-    __pause()
-    {
-        this.input.release();
-    }
-    __end()
-    {
-        this.__pause();
     }
     render(renderer) {
         renderer.render(this.world.scene, this.camera.camera);
