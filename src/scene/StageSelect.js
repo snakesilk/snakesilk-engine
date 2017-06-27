@@ -71,7 +71,7 @@ class StageSelect extends Scene
             this.animations = {
                 'flash': this.createFlashAnimation(),
                 'indicator': this.createIndicatorAnimation(),
-                'stars': this.createStarAnimation(),
+                'stars': this.createStarAnimation(game.renderer.domElement),
             };
             /*if (game.state) {
 
@@ -167,13 +167,12 @@ class StageSelect extends Scene
             indicator.visible = (time % interval) / interval < .5;
         }
     }
-    createStarAnimation()
+    createStarAnimation(viewport)
     {
         const scene = this.world.scene;
         const spread = 160;
         const center = this.bossRevealCenter;
         const camera = this.camera.camera;
-        const viewport = this.game.renderer.domElement;
         const aspect = viewport.width / viewport.height;
 
         this.stars.forEach(star => {
