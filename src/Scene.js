@@ -39,9 +39,7 @@ class Scene
             this.audio.playAudio(audio);
         };
 
-        this.events.bind(this.EVENT_CREATE, (game) => {
-            this.game = game;
-
+        this.events.bind(this.EVENT_CREATE, () => {
             this.world.events.bind(this.world.EVENT_EMIT_AUDIO, audioListener);
         });
 
@@ -58,8 +56,6 @@ class Scene
 
         this.events.bind(this.EVENT_DESTROY, () => {
             this.audio.stopAll();
-            this.game = null;
-
             this.world.events.unbind(this.world.EVENT_EMIT_AUDIO, audioListener);
         });
 
