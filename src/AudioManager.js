@@ -1,9 +1,14 @@
+const Events = require('./Events');
+
 class AudioManager
 {
     constructor()
     {
+        this.EVENT_PLAY = 'audio-play';
+        this.EVENT_STOP = 'audio-stop';
+
+        this.events = new Events(this);
         this._audio = new Map;
-        this._player = null;
     }
     add(id, audio)
     {
@@ -20,26 +25,26 @@ class AudioManager
     play(id)
     {
         const audio = this._get(id);
-        this._player.play(audio);
+        this.playAudio(audio);
+    }
+    playAudio(audio)
+    {
+        this.events.trigger(this.EVENT_PLAY, [audio]);
     }
     stop(id)
     {
         const audio = this._get(id);
-        this._player.stop(audio);
+        this.stopAudio(audio);
+    }
+    stopAudio(audio)
+    {
+        this.events.trigger(this.EVENT_STOP, [audio]);
     }
     stopAll()
     {
         this._audio.forEach(audio => {
-            this._player.stop(audio);
+            this.stopAudio(audio);
         });
-    }
-    setPlayer(player)
-    {
-        this._player = player;
-    }
-    unsetPlayer()
-    {
-        this._player = null;
     }
 }
 
