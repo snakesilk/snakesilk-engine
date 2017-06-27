@@ -62,7 +62,7 @@ class Level extends Scene
             });
         });
 
-        this.timer.events.bind(this.timer.EVENT_UPDATE, () => {
+        this.events.bind(this.EVENT_UPDATE_TIME, () => {
             this.detectCheckpoint();
         });
 
