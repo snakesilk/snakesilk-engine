@@ -1,8 +1,7 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const RandomMock = require('./mocks/math-random-mock');
-
+const Mocks = require('@snakesilk/testing/mocks');
 const THREE = require('three');
 const Math = require('../Math');
 
@@ -59,11 +58,11 @@ describe('Math', function() {
 
   describe('#randStr()', function() {
     beforeEach(function() {
-      RandomMock.mock();
+      Mocks.Math.random.mock();
     });
 
     afterEach(function() {
-      RandomMock.clean();
+      Mocks.Math.random.restore();
     });
 
     it('should return a random string of 6 chars using safe alpha-num set by default', function() {

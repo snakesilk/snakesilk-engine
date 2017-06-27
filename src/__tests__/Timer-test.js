@@ -1,16 +1,16 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const RequestAnimationFrameMock = require('./mocks/requestanimationframe-mock');
+const Mocks = require('@snakesilk/testing/mocks');
 const Timer = require('../Timer');
 
 describe('Timer', function() {
   function setup() {
-    RequestAnimationFrameMock.mock();
+    Mocks.requestAnimationFrame.mock();
   }
 
   function teardown() {
-    RequestAnimationFrameMock.clean();
+    Mocks.requestAnimationFrame.restore();
   }
 
   function createTimer() {
@@ -22,7 +22,7 @@ describe('Timer', function() {
     it('should initialize in paused mode', function() {
       setup();
       const timer = createTimer();
-      RequestAnimationFrameMock.triggerAnimationFrame(1000);
+      Mocks.requestAnimationFrame.triggerAnimationFrame(1000);
       expect(requestAnimationFrame.called).to.be(false);
       teardown();
     });
@@ -35,7 +35,7 @@ describe('Timer', function() {
       timer.run();
       expect(requestAnimationFrame.callCount).to.be(1);
       expect(requestAnimationFrame.lastCall.args[0]).to.be(timer.eventLoop);
-      RequestAnimationFrameMock.triggerAnimationFrame(0);
+      Mocks.requestAnimationFrame.triggerAnimationFrame(0);
       expect(requestAnimationFrame.callCount).to.be(2);
       expect(requestAnimationFrame.lastCall.args[0]).to.be(timer.eventLoop);
       teardown();
@@ -46,7 +46,7 @@ describe('Timer', function() {
       const timer = createTimer();
       timer.run();
       timer.pause();
-      RequestAnimationFrameMock.triggerAnimationFrame(100);
+      Mocks.requestAnimationFrame.triggerAnimationFrame(100);
       expect(requestAnimationFrame.callCount).to.be(1);
       teardown();
     });
@@ -57,10 +57,10 @@ describe('Timer', function() {
       const updateSpy = sinon.spy();
       timer.events.bind(timer.EVENT_UPDATE, updateSpy);
       timer.run();
-      RequestAnimationFrameMock.triggerAnimationFrame(200);
+      Mocks.requestAnimationFrame.triggerAnimationFrame(200);
       expect(updateSpy.callCount).to.equal(1);
       expect(updateSpy.getCall(0).args[0]).to.equal(0.200);
-      RequestAnimationFrameMock.triggerAnimationFrame(550);
+      Mocks.requestAnimationFrame.triggerAnimationFrame(550);
       expect(updateSpy.callCount).to.equal(2);
       expect(updateSpy.getCall(1).args[0]).to.equal(0.350);
       teardown();

@@ -1,20 +1,34 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const RequestAnimationFrameMock = require('./mocks/requestanimationframe-mock');
-const NodeMock = require('./mocks/node-mock');
-const GameMock = require('./mocks/game-mock');
+const Mocks = require('@snakesilk/testing/mocks');
 
+const Game = require('../Game');
 const Hud = require('../Hud');
 const Timer = require('../Timer');
 const Level = require('../scene/Level');
 
 describe('Hud', function() {
+  let hud, game, dom;
+
+  beforeEach(() => {
+    Mocks.AudioContext.mock();
+    Mocks.requestAnimationFrame.mock();
+    Mocks.THREE.WebGLRenderer.mock();
+
+    hud = new Hud;
+    game = new Game();
+    dom = new Mocks.DOMNode;
+  });
+
+  afterEach(() => {
+    Mocks.AudioContext.restore();
+    Mocks.requestAnimationFrame.restore();
+    Mocks.THREE.WebGLRenderer.restore();
+  });
+
   describe('attach()', function() {
     it('should bind to scene create and destroy events of game', function() {
-      const hud = new Hud;
-      const game = new GameMock;
-      const dom = new NodeMock;
       hud.onSceneSet = sinon.spy();
       hud.onSceneUnset = sinon.spy();
       hud.attach(game, dom);
@@ -29,9 +43,6 @@ describe('Hud', function() {
 
   describe('detach()', function() {
     it('should unbind from scene create and destroy events of game', function() {
-      const hud = new Hud;
-      const game = new GameMock;
-      const dom = new NodeMock;
       hud.onSceneSet = sinon.spy();
       hud.onSceneUnset = sinon.spy();
       hud.attach(game, dom);
@@ -45,31 +56,26 @@ describe('Hud', function() {
 
   describe('quantify()', function() {
     it('should return 1 for input 1', function() {
-      const hud = new Hud;
       expect(hud.quantify(1)).to.be(1);
     });
 
     it('should return 0 for input zero', function() {
-      const hud = new Hud;
       expect(hud.quantify(0)).to.be(0);
     });
 
     it('should return 1/28th for value just above 0', function() {
-      const hud = new Hud;
       expect(hud.quantify(0.00000001)).to.be.within(0.03571428571428571, 0.03571428571428572);
     });
 
     it('should return 27/28ths for value just below 1', function() {
-      const hud = new Hud;
       expect(hud.quantify(0.99999998)).to.be.within(0.9642857142857142, 0.9642857142857143);
     });
   });
 
   describe('showHud() / hideHud()', function() {
-    const hud = new Hud;
-    const game = new GameMock;
-    const dom = new NodeMock;
-    hud.attach(game, dom);
+    beforeEach(() => {
+      hud.attach(game, dom);
+    });
 
     describe('showHud()', function() {
       it('should set a class on attached element', function() {
@@ -88,8 +94,7 @@ describe('Hud', function() {
 
   describe('setAmount()', function() {
     it('should set height style and current value on element', function() {
-      const hud = new Hud;
-      const node = new NodeMock;
+      const node = new Mocks.DOMNode;
       hud.setAmount(node, .33);
       const returnedNode = node.querySelector.lastCall.returnValue;
       expect(returnedNode.style.height).to.be('32.14285714285714%');
@@ -99,9 +104,6 @@ describe('Hud', function() {
 
   describe('setAmountInteractive()', function() {
     it('should pass arguments directly to setAmount() when new value is lower', function() {
-      const hud = new Hud;
-      const game = new GameMock;
-      const dom = new NodeMock;
       hud.attach(game, dom);
       const node = dom.getQueries()[0].node;
       hud.showHud();
@@ -113,9 +115,6 @@ describe('Hud', function() {
     });
 
     it('should pass arguments directly to setAmount() when Hud is hidden', function() {
-      const hud = new Hud;
-      const game = new GameMock;
-      const dom = new NodeMock;
       hud.attach(game, dom);
       const node = dom.getQueries()[0].node;
       hud.showHud();
@@ -128,16 +127,13 @@ describe('Hud', function() {
     });
 
     it('should call setAmount iteratively for every timer timepass event until matching', function() {
-      RequestAnimationFrameMock.mock();
-      const hud = new Hud;
-      const timer = new Timer;
-      const game = new GameMock;
+      const timer = new Timer();
       game.scene = {
         resumeSimulation: sinon.spy(),
         pauseSimulation: sinon.spy(),
         timer: timer,
       };
-      const dom = new NodeMock;
+      const dom = new Mocks.DOMNode;
       hud.attach(game, dom);
       hud.showHud();
       const node = dom.getQueries()[0].node;
@@ -157,16 +153,12 @@ describe('Hud', function() {
       expect(hud.game.scene.resumeSimulation.callCount).to.be(1);
       timer.updateTime(.1);
       expect(hud.setAmount.callCount).to.be(3);
-      RequestAnimationFrameMock.clean();
     });
   });
 
   describe('when attached', function() {
-    let hud, game;
     beforeEach(function() {
-      hud = new Hud;
-      game = new GameMock;
-      hud.attach(game, new NodeMock);
+      hud.attach(game, new Mocks.DOMNode);
       sinon.stub(hud, 'showHud');
       sinon.stub(hud, 'hideHud');
     });
@@ -174,13 +166,8 @@ describe('Hud', function() {
     describe('and scene of type Level set', function() {
       let level;
       beforeEach(function() {
-        RequestAnimationFrameMock.mock();
         level = new Level;
         game.setScene(level);
-      });
-
-      afterEach(function() {
-        RequestAnimationFrameMock.clean();
       });
 
       describe('and EVENT_PLAYER_RESET emitted on level', function() {
@@ -207,7 +194,6 @@ describe('Hud', function() {
     describe('and scene of type Level unset', function() {
       let level;
       beforeEach(function() {
-        RequestAnimationFrameMock.mock();
         level = new Level;
         game.setScene(level);
         game.unsetScene(level);
