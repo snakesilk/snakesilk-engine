@@ -77,13 +77,13 @@ class StageSelect extends Scene
 
             }*/
         });
-        this.events.bind(this.EVENT_START, (game) => {
+        this.events.bind(this.EVENT_START, () => {
             this.world.events.bind(this.world.EVENT_SIMULATE, simulate);
             this.camera.panTo(this.cameraDesiredPosition, 1, Easing.easeOutQuad());
             this.enableIndicator();
             this.input.enable();
         });
-        this.events.bind(this.EVENT_DESTROY, (game) => {
+        this.events.bind(this.EVENT_DESTROY, () => {
             this.world.events.unbind(this.world.EVENT_SIMULATE, simulate);
         });
     }
