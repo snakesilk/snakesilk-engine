@@ -41,19 +41,12 @@ class Scene
                 this.events.trigger(this.EVENT_INPUT, [key, type]);
             });
 
-        this._inputRoute = (key, state) => {
-            this.input.trigger(key, state);
-        };
-
         const audioListener = (audio) => {
             this.audio.playAudio(audio);
         };
 
         this.events.bind(this.EVENT_CREATE, (game) => {
             this.game = game;
-
-            const input = this.game.input;
-            input.events.bind(input.EVENT_TRIGGER, this._inputRoute);
 
             this.world.events.bind(this.world.EVENT_EMIT_AUDIO, audioListener);
         });
@@ -71,13 +64,15 @@ class Scene
 
         this.events.bind(this.EVENT_DESTROY, () => {
             this.audio.stopAll();
-
-            const input = this.game.input;
-            input.events.unbind(input.EVENT_TRIGGER, this._inputRoute);
             this.game = null;
 
             this.world.events.unbind(this.world.EVENT_EMIT_AUDIO, audioListener);
         });
+
+        this.receiveInput = this.receiveInput.bind(this);
+    }
+    receiveInput(key, state) {
+        this.input.trigger(key, state);
     }
     render(renderer) {
         renderer.render(this.world.scene, this.camera.camera);

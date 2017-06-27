@@ -145,6 +145,7 @@ class Game
         this.events.trigger(this.EVENT_SCENE_CREATE, [this.scene]);
         this.events.trigger(this.EVENT_SCENE_SET, [this.scene]);
 
+        this.input.events.bind(this.input.EVENT_TRIGGER, this.scene.receiveInput);
 
         /* Because the camera is instantiated per scene,
            we make sure the aspect ratio is correct before
@@ -165,6 +166,8 @@ class Game
     unsetScene()
     {
         if (this.scene) {
+            this.input.events.unbind(this.input.EVENT_TRIGGER, this.scene.receiveInput);
+
             this.events.trigger(this.EVENT_SCENE_UNSET, [this.scene]);
             this.events.trigger(this.EVENT_SCENE_DESTROY, [this.scene]);
             this.scene.events.trigger(this.scene.EVENT_DESTROY);
