@@ -44,7 +44,7 @@ describe('Scene', function() {
   describe('#updateTime', () => {
     describe('when running', () => {
       beforeEach(() => {
-        scene.resumeSimulation();
+        scene.resume();
       });
 
       it('propagates given time to world', () => {
@@ -64,7 +64,7 @@ describe('Scene', function() {
 
     describe('when paused', () => {
       beforeEach(() => {
-        scene.pauseSimulation();
+        scene.pause();
       });
 
       it('does not propagate given time to world', () => {
