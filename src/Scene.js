@@ -27,12 +27,19 @@ class Scene
         this.input = new Keyboard;
         this.world = new World;
 
-        this.doFor = Loops.doFor(this.world.events, this.world.EVENT_SIMULATE);
-        this.waitFor = Loops.waitFor(this.world.events, this.world.EVENT_SIMULATE);
+        this.doFor = Loops.doFor(
+            this.world.events,
+            this.world.EVENT_SIMULATE);
 
-        this.input.events.bind(this.input.EVENT_TRIGGER, (key, type) => {
-            this.events.trigger(this.EVENT_INPUT, [key, type]);
-        });
+        this.waitFor = Loops.waitFor(
+            this.world.events,
+            this.world.EVENT_SIMULATE);
+
+        this.input.events.bind(
+            this.input.EVENT_TRIGGER,
+            (key, type) => {
+                this.events.trigger(this.EVENT_INPUT, [key, type]);
+            });
 
         this._inputRoute = (key, state) => {
             this.input.trigger(key, state);
