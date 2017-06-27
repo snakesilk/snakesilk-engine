@@ -59,7 +59,6 @@ class Scene
         });
 
         this.events.bind(this.EVENT_RESUME, () => {
-            this.__resume();
         });
 
         this.events.bind(this.EVENT_PAUSE, () => {
@@ -79,12 +78,6 @@ class Scene
 
             this.world.events.unbind(this.world.EVENT_EMIT_AUDIO, audioListener);
         });
-    }
-    __start()
-    {
-    }
-    __resume()
-    {
     }
     __pause()
     {
