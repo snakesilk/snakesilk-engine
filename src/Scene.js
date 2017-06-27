@@ -35,12 +35,6 @@ class Scene
             this.world.events,
             this.world.EVENT_SIMULATE);
 
-        this.input.events.bind(
-            this.input.EVENT_TRIGGER,
-            (key, type) => {
-                this.events.trigger(this.EVENT_INPUT, [key, type]);
-            });
-
         const audioListener = (audio) => {
             this.audio.playAudio(audio);
         };
@@ -72,7 +66,11 @@ class Scene
         this.receiveInput = this.receiveInput.bind(this);
     }
     receiveInput(key, state) {
+        /* Send input to active input handler. */
         this.input.trigger(key, state);
+
+        /* Notify listeners. */
+        this.events.trigger(this.EVENT_INPUT, [key, state]);
     }
     render(renderer) {
         renderer.render(this.world.scene, this.camera.camera);
