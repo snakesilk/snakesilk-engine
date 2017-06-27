@@ -6,6 +6,7 @@ const Mocks = require('@snakesilk/testing/mocks');
 const Game = require('../Game');
 const Hud = require('../Hud');
 const Timer = require('../Timer');
+const Scene = require('../Scene');
 const Level = require('../scene/Level');
 
 describe('Hud', function() {
@@ -127,12 +128,11 @@ describe('Hud', function() {
     });
 
     it('should call setAmount iteratively for every timer timepass event until matching', function() {
-      const timer = new Timer();
-      game.scene = {
-        resumeSimulation: sinon.spy(),
-        pauseSimulation: sinon.spy(),
-        timer: timer,
-      };
+      const timer = game.timer;
+      game.scene = new Scene();
+      sinon.stub(game.scene, 'pause');
+      sinon.stub(game.scene, 'resume');
+
       const dom = new Mocks.DOMNode;
       hud.attach(game, dom);
       hud.showHud();
@@ -140,8 +140,8 @@ describe('Hud', function() {
       hud.setAmount(node, .5);
       hud.setAmountInteractive(node, .7);
       hud.setAmount = sinon.spy();
-      expect(hud.game.scene.pauseSimulation.callCount).to.be(1);
-      expect(hud.game.scene.resumeSimulation.callCount).to.be(0);
+      expect(hud.game.scene.pause.callCount).to.be(1);
+      expect(hud.game.scene.resume.callCount).to.be(0);
       timer.updateTime(.05);
       expect(hud.setAmount.lastCall.args).to.eql([node, .55]);
       timer.updateTime(.05);
@@ -149,8 +149,8 @@ describe('Hud', function() {
       timer.updateTime(.1);
       expect(hud.setAmount.lastCall.args).to.eql([node, .7]);
       expect(hud.setAmount.callCount).to.be(3);
-      expect(hud.game.scene.pauseSimulation.callCount).to.be(1);
-      expect(hud.game.scene.resumeSimulation.callCount).to.be(1);
+      expect(hud.game.scene.pause.callCount).to.be(1);
+      expect(hud.game.scene.resume.callCount).to.be(1);
       timer.updateTime(.1);
       expect(hud.setAmount.callCount).to.be(3);
     });

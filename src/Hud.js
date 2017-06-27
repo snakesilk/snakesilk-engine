@@ -122,7 +122,7 @@ class Hud
         let current = parseFloat(element.dataset.value);
         if (this.hudVisible && frac > current) {
             const scene = this.game.scene;
-            const timer = scene.timer;
+            const timer = this.game.timer;
             const target = frac;
             const speed = this.fillSpeed;
             const iteration = dt => {
@@ -130,11 +130,11 @@ class Hud
                 if (current >= target) {
                     current = target;
                     timer.events.unbind(timer.EVENT_UPDATE, iteration);
-                    scene.resumeSimulation();
+                    scene.resume();
                 }
                 this.setAmount(element, current);
             }
-            scene.pauseSimulation();
+            scene.pause();
             timer.events.bind(timer.EVENT_UPDATE, iteration);
         } else {
             this.setAmount(element, frac);
