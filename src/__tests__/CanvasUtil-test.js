@@ -1,13 +1,13 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const CanvasMock = require('./mocks/canvas-mock');
+const Mocks = require('@snakesilk/testing/mocks');
 const CanvasUtil = require('../CanvasUtil');
 
 describe('CanvasUtil', function() {
   beforeEach(function() {
     global.document = {
-      createElement: CanvasMock.createElement,
+      createElement: Mocks.Canvas.createElement,
     }
   });
 

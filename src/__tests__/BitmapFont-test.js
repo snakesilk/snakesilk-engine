@@ -1,14 +1,14 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
+const Mocks = require('@snakesilk/testing/mocks');
 const THREE = require('three');
-const CanvasMock = require('./mocks/canvas-mock');
 const BitmapFont = require('../BitmapFont');
 
 describe('Bitmap Font', () => {
   beforeEach(() => {
     global.document = {
-      createElement: CanvasMock.createElement,
+      createElement: Mocks.Canvas.createElement,
     }
   });
 
@@ -19,7 +19,7 @@ describe('Bitmap Font', () => {
   describe('when instantiated', () => {
     let font, image;
     beforeEach(() => {
-      image = new CanvasMock;
+      image = new Mocks.Canvas();
       image.width = 16 * 8;
       image.height = 12;
       font = new BitmapFont('ABCDEFGH', {x: 16, y: 12}, image);
@@ -80,7 +80,7 @@ describe('Bitmap Font', () => {
 
           describe('texture', () => {
             it('is a Canvas', () => {
-              expect(text._texture.image).to.be.a(CanvasMock);
+              expect(text._texture.image).to.be.a(Mocks.Canvas);
             });
 
             it('has power of 2 width 64', () => {

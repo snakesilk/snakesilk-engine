@@ -1,9 +1,7 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const AudioContextMock = require('../../__tests__/mocks/audiocontext-mock');
-const WebGLRendererMock = require('../../__tests__/mocks/webglrenderer-mock');
-const RequestAnimationFrameMock = require('../../__tests__/mocks/requestanimationframe-mock');
+const Mocks = require('@snakesilk/testing/mocks');
 
 const Game = require('../../Game');
 const Entity = require('../../Entity');
@@ -13,15 +11,15 @@ const Level = require('../Level');
 
 describe('Level', function() {
   beforeEach(() => {
-      AudioContextMock.mock();
-      WebGLRendererMock.mock();
-      RequestAnimationFrameMock.mock();
+      Mocks.AudioContext.mock();
+      Mocks.THREE.WebGLRenderer.mock();
+      Mocks.requestAnimationFrame.mock();
   });
 
   afterEach(() => {
-      AudioContextMock.clean();
-      WebGLRendererMock.clean();
-      RequestAnimationFrameMock.clean();
+      Mocks.AudioContext.restore();
+      Mocks.THREE.WebGLRenderer.restore();
+      Mocks.requestAnimationFrame.restore();
   });
 
   function createLevel() {
