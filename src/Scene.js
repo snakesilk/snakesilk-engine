@@ -40,10 +40,9 @@ class Scene
         };
 
         this.events.bind(this.EVENT_CREATE, () => {
-            this.world.events.bind(this.world.EVENT_EMIT_AUDIO, audioListener);
-        });
-
-        this.events.bind(this.EVENT_RESUME, () => {
+            this.world.events.bind(
+                this.world.EVENT_EMIT_AUDIO,
+                audioListener);
         });
 
         this.events.bind(this.EVENT_PAUSE, () => {
@@ -56,7 +55,9 @@ class Scene
 
         this.events.bind(this.EVENT_DESTROY, () => {
             this.audio.stopAll();
-            this.world.events.unbind(this.world.EVENT_EMIT_AUDIO, audioListener);
+            this.world.events.unbind(
+                this.world.EVENT_EMIT_AUDIO,
+                audioListener);
         });
 
         this.receiveInput = this.receiveInput.bind(this);
