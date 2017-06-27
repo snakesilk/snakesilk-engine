@@ -5,6 +5,7 @@
   "main": "./dist/index.js",
   "scripts": {
     "build": "./scripts/build-dist.sh",
+    "build+watch": "babel ./src --out-dir ./dist --watch",
     "test": "mocha 'src/**/*-test.js'",
     "test+coverage": "istanbul cover $(npm bin)/_mocha 'src/**/*-test.js'",
     "package": "npm run build && npm pack",
