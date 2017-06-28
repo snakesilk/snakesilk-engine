@@ -5,7 +5,7 @@ class SequenceManager
     constructor(host)
     {
         this._host = host;
-        this._sequences = {};
+        this._sequences = Object.create(null);
     }
     addSequence(id, sequence)
     {
