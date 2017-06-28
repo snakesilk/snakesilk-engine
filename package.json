@@ -5,12 +5,12 @@
   "main": "./dist/index.js",
   "scripts": {
     "build": "./scripts/build-dist.sh",
-    "build+watch": "babel ./src --out-dir ./dist --watch",
     "test": "mocha 'src/**/*-test.js'",
     "test+coverage": "istanbul cover $(npm bin)/_mocha 'src/**/*-test.js'",
     "package": "npm run build && npm pack",
     "publish+npm": "npm run build && npm publish",
-    "upload-coverage": "codecov -f coverage/lcov.info --disable=gcov"
+    "upload-coverage": "codecov -f coverage/lcov.info --disable=gcov",
+    "watch": "babel ./src --out-dir ./dist --watch"
   },
   "repository": {
     "type": "git",
