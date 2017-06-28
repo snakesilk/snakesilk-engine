@@ -1,4 +1,5 @@
 const Animation = require('./Animation');
+const Camera = require('./Camera');
 const Game = require('./Game');
 const Easing = require('./Easing');
 const Entity = require('./Entity');
@@ -22,6 +23,7 @@ const Hud = require('./Hud');
 
 module.exports = {
     Animation,
+    Camera,
     Game,
     Easing,
     Entity,

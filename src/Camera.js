@@ -126,4 +126,6 @@ class Camera
     }
 }
 
+Camera.Path = CameraPath;
+
 module.exports = Camera;

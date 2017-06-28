@@ -12,7 +12,7 @@ describe('Main Export', function() {
 
   [
     ['Animation', '../Animation'],
-
+    ['Camera', '../Camera'],
     ['Game', '../Game'],
     ['Entity', '../Entity'],
     ['Loader', '../Loader'],
