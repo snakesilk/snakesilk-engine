@@ -28,10 +28,10 @@ class SequenceManager
 
         const next = () => {
             if (steps.length) {
-                const tasks = [];
-                steps.shift().forEach(action => {
-                    tasks.push(action.call(this._host));
+                const tasks = steps.shift().map(action => {
+                    return action.call(this._host);
                 });
+
                 return SyncPromise.all(tasks).then(() => {
                     return next();
                 });
