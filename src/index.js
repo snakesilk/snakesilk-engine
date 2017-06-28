@@ -7,6 +7,8 @@ const Objects = require('./object/index.js');
 const Scene = require('./Scene');
 const Traits = require('./traits');
 const Tween = require('./Tween');
+const World = require('./World');
+
 const UVAnimator = require('./animator/UV');
 const UVCoords = require('./UVCoords');
 
@@ -28,6 +30,8 @@ module.exports = {
     Scene,
     Traits,
     Tween,
+    World,
+
     UVAnimator,
     UVCoords,
 

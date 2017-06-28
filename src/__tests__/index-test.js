@@ -18,6 +18,7 @@ describe('Main Export', function() {
     ['Loader', '../Loader'],
     ['Scene', '../Scene'],
     ['Tween', '../Tween'],
+    ['World', '../World'],
 
     ['UVAnimator', '../animator/UV'],
     ['UVCoords', '../UVCoords'],
