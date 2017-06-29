@@ -6,6 +6,7 @@ const Easing = require('./Easing');
 const Entity = require('./Entity');
 const Events = require('./Events');
 const Loader = require('./Loader');
+const Logic = require('./logic');
 const Scene = require('./Scene');
 const Traits = require('./traits');
 const Tween = require('./Tween');
@@ -31,6 +32,7 @@ module.exports = {
     Entity,
     Events,
     Loader,
+    Logic,
 
     Scene,
     Traits,
