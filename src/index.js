@@ -4,6 +4,7 @@ const Camera = require('./Camera');
 const Game = require('./Game');
 const Easing = require('./Easing');
 const Entity = require('./Entity');
+const Events = require('./Events');
 const Loader = require('./Loader');
 const Scene = require('./Scene');
 const Traits = require('./traits');
@@ -28,6 +29,7 @@ module.exports = {
     Game,
     Easing,
     Entity,
+    Events,
     Loader,
 
     Scene,
