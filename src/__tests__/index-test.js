@@ -40,6 +40,10 @@ describe('Main Export', function() {
       });
     });
 
+    it('exports Energy class', () => {
+      expect(Main.Logic.Energy).to.be(require('../logic/Energy'));
+    });
+
     [
       'Attach',
       'Climbable',
