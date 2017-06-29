@@ -1,6 +1,5 @@
 const THREE = require('three');
 const Entity = require('./Entity');
-const Weapon = require('./object/Weapon');
 
 class ResourceManager
 {
@@ -8,7 +7,6 @@ class ResourceManager
     {
         /* These must be defined in order of specificity. */
         this.TYPE_MAP = {
-            'weapon': Weapon,
             'object': Entity,
             'texture': THREE.Texture,
         }
