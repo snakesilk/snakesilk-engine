@@ -79,29 +79,9 @@ describe('Main Export', function() {
     });
   });
 
-  [
-    'Airman',
-    'Crashman',
-    'Flashman',
-    'Heatman',
-    'Megaman',
-    'Metalman',
-
-    'ChangkeyMaker',
-    'Shotman',
-    'SniperArmor',
-    'SniperJoe',
-    'Telly',
-
-    'AirShooter',
-    'CrashBomber',
-    'EnemyPlasma',
-    'MetalBlade',
-    'Plasma',
-    'TimeStopper',
-  ].forEach((objectName) => {
-    it(`exposes object ${objectName}`, () => {
-      expect(new (Main.Objects[objectName])()).to.be.ok();
+  describe('exported objects', () => {
+    it('are not available', () => {
+      expect(Main).to.not.have.property('Objects');
     });
   });
 });
