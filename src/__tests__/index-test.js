@@ -16,6 +16,7 @@ describe('Main Export', function() {
     ['Camera', '../Camera'],
     ['Game', '../Game'],
     ['Entity', '../Entity'],
+    ['Events', '../Events'],
     ['Loader', '../Loader'],
     ['Scene', '../Scene'],
     ['Tween', '../Tween'],
