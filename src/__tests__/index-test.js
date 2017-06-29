@@ -11,6 +11,7 @@ describe('Main Export', function() {
   });
 
   [
+    ['AI', '../AI'],
     ['Animation', '../Animation'],
     ['Camera', '../Camera'],
     ['Game', '../Game'],

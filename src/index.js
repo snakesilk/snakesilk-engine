@@ -1,3 +1,4 @@
+const AI = require('./AI');
 const Animation = require('./Animation');
 const Camera = require('./Camera');
 const Game = require('./Game');
@@ -22,6 +23,7 @@ const Mouse = require('./Mouse');
 const Hud = require('./Hud');
 
 module.exports = {
+    AI,
     Animation,
     Camera,
     Game,
