@@ -18,6 +18,7 @@ describe('Main Export', function() {
       ['Game', '../Game'],
       ['Entity', '../Entity'],
       ['Events', '../Events'],
+      ['Keyboard', '../Keyboard'],
       ['Loader', '../Loader'],
       ['Scene', '../Scene'],
       ['Tween', '../Tween'],
