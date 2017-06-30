@@ -21,7 +21,6 @@ const InputRecorder = require('./InputRecorder');
 const SyncPromise = require('./SyncPromise');
 
 const Mouse = require('./Mouse');
-const Hud = require('./Hud');
 
 module.exports = {
     AI,
@@ -47,5 +46,4 @@ module.exports = {
     InputRecorder,
     SyncPromise,
     Mouse,
-    Hud,
 };
