@@ -32,8 +32,6 @@ describe('Main Export', function() {
       ['SyncPromise', '../SyncPromise'],
 
       ['Mouse', '../Mouse'],
-      ['Hud', '../Hud'],
-
     ].forEach(([module, target]) => {
       it(`exposes ${module}`, () => {
         expect(Main[module]).to.be(require(target));
@@ -85,8 +83,13 @@ describe('Main Export', function() {
       });
     });
 
-    it('"Objects" are not available', () => {
-      expect(Main).to.not.have.property('Objects');
+    [
+      'Hud',
+      'Objects',
+    ].forEach(prop => {
+      it(`deprecated export ${prop} is missing`, () => {
+        expect(Main).to.not.have.property(prop);
+      });
     });
   });
 });
