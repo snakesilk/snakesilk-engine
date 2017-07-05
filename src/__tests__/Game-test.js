@@ -46,7 +46,8 @@ describe('Game', function() {
       const element = new Mocks.DOMNode();
       const game = new Game();
       const scene = new Scene();
-      element.setBoundingClientRect({width: 750, height: 600});
+      element.clientWidth = 750;
+      element.clientHeight = 600;
       game.attachToElement(element);
       game.setScene(scene);
       game.adjustAspectRatio();
@@ -100,7 +101,8 @@ describe('Game', function() {
       const element = new Mocks.DOMNode();
       const game = new Game();
       const scene = new Scene();
-      element.setBoundingClientRect({width: 1000, height: 800});
+      element.clientWidth = 750;
+      element.clientHeight = 600;
       game.attachToElement(element);
       game.setScene(scene);
       expect(game.scene.camera.camera.aspect).to.be(1.25);
