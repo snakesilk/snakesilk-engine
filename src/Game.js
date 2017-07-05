@@ -60,16 +60,16 @@ class Game
     adjustAspectRatio()
     {
         if (this.scene && this.element) {
-            const rect = this.element.getBoundingClientRect();
-            const cam = this.scene.camera.camera;
-            cam.aspect = rect.width / rect.height;
-            cam.updateProjectionMatrix();
+            const camera = this.scene.camera.camera;
+            const {clientWidth, clientHeight} = this.element;
+            camera.aspect = clientWidth / clientHeight;
+            camera.updateProjectionMatrix();
         }
     }
     adjustResolution()
     {
-        const rect = this.element.getBoundingClientRect();
-        this.setResolution(rect.width, rect.height);
+        const {clientWidth, clientHeight} = this.element;
+        this.setResolution(clientWidth, clientHeight);
     }
     handleInputEvent(event)
     {
