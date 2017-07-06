@@ -77,6 +77,7 @@ class ResourceLoader
         const task = this._createTask();
         task.promise = new Promise((resolve, reject) => {
             const image = new Image();
+            image.crossOrigin = 'anonymous';
             image.addEventListener('load', () => {
                 const canvas = CanvasUtil.clone(image);
                 resolve(canvas);
