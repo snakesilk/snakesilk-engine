@@ -21,6 +21,7 @@ describe('Main Export', function() {
       ['Keyboard', '../Keyboard'],
       ['Loader', '../Loader'],
       ['Scene', '../Scene'],
+      ['Trait', '../Trait'],
       ['Tween', '../Tween'],
       ['World', '../World'],
 
