@@ -4,7 +4,6 @@ const sinon = require('sinon');
 const Loader = require('../Loader');
 const ResourceManager = require('../ResourceManager');
 const ResourceLoader = require('../ResourceLoader');
-const Traits = require('../traits');
 
 describe('Loader', function() {
   describe('after instantiation', () => {
@@ -31,14 +30,6 @@ describe('Loader', function() {
       expect(loader.textureScale).to.be(1);
     });
 
-    describe('Preloaded Entities', () => {
-      Object.keys(Traits).forEach(traitName => {
-        it(`has ${traitName} in entity registry`, () => {
-          expect(loader.entities.resolve(traitName)).to.be(Traits[traitName]);
-        });
-      });
-    });
-
     describe('Entity Registry', () => {
       class MyEntity{};
 
@@ -50,6 +41,20 @@ describe('Loader', function() {
 
       it('supports adding custom entities', () => {
         expect(loader.entities.resolve('my-entity')).to.be(MyEntity);
+      });
+    });
+
+    describe('Trait Registry', () => {
+      class MyTrait{};
+
+      beforeEach(() => {
+        loader.traits.add({
+          'my-trait': MyTrait,
+        });
+      });
+
+      it('supports adding custom traits', () => {
+        expect(loader.traits.resolve('my-trait')).to.be(MyTrait);
       });
     })
   });

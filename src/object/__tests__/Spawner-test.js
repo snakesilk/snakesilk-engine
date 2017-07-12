@@ -1,17 +1,27 @@
 const expect = require('expect.js');
-const sinon = require('sinon');
 
 const World = require('../../World');
 const Entity = require('../../Entity');
-const Health = require('../../traits/Health');
+const Trait = require('../../Trait');
 const Spawner = require('../../object/Spawner');
 
 describe('Spawner', function() {
+  class MockHealth extends Trait {
+    constructor() {
+      super();
+      this.NAME = 'health';
+    }
+
+    kill() {
+      this._host.removeFromWorld();
+    }
+  }
+
   class Spawnable extends Entity {
     constructor()
     {
       super();
-      this.applyTrait(new Health);
+      this.applyTrait(new MockHealth());
     }
   }
 

@@ -10,7 +10,6 @@ const Logic = require('./logic');
 const Keyboard = require('./Keyboard');
 const Scene = require('./Scene');
 const Trait = require('./Trait');
-const Traits = require('./traits');
 const Tween = require('./Tween');
 const World = require('./World');
 
@@ -40,7 +39,6 @@ module.exports = {
 
     Scene,
     Trait,
-    Traits,
     Tween,
     World,
 
