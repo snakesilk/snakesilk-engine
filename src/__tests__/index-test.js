@@ -47,6 +47,7 @@ describe('Main Export', function() {
       'Hud',
       'Objects',
       'Traits',
+      'Util',
     ].forEach(prop => {
       it(`deprecated export ${prop} is missing`, () => {
         expect(Main).to.not.have.property(prop);
