@@ -14,7 +14,7 @@ class Trait
     {
         this.NAME = null;
 
-        this._bindables = {};
+        this._bindables = Object.create(null);
         this._enabled = true;
         this._host = null;
         this._requires = [];
