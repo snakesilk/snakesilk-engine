@@ -19,6 +19,7 @@ describe('Main Export', function() {
       ['Keyboard', '../Keyboard'],
       ['Loader', '../Loader'],
       ['Scene', '../Scene'],
+      ['Timeline', '../Timeline'],
       ['Trait', '../Trait'],
       ['Tween', '../Tween'],
       ['World', '../World'],
