@@ -15,20 +15,6 @@ const Util = {
             });
         }
     },
-
-    string: {
-        fill: function(x, n)
-        {
-            var s = '';
-            for (;;) {
-                if (n & 1) s += x;
-                n >>= 1;
-                if (n) x += x;
-                else break;
-            }
-            return s;
-        },
-    },
 }
 
 module.exports = Util;
