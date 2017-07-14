@@ -1,77 +1,55 @@
-const THREE = require('three');
-const Entity = require('./Entity');
-
 class ResourceManager
 {
-    constructor()
-    {
-        /* These must be defined in order of specificity. */
-        this.TYPE_MAP = {
-            'object': Entity,
-            'texture': THREE.Texture,
-        }
-
-        this._items = {};
+    constructor() {
+        this._items = new Map();
     }
-    _addResource(type, id, object)
-    {
+
+    _addResource(type, id, object) {
         if (!type) {
             throw new Error('Empty type');
         }
+
         if (!id) {
             throw new Error('Empty id');
         }
-        if (!this._items[type]) {
-            this._items[type] = {};
-        }
-        if (this._items[type][id]) {
-            throw new Error("Object " + id + " already defined");
+
+        if (this.has(type, id)) {
+            throw new Error(`Resource "${id}" of type ${type} already defined.`);
         }
 
-        this._items[type][id] = object;
-    }
-    addAuto(id, object)
-    {
-        for (let type in this.TYPE_MAP) {
-            const proto = this.TYPE_MAP[type].prototype;
-            if (proto.isPrototypeOf(object.prototype)) {
-                this._addResource(type, id, object);
-                return true;
-            }
+        if (!this._items.has(type)) {
+            this._items.set(type, new Map());
         }
-        throw new Error('Could not determine type from ' + object);
+
+        this._items.get(type).set(id, object);
     }
-    addAudio(id, object)
-    {
+
+    addAudio(id, object) {
         return this._addResource('audio', id, object);
     }
-    addFont(id, object)
-    {
+
+    addFont(id, object) {
         return this._addResource('font', id, object);
     }
-    addObject(id, object)
-    {
-        return this._addResource('object', id, object);
+
+    addEntity(id, object) {
+        return this._addResource('entity', id, object);
     }
-    addTexture(id, object)
-    {
+
+    addTexture(id, object) {
         return this._addResource('texture', id, object);
     }
-    addWeapon(id, object)
-    {
-        return this._addResource('weapon', id, object);
-    }
-    get(type, id)
-    {
-        if (this._items[type] && this._items[type][id]) {
-            return this._items[type][id];
+
+    get(type, id) {
+        if (!this.has(type, id)) {
+            throw new Error(`No resource "${id}" of type ${type}.`);
         }
-        throw new Error('No resource "' + id + '" of type ' + type);
+        return this._items.get(type).get(id);
     }
-    has(type, id)
-    {
-        return this._items[type] !== undefined &&
-               this._items[type][id] !== undefined;
+
+    has(type, id) {
+        const sub = this._items.get(type);
+        return sub ? sub.has(id) : false;
     }
 }
 
