@@ -83,11 +83,6 @@ class Entity
         }
     }
 
-    getModel()
-    {
-        return this.model;
-    }
-
     getTrait(traitReference)
     {
         for (let i = 0, l = this.traits.length; i < l; ++i) {
