@@ -16,7 +16,6 @@ class Entity
         this.animators = [];
         this.collidable = true;
         this.collision = [];
-        this.deltaTime = undefined;
         this.direction = new Vector2(this.DIRECTION_RIGHT, 0);
         this.emitter = undefined;
         this.events = new Events(this);
@@ -166,7 +165,6 @@ class Entity
     timeShift(deltaTime)
     {
         const adjustedDelta = deltaTime * this.timeStretch;
-        this.deltaTime = adjustedDelta;
 
         const anim = this.routeAnimation();
         if (anim) {
