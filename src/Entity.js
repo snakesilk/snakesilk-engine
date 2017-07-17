@@ -33,11 +33,7 @@ class Entity
         this.doFor = Loops.doFor(this.events, this.EVENT_TIMESHIFT);
         this.waitFor = Loops.waitFor(this.events, this.EVENT_TIMESHIFT);
 
-        if (this.geometry && this.material) {
-            this.setModel(new Mesh(this.geometry, this.material));
-        } else {
-            this.setModel(new Object3D());
-        }
+        this.setModel(new Object3D());
     }
 
     addCollisionRect(w, h, offsetX, offsetY)
@@ -231,8 +227,6 @@ Entity.prototype.SURFACE_RIGHT = 3;
 
 Entity.prototype.audio = {};
 Entity.prototype.animations = undefined;
-Entity.prototype.geometry = undefined;
-Entity.prototype.material = undefined;
 Entity.prototype.textures = undefined;
 
 module.exports = Entity;
