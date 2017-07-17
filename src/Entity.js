@@ -1,43 +1,50 @@
 const {Mesh, Object3D, Vector2, Vector3, Math: {generateUUID}} = require('three');
 const BoundingBox = require('./BoundingBox');
 const Events = require('./Events');
-const Loops = require('./Loops');
+const {doFor, waitFor} = require('./Loops');
 const SequenceManager = require('./SequenceManager');
 const Verlet = require('./Verlet');
+const {readOnly} = require('./Util');
 
 class Entity
 {
     constructor() {
-        this.uuid = generateUUID();
+        this.id = undefined;
         this.name = undefined;
 
-        this.aim = new Vector2();
         this.anim = undefined;
-        this.animators = [];
         this.collidable = true;
-        this.collision = [];
-        this.direction = new Vector2(this.DIRECTION_RIGHT, 0);
         this.emitter = undefined;
-        this.events = new Events(this);
-        this.id = undefined;
-        this.integrator = new Verlet(new Vector2);
         this.origo = new Vector2();
         this.position = new Vector3();
-        this.sequencer = new SequenceManager(this);
         this.time = 0;
         this.timeStretch = 1;
-        this.traits = [];
-        this.velocity = new Vector2;
         this.world = undefined;
 
-        this.doFor = Loops.doFor(this.events, this.EVENT_TIMESHIFT);
-        this.waitFor = Loops.waitFor(this.events, this.EVENT_TIMESHIFT);
+        const events = new Events(this);
+
+        readOnly(this, {
+            aim: new Vector2(),
+            animations: new Map(),
+            animators: [],
+            audio: {},
+            collision: [],
+            direction: new Vector2(this.DIRECTION_RIGHT, 0),
+            doFor: doFor(events, this.EVENT_TIMESHIFT),
+            events: events,
+            integrator: new Verlet(new Vector2()),
+            sequencer: new SequenceManager(this),
+            textures: new Map(),
+            traits: [],
+            uuid: generateUUID(),
+            velocity: new Vector2(),
+            waitFor: waitFor(events, this.EVENT_TIMESHIFT),
+        });
 
         this.setModel(new Object3D());
     }
 
-    addCollisionRect(w, h, offsetX, offsetY)
-    {
+    addCollisionRect(w, h, offsetX, offsetY) {
         const boundingBox = new BoundingBox(
             this.position,
             {x: w, y: h},
@@ -46,13 +53,11 @@ class Entity
         this.collision.push(boundingBox);
     }
 
-    addCollisionZone(r, offsetX, offsetY)
-    {
+    addCollisionZone(r, offsetX, offsetY) {
         return this.addCollisionRect(r * 2, r * 2, offsetX, offsetY);
     }
 
-    applyTrait(trait)
-    {
+    applyTrait(trait) {
         if (this[trait.NAME] !== undefined) {
             throw new Error('Trait name "' + trait.NAME + '" occupied');
         }
@@ -62,25 +67,21 @@ class Entity
         this.events.trigger(this.EVENT_TRAIT_ATTACHED, [trait]);
     }
 
-    collides(withObject, ourZone, theirZone)
-    {
+    collides(withObject, ourZone, theirZone) {
         this.events.trigger(this.EVENT_COLLIDE, [withObject, ourZone, theirZone]);
     }
 
-    dropCollision()
-    {
+    dropCollision() {
         this.collision.length = 0;
     }
 
-    emitAudio(audio)
-    {
+    emitAudio(audio) {
         if (this.world) {
             this.world.emitAudio(audio);
         }
     }
 
-    getTrait(traitReference)
-    {
+    getTrait(traitReference) {
         for (let i = 0, l = this.traits.length; i < l; ++i) {
             if (this.traits[i] instanceof traitReference) {
                 return this.traits[i];
@@ -89,27 +90,23 @@ class Entity
         return false;
     }
 
-    moveTo(vec)
-    {
+    moveTo(vec) {
         this.position.x = vec.x;
         this.position.y = vec.y;
     }
 
-    nudge(x, y)
-    {
+    nudge(x, y) {
         const vec = this.position.clone();
         vec.x += x || 0;
         vec.y += y || 0;
         this.moveTo(vec);
     }
 
-    obstruct(object, attack, ourZone, theirZone)
-    {
+    obstruct(object, attack, ourZone, theirZone) {
         this.events.trigger(this.EVENT_OBSTRUCT, [object, attack, ourZone, theirZone]);
     }
 
-    reset()
-    {
+    reset() {
         this.aim.set(0, 0);
         this.traits.forEach(trait => {
             if (typeof trait.reset === 'function') {
@@ -118,48 +115,41 @@ class Entity
         });
     }
 
-    removeFromWorld()
-    {
+    removeFromWorld() {
         if (this.world) {
             this.world.removeObject(this);
         }
     }
 
-    routeAnimation()
-    {
+    routeAnimation() {
         return null;
     }
 
-    setAnimation(name)
-    {
+    setAnimation(name) {
         if (name !== this.anim) {
             this.animators[0].setAnimation(this.animations.get(name));
             this.anim = name;
         }
     }
 
-    setEmitter(entity)
-    {
+    setEmitter(entity) {
         if (entity instanceof Entity !== true) {
             throw new Error('Invalid emitter');
         }
         this.emitter = entity;
     }
 
-    setModel(model)
-    {
+    setModel(model) {
         this.model = model;
         this.position = this.model.position;
     }
 
-    setWorld(world)
-    {
+    setWorld(world) {
         this.world = world;
         this.events.trigger(this.EVENT_WORLD_ADD);
     }
 
-    timeShift(deltaTime)
-    {
+    timeShift(deltaTime) {
         const adjustedDelta = deltaTime * this.timeStretch;
 
         const anim = this.routeAnimation();
@@ -186,22 +176,30 @@ class Entity
         this.time += adjustedDelta;
     }
 
-    updateAnimators(deltaTime)
-    {
+    updateAnimators(deltaTime) {
         const adjustedDelta = deltaTime * this.timeStretch;
         this.animators.forEach(animator => {
             animator.update(adjustedDelta);
         });
     }
 
-    uncollides(withObject)
-    {
+    uncollides(withObject) {
         this.events.trigger(this.EVENT_UNCOLLIDE, [withObject]);
     }
 
     unsetWorld() {
         this.events.trigger(this.EVENT_WORLD_REMOVE);
         this.world = undefined;
+    }
+
+    useTexture(textureId) {
+        if (!this.textures.has(textureId)) {
+            console.error(`Texture "${textureId}" not defined.`);
+            return;
+        }
+
+        this.model.material.map = this.textures.get(textureId).texture;
+        this.model.material.needsUpdate = true;
     }
 }
 
@@ -224,9 +222,5 @@ Entity.prototype.SURFACE_TOP = 0;
 Entity.prototype.SURFACE_BOTTOM = 1;
 Entity.prototype.SURFACE_LEFT = 2;
 Entity.prototype.SURFACE_RIGHT = 3;
-
-Entity.prototype.audio = {};
-Entity.prototype.animations = undefined;
-Entity.prototype.textures = undefined;
 
 module.exports = Entity;
