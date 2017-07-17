@@ -139,7 +139,7 @@ class Entity
     setAnimation(name)
     {
         if (name !== this.anim) {
-            this.animators[0].setAnimation(this.animations[name]);
+            this.animators[0].setAnimation(this.animations.get(name));
             this.anim = name;
         }
     }
@@ -233,8 +233,9 @@ Entity.prototype.SURFACE_LEFT = 2;
 Entity.prototype.SURFACE_RIGHT = 3;
 
 Entity.prototype.audio = {};
+Entity.prototype.animations = undefined;
 Entity.prototype.geometry = undefined;
 Entity.prototype.material = undefined;
-Entity.prototype.textures = {};
+Entity.prototype.textures = undefined;
 
 module.exports = Entity;
