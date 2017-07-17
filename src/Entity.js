@@ -14,7 +14,6 @@ class Entity
         this.aim = new Vector2();
         this.anim = undefined;
         this.animators = [];
-        this.audioQueue = [];
         this.collidable = true;
         this.collision = [];
         this.deltaTime = undefined;
