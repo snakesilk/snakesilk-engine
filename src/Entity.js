@@ -1,4 +1,4 @@
-const {Mesh, Vector2, Vector3, Math: {generateUUID}} = require('three');
+const {Mesh, Object3D, Vector2, Vector3, Math: {generateUUID}} = require('three');
 const BoundingBox = require('./BoundingBox');
 const Events = require('./Events');
 const Loops = require('./Loops');
@@ -37,6 +37,8 @@ class Entity
 
         if (this.geometry && this.material) {
             this.setModel(new Mesh(this.geometry, this.material));
+        } else {
+            this.setModel(new Object3D());
         }
     }
 

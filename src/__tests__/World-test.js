@@ -2,7 +2,7 @@ const expect = require('expect.js');
 const sinon = require('sinon');
 
 const THREE = require('three');
-const Obj = require('../../src/Entity');
+const Entity = require('../../src/Entity');
 const World = require('../../src/World');
 
 describe('World', function() {
@@ -16,9 +16,9 @@ describe('World', function() {
     world = new World();
     world.timeStep = 1/120;
     objects = [
-      new Obj(),
-      new Obj(),
-      new Obj(),
+      new Entity(),
+      new Entity(),
+      new Entity(),
     ];
     objects.forEach(function(o) {
       o.timeShift = sinon.spy();
@@ -63,9 +63,12 @@ describe('World', function() {
 
     it('should not add object model to scene if not set', function() {
       const world = new World();
-      world.scene.add = sinon.spy();
-      const obj = new Obj();
-      world.addObject(obj);
+      sinon.stub(world.scene, 'add');
+
+      const entity = new Entity();
+      entity.model = undefined;
+
+      world.addObject(entity);
       expect(world.scene.add.called).to.be(false);
     });
 
