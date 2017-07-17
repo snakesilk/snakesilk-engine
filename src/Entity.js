@@ -6,13 +6,16 @@ const SequenceManager = require('./SequenceManager');
 const Verlet = require('./Verlet');
 const {readOnly} = require('./Util');
 
+const ANIM = Symbol('Current Animation');
+
 class Entity
 {
     constructor() {
         this.id = undefined;
         this.name = undefined;
 
-        this.anim = undefined;
+        this[ANIM] = undefined;
+
         this.collidable = true;
         this.emitter = undefined;
         this.origo = new Vector2();
@@ -44,11 +47,17 @@ class Entity
         this.setModel(new Object3D());
     }
 
-    addCollisionRect(w, h, offsetX, offsetY) {
+    addCollisionRect(w, h, offsetX = 0, offsetY = 0) {
         const boundingBox = new BoundingBox(
             this.position,
-            {x: w, y: h},
-            {x: offsetX || 0, y: offsetY || 0}
+            {
+                x: w,
+                y: h,
+            },
+            {
+                x: offsetX,
+                y: offsetY,
+            }
         );
         this.collision.push(boundingBox);
     }
@@ -58,21 +67,22 @@ class Entity
     }
 
     applyTrait(trait) {
-        if (this[trait.NAME] !== undefined) {
-            throw new Error('Trait name "' + trait.NAME + '" occupied');
+        if (trait.NAME in this) {
+            throw new Error(`Trait name "${trait.NAME}" occupied.`);
         }
+
         trait.__attach(this);
         this.traits.push(trait);
-        this[trait.NAME] = trait;
+
+        readOnly(this, {
+            [trait.NAME]: trait,
+        });
+
         this.events.trigger(this.EVENT_TRAIT_ATTACHED, [trait]);
     }
 
     collides(withObject, ourZone, theirZone) {
         this.events.trigger(this.EVENT_COLLIDE, [withObject, ourZone, theirZone]);
-    }
-
-    dropCollision() {
-        this.collision.length = 0;
     }
 
     emitAudio(audio) {
@@ -82,24 +92,16 @@ class Entity
     }
 
     getTrait(traitReference) {
-        for (let i = 0, l = this.traits.length; i < l; ++i) {
-            if (this.traits[i] instanceof traitReference) {
-                return this.traits[i];
-            }
-        }
-        return false;
+        return this.traits.find(t => t instanceof traitReference) || false;
     }
 
     moveTo(vec) {
-        this.position.x = vec.x;
-        this.position.y = vec.y;
-    }
-
-    nudge(x, y) {
-        const vec = this.position.clone();
-        vec.x += x || 0;
-        vec.y += y || 0;
-        this.moveTo(vec);
+        Object.keys(this.position).forEach(k => {
+            const v = vec[k];
+            if (typeof v === 'number' && isFinite(v)) {
+                this.position[k] = v;
+            }
+        });
     }
 
     obstruct(object, attack, ourZone, theirZone) {
@@ -126,9 +128,9 @@ class Entity
     }
 
     setAnimation(name) {
-        if (name !== this.anim) {
+        if (name !== this[ANIM]) {
             this.animators[0].setAnimation(this.animations.get(name));
-            this.anim = name;
+            this[ANIM] = name;
         }
     }
 
