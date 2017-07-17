@@ -142,12 +142,12 @@ class Entity
         }
     }
 
-    setEmitter(object)
+    setEmitter(entity)
     {
-        if (object instanceof Object !== true) {
+        if (entity instanceof Entity !== true) {
             throw new Error('Invalid emitter');
         }
-        this.emitter = object;
+        this.emitter = entity;
     }
 
     setModel(model)
