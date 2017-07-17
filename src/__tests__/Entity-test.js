@@ -1,6 +1,7 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
+const {Object3D} = require('three');
 const Entity = require('../Entity');
 const Trait = require('../Trait');
 
@@ -23,8 +24,12 @@ describe('Entity', function() {
       entity = new Entity();
     });
 
-    it('should have direction default to right', function() {
+    it('direction is set to right', function() {
       expect(entity.direction).to.eql({x: 1, y: 0});
+    });
+
+    it('has a default model', () => {
+      expect(entity.model).to.be.an(Object3D);
     });
   });
 
