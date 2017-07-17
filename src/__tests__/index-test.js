@@ -22,6 +22,7 @@ describe('Main Export', function() {
       ['Timeline', '../Timeline'],
       ['Trait', '../Trait'],
       ['Tween', '../Tween'],
+      ['Util', '../Util'],
       ['World', '../World'],
 
       ['UVAnimator', '../animator/UV'],
@@ -47,7 +48,6 @@ describe('Main Export', function() {
       'Hud',
       'Objects',
       'Traits',
-      'Util',
     ].forEach(prop => {
       it(`deprecated export ${prop} is missing`, () => {
         expect(Main).to.not.have.property(prop);

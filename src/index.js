@@ -12,6 +12,7 @@ const Scene = require('./Scene');
 const Timeline = require('./Timeline');
 const Trait = require('./Trait');
 const Tween = require('./Tween');
+const Util = require('./Util');
 const World = require('./World');
 
 const UVAnimator = require('./animator/UV');
@@ -52,4 +53,5 @@ module.exports = {
     InputRecorder,
     SyncPromise,
     Mouse,
+    Util,
 };
