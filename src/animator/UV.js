@@ -1,4 +1,4 @@
-const THREE = require('three');
+const {Geometry} = require('three');
 const Animator = require('../Animator');
 
 class UVAnimator extends Animator
@@ -31,7 +31,7 @@ class UVAnimator extends Animator
 
     addGeometry(geometry)
     {
-        if (geometry instanceof THREE.Geometry === false) {
+        if (geometry instanceof Geometry === false) {
             throw new TypeError('Invalid geometry');
         }
         this.geometries.push(geometry);
