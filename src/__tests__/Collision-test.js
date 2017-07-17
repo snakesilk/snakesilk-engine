@@ -200,7 +200,7 @@ describe('Collision', function() {
       expect(collision.objectsCollide(o1, o2)).to.be(true);
     });
     it('should return false if objects outside optimization range', function() {
-      delete o1.collision;
+      o1.collision.lenght = 0;
       o1.position.distanceToSquared = sinon.spy(function() {
         return 101;
       })
