@@ -8,8 +8,8 @@ class Loader
     {
         this.game = game;
 
-        this.resourceManager = new ResourceManager(this);
-        this.resourceLoader = new ResourceLoader(this);
+        this.resourceManager = new ResourceManager();
+        this.resourceLoader = new ResourceLoader();
 
         this.entities = new Registry();
         this.traits = new Registry();

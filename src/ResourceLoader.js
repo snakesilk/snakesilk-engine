@@ -4,12 +4,11 @@ const Events = require('./Events');
 
 class ResourceLoader
 {
-    constructor(loader)
-    {
+    constructor() {
         this.EVENT_COMPLETE = 'complete';
         this.EVENT_PROGRESS = 'progress';
 
-        this.loader = loader;
+        this.audioContext = new AudioContext();
 
         this.events = new Events(this);
 
@@ -21,8 +20,8 @@ class ResourceLoader
         this._started = 0;
         this._completed = 0;
     }
-    _createTask()
-    {
+
+    _createTask() {
         const task = {
             status: this.PENDING,
             promise: null,
@@ -32,14 +31,14 @@ class ResourceLoader
         this.events.trigger(this.EVENT_PROGRESS, [this.progress()]);
         return task;
     }
-    _completeTask(task)
-    {
+
+    _completeTask(task) {
         task.status = this.COMPLETE;
         ++this._completed;
         this.events.trigger(this.EVENT_PROGRESS, [this.progress()]);
     }
-    complete()
-    {
+
+    complete() {
         const tasks = this._tasks.map(task => {
             return task.promise;
         });
@@ -51,20 +50,19 @@ class ResourceLoader
             this.events.trigger(this.EVENT_COMPLETE);
         });
     }
-    progress()
-    {
+
+    progress() {
         return this._completed / this._started;
     }
-    loadAudio(url)
-    {
+
+    loadAudio(url) {
         const task = this._createTask();
-        const context = this.loader.game.audioPlayer.getContext();
         task.promise = fetch(url)
             .then(response => {
                 return response.arrayBuffer();
             })
             .then(arrayBuffer => {
-                return context.decodeAudioData(arrayBuffer);
+                return this.audioContext.decodeAudioData(arrayBuffer);
             })
             .then(buffer => {
                 this._completeTask(task);
@@ -72,8 +70,8 @@ class ResourceLoader
             });
         return task.promise;
     }
-    loadImage(url)
-    {
+
+    loadImage(url) {
         const task = this._createTask();
         task.promise = new Promise((resolve, reject) => {
             const image = new Image();
@@ -88,8 +86,8 @@ class ResourceLoader
         });
         return task.promise;
     }
-    loadXML(url)
-    {
+
+    loadXML(url) {
         const task = this._createTask();
         task.promise = fetch(url)
             .then(response => {
