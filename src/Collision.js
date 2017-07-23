@@ -3,6 +3,64 @@ const BoundingBox = require('./BoundingBox');
 const Entity = require('./Entity');
 const {rectanglesIntersect} = require('./Math');
 
+function zonesCollide(zone1, zone2) {
+    return rectanglesIntersect(
+        zone1.x, zone1.y, zone1.w, zone1.h,
+        zone2.x, zone2.y, zone2.w, zone2.h);
+}
+
+class Entry {
+    constructor(entity) {
+        this.entity = entity;
+        this.collidingWith = new Set();
+        this.lastPosition = new Vector2();
+    }
+
+    canCollide() {
+        return this.entity.collidable;
+    }
+
+    didMove() {
+        return !this.lastPosition.equals(this.entity.position);
+    }
+
+    check(entry) {
+        const us = this.entity;
+        const them = entry.entity;
+
+        const ours = us.collision;
+        const theirs = them.collision;
+
+        for (let i = 0, l = ours.length; i !== l; ++i) {
+            const z1 = ours[i];
+            for (let j = 0, m = theirs.length; j !== m; ++j) {
+                const z2 = theirs[j];
+                if (zonesCollide(z1, z2)) {
+                    us.collides(them, z1, z2);
+                    them.collides(us, z2, z1);
+                    this.collidingWith.add(entry);
+                    return true;
+                }
+            }
+        }
+
+        if (this.collidingWith.has(entry)) {
+            us.uncollides(them);
+            them.uncollides(us);
+            this.collidingWith.delete(entry);
+        }
+        return false;
+    }
+
+    shouldCheck() {
+        return this.entity.collidable && this.didMove();
+    }
+
+    updateLastPos() {
+        this.lastPosition.copy(this.entity.position);
+    }
+}
+
 class Collision
 {
     constructor() {
@@ -19,7 +77,7 @@ class Collision
         if (object instanceof Entity !== true) {
             throw new TypeError('Collidable wrong type');
         }
-        this.objects.push(object);
+        this.objects.push(new Entry(object));
         this.collisionIndex.push([]);
         this.positionCache.push(new Vector2().set());
     }
@@ -28,7 +86,7 @@ class Collision
         let object;
         let index;
         while (object = this.garbage.pop()) {
-            while ((index = this.objects.indexOf(object)) !== -1) {
+            while ((index = this.objects.findIndex(entry => entry.entity === object)) !== -1) {
                 this.objects.splice(index, 1);
                 this.collisionIndex.splice(index, 1);
                 this.positionCache.splice(index, 1);
@@ -41,7 +99,7 @@ class Collision
     }
 
     objectNeedsRecheck(index) {
-        const o = this.objects[index];
+        const o = this.objects[index].entity;
         const p = this.positionCache[index];
         if (p.equals(o.position)) {
             return false;
@@ -50,16 +108,16 @@ class Collision
     }
 
     updatePositionCache(index) {
-        this.positionCache[index].copy(this.objects[index].position);
+        this.positionCache[index].copy(this.objects[index].entity.position);
     }
 
     detect() {
         this.garbageCollect();
 
         for (let i = 0, l = this.objects.length; i !== l; ++i) {
-            if (this.objects[i].collidable && this.objectNeedsRecheck(i)) {
+            if (this.objects[i].entity.collidable && this.objectNeedsRecheck(i)) {
                 for (let j = 0; j !== l; ++j) {
-                    if (i !== j && this.objects[j].collidable) {
+                    if (i !== j && this.objects[j].entity.collidable) {
                         this.objectIndexesCollide(i, j);
                     }
                 }
@@ -72,8 +130,8 @@ class Collision
     }
 
     objectIndexesCollide(i, j) {
-        const o1 = this.objects[i];
-        const o2 = this.objects[j];
+        const o1 = this.objects[i].entity;
+        const o2 = this.objects[j].entity;
 
         if (this.objectsCollide(o1, o2)) {
             if (this.collisionIndex[i].indexOf(o2) < 0) {

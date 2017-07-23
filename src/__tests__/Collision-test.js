@@ -37,9 +37,9 @@ describe('Collision', function() {
       const collision = new Collision();
       const object = new Obj();
       collision.addObject(object);
-      it('should add an object to object array', function() {
+      it('should add an object to object array wrapped', function() {
         expect(collision.objects).to.have.length(1);
-        expect(collision.objects).to.contain(object);
+        expect(collision.objects[0].entity).to.be(object);
       });
       it('should create a collision index array at same position', function() {
         expect(collision.collisionIndex).to.have.length(1);
