@@ -45,12 +45,6 @@ describe('Collision', function() {
         expect(collision.collisionIndex).to.have.length(1);
         expect(collision.collisionIndex[0]).to.be.an(Array);
       });
-      it('should create a placeholder in position cache', function() {
-        expect(collision.positionCache).to.have.length(1);
-        expect(collision.positionCache[0]).to.be.a(THREE.Vector2);
-        expect(collision.positionCache[0].x).to.be(undefined);
-        expect(collision.positionCache[0].y).to.be(undefined);
-      });
     });
     it('should except if argument not an object', function() {
       const collision = new Collision();
@@ -147,15 +141,11 @@ describe('Collision', function() {
     collision.detect();
     it('should clean up removed objects and counterparts', function() {
       collision.collisionIndex[1] = 'e5beb09b-f74a-49eb-8e3b-8734e9892bdc';
-      collision.positionCache[1] = '942294a7-befd-41e3-a15a-a3ab96147343';
       collision.removeObject(objects[1]);
       collision.garbageCollect();
       expect(collision.collisionIndex).to.have.length(2);
-      expect(collision.positionCache).to.have.length(2);
       expect(collision.collisionIndex)
         .to.not.contain('e5beb09b-f74a-49eb-8e3b-8734e9892bdc');
-      expect(collision.positionCache)
-        .to.not.contain('942294a7-befd-41e3-a15a-a3ab96147343');
     });
   });
   describe('#removeObject', function() {

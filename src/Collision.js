@@ -13,15 +13,7 @@ class Entry {
     constructor(entity) {
         this.entity = entity;
         this.collidingWith = new Set();
-        this.lastPosition = new Vector2();
-    }
-
-    canCollide() {
-        return this.entity.collidable;
-    }
-
-    didMove() {
-        return !this.lastPosition.equals(this.entity.position);
+        this.lastPosition = new Vector2().set(NaN, NaN, NaN);
     }
 
     check(entry) {
@@ -52,10 +44,6 @@ class Entry {
         return false;
     }
 
-    shouldCheck() {
-        return this.entity.collidable && this.didMove();
-    }
-
     updateLastPos() {
         this.lastPosition.copy(this.entity.position);
     }
@@ -66,7 +54,6 @@ class Collision
     constructor() {
         this.objects = [];
         this.collisionIndex = [];
-        this.positionCache = [];
 
         this.garbage = [];
 
@@ -79,7 +66,6 @@ class Collision
         }
         this.objects.push(new Entry(object));
         this.collisionIndex.push([]);
-        this.positionCache.push(new Vector2().set());
     }
 
     garbageCollect() {
@@ -89,7 +75,6 @@ class Collision
             while ((index = this.objects.findIndex(entry => entry.entity === object)) !== -1) {
                 this.objects.splice(index, 1);
                 this.collisionIndex.splice(index, 1);
-                this.positionCache.splice(index, 1);
            }
         }
     }
@@ -100,15 +85,11 @@ class Collision
 
     objectNeedsRecheck(index) {
         const o = this.objects[index].entity;
-        const p = this.positionCache[index];
+        const p = this.objects[index].lastPosition;
         if (p.equals(o.position)) {
             return false;
         }
         return true;
-    }
-
-    updatePositionCache(index) {
-        this.positionCache[index].copy(this.objects[index].entity.position);
     }
 
     detect() {
@@ -125,7 +106,7 @@ class Collision
         }
 
         for (let i = 0, l = this.objects.length; i !== l; ++i) {
-            this.updatePositionCache(i);
+            this.objects[i].updateLastPos();
         }
     }
 
