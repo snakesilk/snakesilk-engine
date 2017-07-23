@@ -1,7 +1,6 @@
 class BoundingBox
 {
-    constructor(pos, size, offset)
-    {
+    constructor(pos, size, offset) {
         this.position = pos;
         this.offset = offset;
 
