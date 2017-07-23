@@ -5,8 +5,7 @@ const {rectanglesIntersect} = require('./Math');
 
 class Collision
 {
-    constructor()
-    {
+    constructor() {
         this.objects = [];
         this.collisionIndex = [];
         this.positionCache = [];
@@ -15,8 +14,8 @@ class Collision
 
         this.collisionMaxDistanceSq = undefined;
     }
-    addObject(object)
-    {
+
+    addObject(object) {
         if (object instanceof Entity !== true) {
             throw new TypeError('Collidable wrong type');
         }
@@ -24,8 +23,8 @@ class Collision
         this.collisionIndex.push([]);
         this.positionCache.push(new Vector2().set());
     }
-    garbageCollect()
-    {
+
+    garbageCollect() {
         let object;
         let index;
         while (object = this.garbage.pop()) {
@@ -36,12 +35,12 @@ class Collision
            }
         }
     }
-    removeObject(object)
-    {
+
+    removeObject(object) {
         this.garbage.push(object);
     }
-    objectNeedsRecheck(index)
-    {
+
+    objectNeedsRecheck(index) {
         const o = this.objects[index];
         const p = this.positionCache[index];
         if (p.equals(o.position)) {
@@ -49,12 +48,12 @@ class Collision
         }
         return true;
     }
-    updatePositionCache(index)
-    {
+
+    updatePositionCache(index) {
         this.positionCache[index].copy(this.objects[index].position);
     }
-    detect()
-    {
+
+    detect() {
         this.garbageCollect();
 
         for (let i = 0, l = this.objects.length; i !== l; ++i) {
@@ -71,8 +70,8 @@ class Collision
             this.updatePositionCache(i);
         }
     }
-    objectIndexesCollide(i, j)
-    {
+
+    objectIndexesCollide(i, j) {
         const o1 = this.objects[i];
         const o2 = this.objects[j];
 
@@ -92,8 +91,8 @@ class Collision
             return false;
         }
     }
-    objectsCollide(o1, o2)
-    {
+
+    objectsCollide(o1, o2) {
         if (o1.position.distanceToSquared(o2.position) > this.collisionMaxDistanceSq) {
             return false;
         }
@@ -111,12 +110,12 @@ class Collision
         }
         return false;
     }
-    setCollisionRadius(units)
-    {
+
+    setCollisionRadius(units) {
         this.collisionMaxDistanceSq = units * units;
     }
-    zonesCollide(object1, zone1, object2, zone2)
-    {
+
+    zonesCollide(object1, zone1, object2, zone2) {
         return rectanglesIntersect(
             zone1.x, zone1.y, zone1.w, zone1.h,
             zone2.x, zone2.y, zone2.w, zone2.h);
