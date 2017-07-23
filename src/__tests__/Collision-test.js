@@ -3,16 +3,15 @@
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const THREE = require('three');
 const Collision = require('../Collision');
-const Obj = require('../Entity');
+const Entity = require('../Entity');
 
 describe('Collision', function() {
   it('should not re-test positionally static objects', function() {
     const collision = new Collision();
     const objects = [
-       new Obj(),
-       new Obj(),
+       new Entity(),
+       new Entity(),
     ];
     objects[0].collides = sinon.spy();
     objects[1].collides = sinon.spy();
@@ -32,20 +31,24 @@ describe('Collision', function() {
     expect(objects[0].collides.callCount).to.equal(3);
     expect(objects[1].collides.callCount).to.equal(3);
   });
+
   describe('#addObject', function() {
     context('when adding an object', function() {
       const collision = new Collision();
-      const object = new Obj();
+      const object = new Entity();
       collision.addObject(object);
+
       it('should add an object to object array wrapped', function() {
         expect(collision.objects).to.have.length(1);
         expect(collision.objects[0].entity).to.be(object);
       });
+
       it('should create a collision index array at same position', function() {
         expect(collision.collisionIndex).to.have.length(1);
         expect(collision.collisionIndex[0]).to.be.an(Array);
       });
     });
+
     it('should except if argument not an object', function() {
       const collision = new Collision();
       expect(function() {
@@ -60,8 +63,8 @@ describe('Collision', function() {
     it('should call collide callback on colliding objects', function() {
       const collision = new Collision();
       const object = [
-        new Obj(),
-        new Obj(),
+        new Entity(),
+        new Entity(),
       ];
       object[0].collides = sinon.spy();
       object[1].collides = sinon.spy();
@@ -86,8 +89,8 @@ describe('Collision', function() {
     it('should call uncollide callback on objects that are no longer touching', function() {
       const collision = new Collision();
       const object = [
-        new Obj(),
-        new Obj(),
+        new Entity(),
+        new Entity(),
       ];
       object[0].collides = sinon.spy();
       object[1].collides = sinon.spy();
@@ -112,8 +115,8 @@ describe('Collision', function() {
     it('should gracefully handle object removal during loop', function() {
       const collision = new Collision();
       const object = [
-        new Obj(),
-        new Obj(),
+        new Entity(),
+        new Entity(),
       ];
       object[0].collides = sinon.spy(function(subject, ourZone, theirZone) {
         collision.removeObject(subject);
@@ -131,14 +134,15 @@ describe('Collision', function() {
   describe('#garbageCollect', function() {
     const collision = new Collision();
     const objects = [
-      new Obj(),
-      new Obj(),
-      new Obj(),
+      new Entity(),
+      new Entity(),
+      new Entity(),
     ];
     collision.addObject(objects[0]);
     collision.addObject(objects[1]);
     collision.addObject(objects[2]);
     collision.detect();
+
     it('should clean up removed objects and counterparts', function() {
       collision.collisionIndex[1] = 'e5beb09b-f74a-49eb-8e3b-8734e9892bdc';
       collision.removeObject(objects[1]);
@@ -148,12 +152,13 @@ describe('Collision', function() {
         .to.not.contain('e5beb09b-f74a-49eb-8e3b-8734e9892bdc');
     });
   });
+
   describe('#removeObject', function() {
     it('should prevent an object from being collision detected', function() {
       const collision = new Collision();
       const object = [
-        new Obj(),
-        new Obj(),
+        new Entity(),
+        new Entity(),
       ];
       object[0].collides = sinon.spy();
       object[1].collides = sinon.spy();
@@ -166,22 +171,25 @@ describe('Collision', function() {
       expect(object[1].collides.callCount).to.equal(0);
     });
   });
+
   describe('#objectsCollide', function() {
-    let collision;
-    let o1, o2;
+    let collision, o1, o2;
+
     beforeEach(function() {
       collision = new Collision();
-      o1 = new Obj();
-      o2 = new Obj();
+      o1 = new Entity();
+      o2 = new Entity();
       o1.addCollisionRect(7, 7);
       o2.addCollisionRect(13, 13);
     });
+
     it('should account for object position', function() {
       o2.position.set(10, 0, 0);
       expect(collision.objectsCollide(o1, o2)).to.be(false);
       o1.position.x = 1;
       expect(collision.objectsCollide(o1, o2)).to.be(true);
     });
+
     it('should account for zone offset', function() {
       o1.position.set(0, 0, 0);
       o2.position.set(10, 0, 0);
@@ -189,6 +197,7 @@ describe('Collision', function() {
       o1.collision[0].position.x = 1;
       expect(collision.objectsCollide(o1, o2)).to.be(true);
     });
+
     it('should return false if objects outside optimization range', function() {
       o1.collision.lenght = 0;
       o1.position.distanceToSquared = sinon.spy(function() {
@@ -199,6 +208,7 @@ describe('Collision', function() {
       expect(o1.position.distanceToSquared.calledOnce).to.be(true);
     });
   });
+
   describe('#setCollisionRadius', function() {
     it('should set value squared', function() {
       const collision = new Collision();
@@ -208,24 +218,29 @@ describe('Collision', function() {
       expect(collision.collisionMaxDistanceSq).to.equal(144);
     });
   });
+
   describe('BoundingBox', function() {
-    const host = new Obj();
+    const host = new Entity();
     host.addCollisionRect(5, 7);
     const box = host.collision[0];
+
     it('should have x and y', function() {
       expect(box.x).to.equal(0);
       expect(box.y).to.equal(0);
     });
+
     it('should have width and height', function() {
       expect(box.width).to.equal(5);
       expect(box.height).to.equal(7);
     });
+
     it('should provide absolute left, right, top, bottom', function() {
       expect(box.left).to.equal(-2.5);
       expect(box.right).to.equal(2.5);
       expect(box.top).to.equal(3.5);
       expect(box.bottom).to.equal(-3.5);
     });
+
     it('should update automatically if host moves', function() {
       host.position.x += 8;
       host.position.y += 4;
@@ -236,6 +251,7 @@ describe('Collision', function() {
       expect(box.top).to.equal(7.5);
       expect(box.bottom).to.equal(0.5);
     });
+    
     it('should move host if values set', function() {
       box.top = 0;
       box.left = 0;
