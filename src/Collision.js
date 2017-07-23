@@ -44,6 +44,11 @@ class Entry {
         return false;
     }
 
+    needsCheck() {
+        return this.entity.collidable 
+            && !this.lastPosition.equals(this.entity.position);
+    }
+
     updateLastPos() {
         this.lastPosition.copy(this.entity.position);
     }
@@ -83,20 +88,11 @@ class Collision
         this.garbage.push(object);
     }
 
-    objectNeedsRecheck(index) {
-        const o = this.objects[index].entity;
-        const p = this.objects[index].lastPosition;
-        if (p.equals(o.position)) {
-            return false;
-        }
-        return true;
-    }
-
     detect() {
         this.garbageCollect();
 
         for (let i = 0, l = this.objects.length; i !== l; ++i) {
-            if (this.objects[i].entity.collidable && this.objectNeedsRecheck(i)) {
+            if (this.objects[i].needsCheck()) {
                 for (let j = 0; j !== l; ++j) {
                     if (i !== j && this.objects[j].entity.collidable) {
                         this.objectIndexesCollide(i, j);
