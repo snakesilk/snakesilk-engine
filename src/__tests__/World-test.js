@@ -49,8 +49,10 @@ describe('World', function() {
   describe('#addObject', function() {
     it('should add object to collision detector', function() {
       const world = new World();
+      sinon.stub(world.collision, 'addObject');
       world.addObject(objects[0]);
-      expect(world.collision.objects).to.contain(objects[0]);
+      expect(world.collision.addObject.callCount).to.be(1);
+      expect(world.collision.addObject.lastCall.args[0]).to.be(objects[0]);
     });
 
     it('should add object model to scene', function() {
