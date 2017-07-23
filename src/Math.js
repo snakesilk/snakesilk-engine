@@ -73,19 +73,22 @@ MathLib.Geometry = {
             'w': Math.abs(geometry.vertices[0].x - geometry.vertices[1].x),
             'h': Math.abs(geometry.vertices[1].y - geometry.vertices[3].y),
         }
-    },
-    rectanglesIntersect: (x1, y1, w1, h1, x2, y2, w2, h2) => {
-        w1 /= 2;
-        w2 /= 2;
-        h1 /= 2;
-        h2 /= 2;
-        if (x1 + w1 > x2 - w2 && x1 - w1 < x2 + w2 &&
-            y1 + h1 > y2 - h2 && y1 - h1 < y2 + h2) {
-            return true;
-        }
-        return false;
-    },
+    }
 }
+
+function rectanglesIntersect(x1, y1, w1, h1, x2, y2, w2, h2) {
+    w1 /= 2;
+    w2 /= 2;
+    h1 /= 2;
+    h2 /= 2;
+    if (x1 + w1 > x2 - w2 && x1 - w1 < x2 + w2 &&
+        y1 + h1 > y2 - h2 && y1 - h1 < y2 + h2) {
+        return true;
+    }
+    return false;
+}
+
+MathLib.rectanglesIntersect = rectanglesIntersect;
 
 module.exports = MathLib;
 

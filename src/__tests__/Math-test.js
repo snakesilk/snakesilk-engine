@@ -3,6 +3,7 @@ const sinon = require('sinon');
 
 const Mocks = require('@snakesilk/testing/mocks');
 const THREE = require('three');
+const {rectanglesIntersect} = require('../Math');
 const Math = require('../Math');
 
 describe('Math', function() {
@@ -124,31 +125,31 @@ describe('Math', function() {
       context('when a rectangle sized 10x10 is at 0, 0', function() {
         context('and another rectangle 10x10 is at 9, 9', function() {
           it('returns true', function() {
-            expect(Math.Geometry.rectanglesIntersect(0, 0, 10, 10, 9, 9, 10, 10)).to.be(true);
+            expect(rectanglesIntersect(0, 0, 10, 10, 9, 9, 10, 10)).to.be(true);
           });
         });
 
         context('and another rectangle 10x10 is at 10, 0', function() {
           it('returns false', function() {
-            expect(Math.Geometry.rectanglesIntersect(0, 0, 10, 10, 10, 0, 10, 10)).to.be(false);
+            expect(rectanglesIntersect(0, 0, 10, 10, 10, 0, 10, 10)).to.be(false);
           });
         });
 
         context('and another rectangle 10x10 is at -10, 0', function() {
           it('returns false', function() {
-            expect(Math.Geometry.rectanglesIntersect(0, 0, 10, 10, -10, 10, 10, 10)).to.be(false);
+            expect(rectanglesIntersect(0, 0, 10, 10, -10, 10, 10, 10)).to.be(false);
           });
         });
 
         context('and another rectangle 10x10 is at 0, 10', function() {
           it('returns false', function() {
-            expect(Math.Geometry.rectanglesIntersect(0, 0, 10, 10, 0, 10, 10, 10)).to.be(false);
+            expect(rectanglesIntersect(0, 0, 10, 10, 0, 10, 10, 10)).to.be(false);
           });
         });
 
         context('and another rectangle 10x10 is at 0, -10', function() {
           it('returns false', function() {
-            expect(Math.Geometry.rectanglesIntersect(0, 0, 10, 10, 0, -10, 10, 10)).to.be(false);
+            expect(rectanglesIntersect(0, 0, 10, 10, 0, -10, 10, 10)).to.be(false);
           });
         });
       });

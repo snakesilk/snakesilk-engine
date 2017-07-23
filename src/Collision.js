@@ -1,7 +1,7 @@
 const {Vector2} = require('three');
 const BoundingBox = require('./BoundingBox');
 const Entity = require('./Entity');
-const Math = require('./Math');
+const {rectanglesIntersect} = require('./Math');
 
 class Collision
 {
@@ -117,7 +117,7 @@ class Collision
     }
     zonesCollide(object1, zone1, object2, zone2)
     {
-        return Math.Geometry.rectanglesIntersect(
+        return rectanglesIntersect(
             zone1.x, zone1.y, zone1.w, zone1.h,
             zone2.x, zone2.y, zone2.w, zone2.h);
     }
