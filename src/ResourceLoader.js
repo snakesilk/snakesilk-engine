@@ -59,9 +59,25 @@ class ResourceLoader
         const task = this._createTask();
         task.promise = fetch(url)
             .then(response => {
-                return response.arrayBuffer();
+                const reader = response.body.getReader();
+
+                return new Promise(resolve => {
+                    function read() {
+                        reader.read().then(data => {
+                            console.log(data);
+                            if (data.done) {
+                                resolve(data.value);
+                            } else {
+                                read();
+                            }
+                        });
+                    }
+                    read();
+                });
+
             })
             .then(arrayBuffer => {
+                console.log(arrayBuffer);
                 return this.audioContext.decodeAudioData(arrayBuffer);
             })
             .then(buffer => {
