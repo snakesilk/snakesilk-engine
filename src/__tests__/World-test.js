@@ -33,6 +33,10 @@ describe('World', function() {
       expect(world.ambientLight).to.be.a(THREE.AmbientLight);
       expect(world.ambientLight.color).to.eql({r: 1, g: 1, b: 1});
     });
+
+    it('has 3D gravity', () => {
+      expect(world.gravityForce).to.be.a(THREE.Vector3);
+    });
   });
 
   it('should handle removal of objects inside simulate loop but complete loop', function() {

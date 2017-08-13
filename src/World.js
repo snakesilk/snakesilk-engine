@@ -1,4 +1,4 @@
-const {AmbientLight, Scene, Vector2} = require('three');
+const {AmbientLight, Scene, Vector3} = require('three');
 const Collision = require('./Collision');
 const Entity = require('./Entity');
 const Events = require('./Events');
@@ -24,7 +24,7 @@ class World
 
         this.atmosphericDensity = .1;
         this.atmosphericViscosity = .1;
-        this.gravityForce = new Vector2(0, 9.81);
+        this.gravityForce = new Vector3(0, 9.81, 0);
 
         this.objects = [];
         this.objectsDead = [];
