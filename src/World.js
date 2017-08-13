@@ -25,7 +25,6 @@ class World
         this.atmosphericDensity = .1;
         this.atmosphericViscosity = .1;
         this.gravityForce = new Vector2(0, 9.81);
-        this.windForce = new Vector2(0, 0);
 
         this.objects = [];
         this.objectsDead = [];
