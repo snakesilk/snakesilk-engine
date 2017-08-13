@@ -22,8 +22,6 @@ class World
         this.doFor = Loops.doFor(this.events, this.EVENT_SIMULATE);
         this.waitFor = Loops.waitFor(this.events, this.EVENT_SIMULATE);
 
-        this.atmosphericDensity = .1;
-        this.atmosphericViscosity = .1;
         this.gravityForce = new Vector3(0, 9.81, 0);
 
         this.objects = [];
