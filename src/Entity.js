@@ -18,7 +18,6 @@ class Entity
 
         this.collidable = true;
         this.emitter = undefined;
-        this.origo = new Vector2();
         this.position = new Vector3();
         this.time = 0;
         this.timeStretch = 1;
