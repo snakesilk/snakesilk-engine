@@ -1,7 +1,13 @@
+const Events = require('./Events');
+
 class ResourceManager
 {
     constructor() {
-        this._items = new Map();
+        this.EVENT_RESOURCE_ADDED = 'resource-added';
+
+        this.awaiting = new Map();
+        this.events = new Events();
+        this.items = new Map();
     }
 
     _addResource(type, id, object) {
@@ -17,11 +23,17 @@ class ResourceManager
             throw new Error(`Resource "${id}" of type ${type} already defined.`);
         }
 
-        if (!this._items.has(type)) {
-            this._items.set(type, new Map());
+        if (!this.items.has(type)) {
+            this.items.set(type, new Map());
         }
 
-        this._items.get(type).set(id, object);
+        this.items.get(type).set(id, object);
+
+        this.events.trigger(this.EVENT_RESOURCE_ADDED, [{
+            type,
+            id,
+            object,
+        }]);
     }
 
     addAudio(id, object) {
@@ -41,14 +53,27 @@ class ResourceManager
     }
 
     get(type, id) {
-        if (!this.has(type, id)) {
-            throw new Error(`No resource "${id}" of type ${type}.`);
+        if (this.has(type, id)) {
+            const object = this.items.get(type).get(id);
+            return Promise.resolve(object);
         }
-        return this._items.get(type).get(id);
+
+        return new Promise((resolve, reject) => {
+            const onEventAdded = (event) => {
+                if (event.type === type && event.id === id) {
+                    this.awaiting.delete(onEventAdded);
+                    this.events.unbind(this.EVENT_RESOURCE_ADDED, onEventAdded);
+                    resolve(event.object);
+                }
+            }
+
+            this.awaiting.set(onEventAdded, {type, id});
+            this.events.bind(this.EVENT_RESOURCE_ADDED, onEventAdded);
+        });
     }
 
     has(type, id) {
-        const sub = this._items.get(type);
+        const sub = this.items.get(type);
         return sub ? sub.has(id) : false;
     }
 }

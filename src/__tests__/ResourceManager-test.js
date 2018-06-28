@@ -14,13 +14,17 @@ describe('ResourceManager', function() {
       expect(resource.has('entity', 'my-entity-id')).to.be(false);
     });
 
-    it('throws an error when asking for item that does not exist', () => {
-      expect(() => {
-        resource.get('entity', 'my-id');
-      }).to.throwError(error => {
-        expect(error).to.be.an(Error);
-        expect(error.message).to.be('No resource "my-id" of type entity.');
+    it('returns a Promise that resolves once item added if not exist', () => {
+      const MOCK_ENTITY = Symbol();
+
+      const promise = resource.get('entity', 'my-id')
+      .then(object => {
+        expect(object).to.be(MOCK_ENTITY);
       });
+
+      resource.addEntity('my-id', MOCK_ENTITY);
+
+      return promise;
     });
 
     describe('when item added', () => {
@@ -34,8 +38,11 @@ describe('ResourceManager', function() {
         expect(resource.has('entity', 'my-entity-id')).to.be(true);
       });
 
-      it('returns item', () => {
-        expect(resource.get('entity', 'my-entity-id')).to.be(MOCK_ENTITY);
+      it('returns item asynchrously', () => {
+        return resource.get('entity', 'my-entity-id')
+        .then(object => {
+          expect(object).to.be(MOCK_ENTITY);
+        });
       });
 
       it('throws an error if trying to overwrite object', () => {
@@ -63,7 +70,10 @@ describe('ResourceManager', function() {
         });
 
         it(`can be retrieved with type "${typeName}"`, () => {
-          expect(resource.get(typeName, ID)).to.be(MOCK_ENTITY);
+          return resource.get(typeName, ID)
+          .then(object => {
+            expect(object).to.be(MOCK_ENTITY);
+          });
         });
       });
     });
