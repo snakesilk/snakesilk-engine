@@ -1937,6 +1937,10 @@ temp@~0.5.1:
   dependencies:
     rimraf "~2.1.4"
 
+three@0.137:
+  version "0.137.0"
+  resolved "https://registry.yarnpkg.com/three/-/three-0.137.0.tgz#0ebd6ba66637a332c31f234bcdd35aeec071a6e3"
+
 three@0.70:
   version "0.70.1"
   resolved "https://registry.yarnpkg.com/three/-/three-0.70.1.tgz#459e5eabf2240bda58ea4ba412c14d0b3e4a250d"
